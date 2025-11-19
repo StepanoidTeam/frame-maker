@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  background-color: black;
+}
+.welcome-message {
+  color: white;
+  text-align: center;
+  margin-top: 20%;
+  font-size: 2em;
+}
+
+.login-button {
+  margin-top: 20px;
+  padding: 20px 40px;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, #0077b5, #4a9eff);
+  color: white;
+  cursor: pointer;
+  border: 1px solid #005f8d;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.linkedin-icon {
+  margin-right: 10px;
+}
