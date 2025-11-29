@@ -1,28 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Frame maker</title>
-  <link rel="stylesheet" href="index.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frame Maker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <div class="welcome-message">
-    <h1>Welcome to Frame Maker</h1>
-    <p>Create and customize your own Linkedin frames easily</p>
-    <button class="login-button">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"
-        class="linkedin-icon">
-        <path
-          d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-      </svg>
+    <div class="app-container">
+        <header class="header">
+            <h1>Frames</h1>
+            <button class="close-btn">&times;</button>
+        </header>
 
-      Login to your Linkedin account
-    </button>
-  </div>
+        <main class="main-content">
+            <!-- Left Panel: Gallery -->
+            <section class="panel gallery-panel">
+                <h2 style="font-size: 1.1rem; margin: 0 0 var(--spacing-m) 0">Frame Gallery</h2>
+                <div class="gallery-list">
+                    <!-- Gallery items will be populated by script.js -->
+                </div>
+                <button class="create-btn">+ Create New Frame</button>
+            </section>
+
+            <!-- Center Panel: Preview -->
+            <section class="preview-panel">
+                <div class="profile-preview">
+                    <canvas id="preview-canvas"></canvas>
+                </div>
+
+                <div class="preview-divider"></div>
+
+                <div class="preview-buttons">
+                    <button class="upload-btn" id="upload-photo-btn">Upload Photo</button>
+                    <input type="file" id="file-input" accept="image/*" style="display: none;">
+                </div>
+            </section>
+
+            <!-- Right Panel: Editor -->
+            <section class="panel editor-panel">
+                <!-- Text Settings -->
+                <div class="editor-group">
+                    <h3>Text & Font</h3>
+                    <input type="text" id="frame-text-input" class="input-field" value="#Hiring" placeholder="Enter frame text">
+                    
+                    <div class="customization-row">
+                        <label style="color: var(--color-text-secondary); font-size: 0.9rem; min-width: 60px;">Font</label>
+                        <select id="font-family-select" class="input-field" style="margin-bottom: 0;">
+                            <option value="Inter, sans-serif">Inter</option>
+                            <option value="Lato, sans-serif">Lato</option>
+                        </select>
+                    </div>
+                    
+                    <div class="customization-row">
+                        <label style="color: var(--color-text-secondary); font-size: 0.9rem;">Color</label>
+                        <div class="color-palette">
+                            <div class="color-swatch active" data-type="text" data-color="#ffffff" style="background-color: #ffffff;"></div>
+                            <div class="color-swatch" data-type="text" data-color="#000000" style="background-color: #000000;"></div>
+                            <div class="color-swatch" data-type="text" data-color="#0a66c2" style="background-color: #0a66c2;"></div>
+                        </div>
+                    </div>
+
+                    <div class="slider-group">
+                        <label>font Size</label>
+                        <input type="range" id="font-size-input" min="10" max="100" value="24">
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label>Rotation</label>
+                        <input type="range" id="rotation-input" min="-180" max="180" value="0">
+                    </div>
+
+                    
+
+                </div>
+
+                <!-- Frame Style -->
+                <div class="editor-group">
+                    <h3>Frame Style</h3>
+                    <div class="customization-row">
+                        <label style="color: var(--color-text-secondary); font-size: 0.9rem;">Color</label>
+                        <div class="color-palette">
+                            <div class="color-swatch active" data-type="frame" data-color="#79389f" style="background-color: #79389f;"></div>
+                            <div class="color-swatch" data-type="frame" data-color="#467031" style="background-color: #467031;"></div>
+                            <div class="color-swatch" data-type="frame" data-color="#0a66c2" style="background-color: #0a66c2;"></div>
+                            <div class="color-swatch" data-type="frame" data-color="#d93025" style="background-color: #d93025;"></div>
+                        </div>
+                    </div>
+
+                    <div class="slider-group">
+                        <label>Thickness</label>
+                        <input type="range" id="thickness-input" min="5" max="50" value="20">
+                    </div>
+
+                    <div class="radio-group">
+                        <div class="checkbox-container">
+                            <input type="radio" name="frame-style" id="style-solid" value="solid" checked>
+                            <label for="style-solid">Solid</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="radio" name="frame-style" id="style-gradient" value="gradient">
+                            <label for="style-gradient">Gradient</label>
+                        </div>
+                        <!-- Pattern not fully implemented yet, but adding UI -->
+                        <div class="checkbox-container">
+                            <input type="radio" name="frame-style" id="style-pattern" value="pattern" disabled>
+                            <label for="style-pattern" style="color: var(--color-text-secondary);">Pattern (Coming Soon)</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer-bar">
+            <div class="checkbox-container">
+                <input type="checkbox" id="visible-check" checked>
+                <label for="visible-check">Visible to all LinkedIn members</label>
+            </div>
+            <div class="footer-buttons">
+                <button class="save-btn" id="download-btn">Download</button>
+                <button class="publish-btn">Publish to LinkedIn</button>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js" module defer></script>
 </body>
-<script type="module" src="index.js"></script>
-
 </html>

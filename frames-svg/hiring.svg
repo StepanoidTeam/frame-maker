@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none" data-jetski-tab-id="327592917">
+    <defs>
+        <linearGradient id="hiringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#8e44ad;stop-opacity:1"/>
+            <stop offset="50%" style="stop-color:#4a2b9a;stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#2980b9;stop-opacity:1"/>
+        </linearGradient>
+    </defs>
+
+    <g>
+        <!-- Removed background rect and circle to allow transparency -->
+        <path id="frame-path" d="M 30 0 A 30 30 0 0 1 30 60 A 30 30 0 0 1 30 0 Z M 30 4 A 26 26 0 0 0 30 56 A 26 26 0 0 0 30 4 Z" fill="url(#hiringGradient)"/>
+
+        <rect id="text-bg" x="15" y="40" width="30" height="12" rx="3" fill="rgba(0,0,0,0.5)"/>
+        
+        <text id="frame-text" x="30" y="49" font-family="Inter, sans-serif" font-size="8" fill="white" text-anchor="middle" font-weight="bold">#HIRING</text>
+    </g>
+</svg>
