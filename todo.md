@@ -1,15 +1,21 @@
 todo
 
 - [ ] replace frame gallery with same as photo gallery
-- [ ] add img frame support (no customization?)
-- [ ] impl upload new frame button
+- [ ] add img frame support (no customization? just static images, maybe allow add text over?)
 - [ ] fix svg frame sizes to be consistent (for fonts size adjustments)
+
+- [ ] allow to upload non-square photos -- do not squeeze those
+- [ ] impl crop/resize photos tools
+
 - [ ] add more colors to color palettes
 - [ ] add more fonts, and fix font family select
+
 - [ ] show slider values
 - [ ] add font customization (bold, italic, etc.)
 - [ ] add font caps
-- [ ] add watermark? at the corner of the avatar
-- [ ] add local storage for frames/photos
 - [ ] add text/frame rotation?
-- [ ] 
+
+- [ ] add watermark? at the corner of the avatar
+
+- [ ] impl upload new frame button
+- [ ] add local storage for frames/photos
