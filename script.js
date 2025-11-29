@@ -38,11 +38,26 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.width = CANVAS_SIZE;
     canvas.height = CANVAS_SIZE;
 
+    // --- Photo Gallery Data ---
+    const localPhotos = [
+        '1688381504089.jpeg',
+        '1699455018471.jpeg',
+        '1744056970861.jpeg',
+        '1752057077706.jpeg'
+    ];
+
     // Load default placeholder image
     const placeholderImg = new Image();
-    // todo(vmyshko): set first image from gallery dynamically
     placeholderImg.crossOrigin = "Anonymous";
-    placeholderImg.src = "./photos/1688381504089.jpeg";
+    
+    // Use the first photo from the gallery as default
+    if (localPhotos.length > 0) {
+        placeholderImg.src = `./photos/${localPhotos[0]}`;
+    } else {
+        // Fallback if no photos
+        placeholderImg.src = "./photos/1688381504089.jpeg";
+    }
+
     placeholderImg.onload = () => {
         if (!state.userImage) {
             state.userImage = placeholderImg;
@@ -381,8 +396,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Photo Gallery ---
+    function renderPhotoGallery() {
+        const photoGallery = document.getElementById('photo-gallery');
+        if (!photoGallery) return;
+        
+        photoGallery.innerHTML = '';
+
+        localPhotos.forEach((filename, index) => {
+            const imgPath = `./photos/${filename}`;
+            const thumb = document.createElement('div');
+            thumb.className = 'photo-thumbnail';
+            if (index === 0) {
+                thumb.classList.add('active');
+            }
+            thumb.innerHTML = `<img src="${imgPath}" alt="Photo">`;
+            
+            thumb.addEventListener('click', () => {
+                // Update active state
+                document.querySelectorAll('.photo-thumbnail').forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+                
+                // Load image
+                const img = new Image();
+                img.crossOrigin = "Anonymous";
+                img.onload = () => {
+                    state.userImage = img;
+                    draw();
+                };
+                img.src = imgPath;
+            });
+
+            photoGallery.appendChild(thumb);
+        });
+    }
+
     // Initial Render
     renderGallery();
+    renderPhotoGallery();
 
     // Text Input
     textInput.addEventListener('input', (e) => {
@@ -475,6 +526,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 img.onload = () => {
                     state.userImage = img;
                     draw();
+                    // Clear gallery selection
+                    document.querySelectorAll('.photo-thumbnail').forEach(t => t.classList.remove('active'));
                 };
                 img.src = event.target.result;
             };

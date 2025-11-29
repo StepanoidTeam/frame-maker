@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <script src="script.js" module defer></script>
 </head>
 <body>
     <div class="app-container">
@@ -37,6 +38,13 @@
                 <div class="preview-buttons">
                     <button class="upload-btn" id="upload-photo-btn">Upload Photo</button>
                     <input type="file" id="file-input" accept="image/*" style="display: none;">
+                </div>
+
+                <div class="photo-gallery-container">
+                    <h3 style="font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: var(--spacing-sm); font-weight: normal;">Or choose a photo</h3>
+                    <div class="photo-gallery" id="photo-gallery">
+                        <!-- Photos will be populated by script.js -->
+                    </div>
                 </div>
             </section>
 
@@ -127,6 +135,6 @@
         </footer>
     </div>
 
-    <script src="script.js" module defer></script>
+   
 </body>
 </html>
