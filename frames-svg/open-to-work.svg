@@ -1,8 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none" data-jetski-tab-id="327592918">
+
+<g width="60" height="60" viewBox="0 0 60 60" fill="none" data-jetski-tab-id="327592918">
     <g>
         <!-- Removed background rect and circle to allow transparency -->
         <path id="frame-path" d="M 30 0 A 30 30 0 0 1 30 60 A 30 30 0 0 1 30 0 Z M 30 4 A 26 26 0 0 0 30 56 A 26 26 0 0 0 30 4 Z" fill="var(--color)"/>
         <rect id="text-bg" x="10" y="40" width="40" height="12" rx="3" fill="rgba(0,0,0,0.5)"/>
-        <text id="frame-text" x="30" y="49" font-family="Inter, sans-serif" font-size="7" fill="white" text-anchor="middle" font-weight="bold">#OpenToWork</text>
+        <text id="frame-text" x="30" y="49" font-family="var(--font-family)" font-size="5" fill="var(--text-color)" text-anchor="middle" font-weight="bold">#OpenToWork</text>
     </g>
+</g>
 </svg>

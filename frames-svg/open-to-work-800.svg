@@ -17,7 +17,7 @@
 
 <!-- </defs> -->
 
-<text fill="white" xml:space="preserve" style="white-space: pre" font-family="Lato" font-size="var(--font-size)" font-weight="800" letter-spacing="0.08em">
+<text fill="var(--text-color)" xml:space="preserve" style="white-space: pre" font-family="var(--font-family)" font-size="var(--font-size)" font-weight="800" letter-spacing="0.08em">
 <textPath startOffset="0%" href="#curve">
     <tspan id="frame-text" x="0">#OPENTOWORK</tspan>
 </textPath>

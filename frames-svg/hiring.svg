@@ -13,6 +13,6 @@
 
         <rect id="text-bg" x="15" y="40" width="30" height="12" rx="3" fill="rgba(0,0,0,0.5)"/>
         
-        <text id="frame-text" x="30" y="49" font-family="Inter, sans-serif" font-size="8" fill="white" text-anchor="middle" font-weight="bold">#HIRING</text>
+        <text id="frame-text" x="30" y="49" font-family="var(--font-family)" font-size="5" fill="var(--text-color)" text-anchor="middle" font-weight="bold">#HIRING</text>
     </g>
 </svg>
