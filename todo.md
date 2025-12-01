@@ -7,7 +7,8 @@ todo
 - [ ] allow to upload non-square photos -- do not squeeze those
 - [ ] impl crop/resize photos tools
 
-- [ ] add more colors to color palettes
+- [x] add more colors to color palettes
+- [ ] add support for gradient colors
 - [ ] add more fonts, and fix font family select
 
 - [ ] show slider values

@@ -1,140 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frame Maker</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    <script src="script.js" module defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frame Maker</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&display=swap"
+    rel="stylesheet">
+  <script src="script.js" module defer></script>
 </head>
+
 <body>
-    <div class="app-container">
-        <header class="header">
-            <h1>Frames</h1>
-            <button class="close-btn">&times;</button>
-        </header>
+  <div class="app-container">
+    <header class="header">
+      <h1>Frames</h1>
+      <button class="close-btn">&times;</button>
+    </header>
 
-        <main class="main-content">
-            <!-- Left Panel: Gallery -->
-            <section class="panel gallery-panel">
-                <h2 style="font-size: 1.1rem; margin: 0 0 var(--spacing-m) 0">Frame Gallery</h2>
-                <div class="gallery-list">
-                    <!-- Gallery items will be populated by script.js -->
-                </div>
-                <button disabled class="btn-secondary create-btn">+ Upload New Frame</button>
-            </section>
+    <main class="main-content">
+      <!-- Left Panel: Gallery -->
+      <section class="panel gallery-panel">
+        <h2 style="font-size: 1.1rem; margin: 0 0 var(--spacing-m) 0">Frame Gallery</h2>
+        <div class="gallery-list">
+          <!-- Gallery items will be populated by script.js -->
+        </div>
+        <button disabled class="btn-secondary create-btn">+ Upload New Frame</button>
+      </section>
 
-            <!-- Center Panel: Preview -->
-            <section class="preview-panel">
-                <div class="profile-preview">
-                    <canvas id="preview-canvas"></canvas>
-                </div>
+      <!-- Center Panel: Preview -->
+      <section class="preview-panel">
+        <div class="profile-preview">
+          <canvas id="preview-canvas"></canvas>
+        </div>
 
-                <div class="preview-divider"></div>
+        <div class="preview-divider"></div>
 
-                <div class="preview-buttons">
-                    <button class="upload-btn" id="upload-photo-btn">Upload Photo</button>
-                    <input type="file" id="file-input" accept="image/*" style="display: none;">
-                </div>
+        <div class="preview-buttons">
+          <button class="upload-btn" id="upload-photo-btn">Upload Photo</button>
+          <input type="file" id="file-input" accept="image/*" style="display: none;">
+        </div>
 
-                <div class="photo-gallery-container">
-                    <h3 style="font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: var(--spacing-sm); font-weight: normal;">Or choose a photo</h3>
-                    <div class="photo-gallery" id="photo-gallery">
-                        <!-- Photos will be populated by script.js -->
-                    </div>
-                </div>
-            </section>
+        <div class="photo-gallery-container">
+          <h3
+            style="font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: var(--spacing-sm); font-weight: normal;">
+            Or choose a photo</h3>
+          <div class="photo-gallery" id="photo-gallery">
+            <!-- Photos will be populated by script.js -->
+          </div>
+        </div>
+      </section>
 
-            <!-- Right Panel: Editor -->
-            <section class="panel editor-panel">
-                <!-- Text Settings -->
-                <div class="editor-group">
-                    <h3>Text & Font</h3>
-                    <input type="text" id="frame-text-input" class="input-field" value="#Hiring" placeholder="Enter frame text">
-                    
-                    <div class="customization-row">
-                        <label style="color: var(--color-text-secondary); font-size: 0.9rem; min-width: 60px;">Font</label>
-                        <select id="font-family-select" class="input-field" style="margin-bottom: 0;">
-                            <option value="Inter, sans-serif">Inter</option>
-                            <option value="Lato, sans-serif">Lato</option>
-                        </select>
-                    </div>
-                    
-                    <div class="customization-row">
-                        <label style="color: var(--color-text-secondary); font-size: 0.9rem;">Color</label>
-                        <div class="color-palette">
-                            <div class="color-swatch active" data-type="text" data-color="#ffffff" style="background-color: #ffffff;"></div>
-                            <div class="color-swatch" data-type="text" data-color="#000000" style="background-color: #000000;"></div>
-                            <div class="color-swatch" data-type="text" data-color="#0a66c2" style="background-color: #0a66c2;"></div>
-                        </div>
-                    </div>
+      <!-- Right Panel: Editor -->
+      <section class="panel editor-panel">
+        <!-- Text Settings -->
+        <div class="editor-group">
+          <h3>Text & Font</h3>
+          <input type="text" id="frame-text-input" class="input-field" value="#Hiring" placeholder="Enter frame text">
 
-                    <div class="slider-group">
-                        <label>font Size</label>
-                        <input type="range" id="font-size-input" min="10" max="100" value="24">
-                    </div>
-                    
-                    <div class="slider-group">
-                        <label>Rotation</label>
-                        <input type="range" id="rotation-input" min="-180" max="180" value="0">
-                    </div>
+          <div class="customization-row">
+            <label style="color: var(--color-text-secondary); font-size: 0.9rem; min-width: 60px;">Font</label>
+            <select id="font-family-select" class="input-field" style="margin-bottom: 0;">
+              <option value="Inter, sans-serif">Inter</option>
+              <option value="Lato, sans-serif">Lato</option>
+            </select>
+          </div>
 
-                    
+          <div class="customization-row">
+            <label style="color: var(--color-text-secondary); font-size: 0.9rem;">Color</label>
+            <div class="color-palette">
+              <div class="color-swatch active" data-type="text" data-color="#ffffff" style="background-color: #ffffff;">
+              </div>
+              <div class="color-swatch" data-type="text" data-color="#000000" style="background-color: #000000;"></div>
+              <div class="color-swatch" data-type="text" data-color="#0a66c2" style="background-color: #0a66c2;"></div>
+            </div>
+          </div>
 
-                </div>
+          <div class="slider-group">
+            <label>font Size</label>
+            <input type="range" id="font-size-input" min="10" max="100" value="24">
+          </div>
 
-                <!-- Frame Style -->
-                <div class="editor-group">
-                    <h3>Frame Style</h3>
-                    <div class="customization-row">
-                        <label style="color: var(--color-text-secondary); font-size: 0.9rem;">Color</label>
-                        <div class="color-palette">
-                            <div class="color-swatch active" data-type="frame" data-color="#79389f" style="background-color: #79389f;"></div>
-                            <div class="color-swatch" data-type="frame" data-color="#467031" style="background-color: #467031;"></div>
-                            <div class="color-swatch" data-type="frame" data-color="#0a66c2" style="background-color: #0a66c2;"></div>
-                            <div class="color-swatch" data-type="frame" data-color="#d93025" style="background-color: #d93025;"></div>
-                        </div>
-                    </div>
+          <div class="slider-group">
+            <label>Rotation</label>
+            <input type="range" id="rotation-input" min="-180" max="180" value="0">
+          </div>
 
-                    <div class="slider-group">
-                        <label>Thickness</label>
-                        <input type="range" id="thickness-input" min="5" max="50" value="20">
-                    </div>
 
-                    <div class="radio-group">
-                        <div class="checkbox-container">
-                            <input type="radio" name="frame-style" id="style-solid" value="solid" checked>
-                            <label for="style-solid">Solid</label>
-                        </div>
-                        <div class="checkbox-container">
-                            <input type="radio" name="frame-style" id="style-gradient" value="gradient">
-                            <label for="style-gradient">Gradient</label>
-                        </div>
-                        <!-- Pattern not fully implemented yet, but adding UI -->
-                        <div class="checkbox-container">
-                            <input type="radio" name="frame-style" id="style-pattern" value="pattern" disabled>
-                            <label for="style-pattern" style="color: var(--color-text-secondary);">Pattern (Coming Soon)</label>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
 
-        <footer class="footer-bar">
+        </div>
+
+        <!-- Frame Style -->
+        <div class="editor-group">
+          <h3>Frame Style</h3>
+          <div class="customization-row">
+            <label style="color: var(--color-text-secondary); font-size: 0.9rem;">Color</label>
+            <div class="color-palette">
+              <div class="color-swatch active" data-type="frame" data-color="#79389f"
+                style="background-color: #79389f;"></div>
+              <div class="color-swatch" data-type="frame" data-color="#467031" style="background-color: #467031;"></div>
+              <div class="color-swatch" data-type="frame" data-color="#0a66c2" style="background-color: #0a66c2;"></div>
+              <div class="color-swatch" data-type="frame" data-color="#fff000" style="background-color: #fff000;"></div>
+              <div class="color-swatch" data-type="frame" data-color="#ff80ed" style="background-color: #ff80ed;"></div>
+              <div class="color-swatch" data-type="frame" data-color="#ffffff" style="background-color: #ffffff;">
+              </div>
+              <div class="color-swatch" data-type="frame" data-color="#7b5804" style="background-color: #7b5804;">
+              </div>
+              <div class="color-swatch" data-type="frame" data-color="#00ff00" style="background-color: #00ff00;">
+              </div>
+              <div class="color-swatch" data-type="frame" data-color="#ff0000" style="background-color: #ff0000;">
+              </div>
+              <div class="color-swatch" data-type="frame" data-color="#00ffff" style="background-color: #00ffff;">
+              </div>
+              <div class="color-swatch" data-type="frame"
+                data-color="linear-gradient(89.7deg, rgba(223,0,0,1) 2.7%, rgba(214,91,0,1) 15.1%, rgba(233,245,0,1) 29.5%, rgba(23,255,17,1) 45.8%, rgba(29,255,255,1) 61.5%, rgba(5,17,255,1) 76.4%, rgba(202,0,253,1) 92.4%)"
+                style="background: linear-gradient(89.7deg, rgba(223,0,0,1) 2.7%, rgba(214,91,0,1) 15.1%, rgba(233,245,0,1) 29.5%, rgba(23,255,17,1) 45.8%, rgba(29,255,255,1) 61.5%, rgba(5,17,255,1) 76.4%, rgba(202,0,253,1) 92.4%);">
+              </div>
+            </div>
+          </div>
+
+          <div class="slider-group">
+            <label>Thickness</label>
+            <input type="range" id="thickness-input" min="5" max="50" value="20">
+          </div>
+
+          <div class="radio-group">
             <div class="checkbox-container">
-                <input type="checkbox" id="visible-check" checked>
-                <label for="visible-check">Visible to all LinkedIn members</label>
+              <input type="radio" name="frame-style" id="style-solid" value="solid" checked>
+              <label for="style-solid">Solid</label>
             </div>
-            <div class="footer-buttons">
-                <button class="btn-secondary save-btn" id="download-btn">Download</button>
-                <button class="btn-primary publish-btn">Publish to LinkedIn</button>
+            <div class="checkbox-container">
+              <input type="radio" name="frame-style" id="style-gradient" value="gradient">
+              <label for="style-gradient">Gradient</label>
             </div>
-        </footer>
-    </div>
+            <!-- Pattern not fully implemented yet, but adding UI -->
+            <div class="checkbox-container">
+              <input type="radio" name="frame-style" id="style-pattern" value="pattern" disabled>
+              <label for="style-pattern" style="color: var(--color-text-secondary);">Pattern (Coming Soon)</label>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
-   
+    <footer class="footer-bar">
+      <div class="checkbox-container">
+        <input type="checkbox" id="visible-check" checked>
+        <label for="visible-check">Visible to all LinkedIn members</label>
+      </div>
+      <div class="footer-buttons">
+        <button class="btn-secondary save-btn" id="download-btn">Download</button>
+        <button class="btn-primary publish-btn">Publish to LinkedIn</button>
+      </div>
+    </footer>
+  </div>
+
+
 </body>
+
 </html>
