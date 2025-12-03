@@ -4,24 +4,26 @@
 button {
   font-family: var(--font-family);
   font-size: 16px;
-  font-weight: 600; 
+  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s, border-color 0.2s;
 
   &.btn-primary {
-    background-color: var(--color-accent-blue); 
+    background-color: var(--color-accent-blue);
     color: var(--color-button-text);
-    border: 1px solid var(--color-accent-blue); 
+    border: 1px solid var(--color-accent-blue);
   }
   &.btn-primary:hover {
-    background-color: var(--color-accent-blue); /* Maintain for now, or darken? */
+    background-color: var(
+      --color-accent-blue
+    ); /* Maintain for now, or darken? */
     opacity: 0.9;
   }
 
   &.btn-secondary {
     background-color: transparent;
     color: var(--color-accent-blue);
-    border: 1px solid var(--color-accent-blue); 
+    border: 1px solid var(--color-accent-blue);
   }
   &.btn-secondary:hover {
     background-color: rgba(10, 102, 194, 0.1);
@@ -69,6 +71,12 @@ button {
 .publish-btn {
   padding: 8px 18px;
   border-radius: var(--radius-rounded);
+}
+@media screen and (max-width: 500px) {
+  .publish-btn {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
 }
 
 .save-btn {
