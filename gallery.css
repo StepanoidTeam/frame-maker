@@ -53,6 +53,12 @@
   scrollbar-color: var(--color-border) transparent;
 }
 
+@media (max-width: 400px) {
+  .photo-gallery {
+    flex-wrap: wrap;
+  }
+}
+
 .photo-gallery::-webkit-scrollbar {
   height: 6px;
 }
@@ -100,5 +106,12 @@
   }
   .gallery-list {
     flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 500px) {
+  .photo-thumbnail {
+    flex-direction: column;
   }
 }
