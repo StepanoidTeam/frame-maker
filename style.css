@@ -1,6 +1,8 @@
 @import "./buttons.css";
 @import "./gallery.css";
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&display=swap");
+
 /*
  * CSS Variables for Dark Theme
  */
@@ -10,13 +12,13 @@
   --color-bg-card: #293138; /*linkedin*/
   --color-text-primary: #ffffff;
   --color-text-secondary: #bbbbbb;
-  --color-accent-blue: #71b7fb;/*linkedin*/
+  --color-accent-blue: #71b7fb; /*linkedin*/
 
   --color-button-text: rgba(0, 0, 0, 0.9);
 
-  --color-accent-green: #457032;/*linkedin*/
-  --color-accent-purple: #8344cb;/*linkedin*/
-  --color-border: #363a3d;/*linkedin*/
+  --color-accent-green: #457032; /*linkedin*/
+  --color-accent-purple: #8344cb; /*linkedin*/
+  --color-border: #363a3d; /*linkedin*/
   --spacing-xs: 8px;
   --spacing-sm: 10px;
   --spacing-m: 16px;
@@ -27,14 +29,17 @@
   --radius-rounded: 99rem;
   --shadow-soft: 0 4px 10px rgba(0, 0, 0, 0.6);
 
-  --font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Fira Sans, Ubuntu, Oxygen, Oxygen Sans, Cantarell, Droid Sans, Apple Color Emoji, Segoe UI Emoji, Segoe UI Emoji, Segoe UI Symbol, Lucida Grande, Helvetica, Arial, sans-serif;
+  --font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Fira Sans, Ubuntu, Oxygen, Oxygen Sans, Cantarell,
+    Droid Sans, Apple Color Emoji, Segoe UI Emoji, Segoe UI Emoji,
+    Segoe UI Symbol, Lucida Grande, Helvetica, Arial, sans-serif;
 }
 
 /*
  * Base Styles
  */
 body {
-  font-family:var(--font-family);
+  font-family: var(--font-family);
   font-size: 16px;
   margin: 0;
   padding: 2rem;
@@ -78,7 +83,6 @@ body {
   font-weight: 500;
 }
 
-
 /*
  * Main Layout
  */
@@ -97,9 +101,6 @@ body {
   gap: var(--spacing-m);
   overflow-y: auto;
 }
-
-
-
 
 /*
  * Center Panel: Preview
@@ -147,7 +148,6 @@ body {
   gap: var(--spacing-m);
 }
 
-
 /*
  * Right Panel: Editor
  */
@@ -156,11 +156,40 @@ body {
 }
 
 .editor-group {
-  margin-bottom: var(--spacing-m);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+
   padding: var(--spacing-sm);
   background-color: var(--color-bg-secondary);
   border-radius: var(--radius-s);
   border: 1px solid var(--color-border);
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+
+    span {
+      white-space: nowrap;
+    }
+  }
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+
+  .checkbox-container {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-xs);
+
+    cursor: pointer;
+  }
 }
 
 .editor-group h3 {
@@ -178,7 +207,6 @@ body {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-s);
   color: var(--color-text-primary);
-  margin-bottom: var(--spacing-sm);
   box-sizing: border-box;
   font-size: 0.95rem;
 }
@@ -187,7 +215,6 @@ body {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-  margin-bottom: var(--spacing-sm);
 }
 
 .color-palette {
@@ -206,19 +233,32 @@ body {
 }
 .color-swatch.active {
   border-color: var(--color-accent-blue);
-  box-shadow: 0 0 0 1px var(--color-accent-blue), 0 0 0 3px rgba(10, 102, 194, 0.3);
+  box-shadow: 0 0 0 1px var(--color-accent-blue),
+    0 0 0 3px rgba(10, 102, 194, 0.3);
 }
 
 .slider-group {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-  margin-bottom: var(--spacing-sm);
-}
-.slider-group label {
-  min-width: 60px;
-  font-size: 0.9rem;
-  color: var(--color-text-secondary);
+
+  label {
+    /* // */
+  }
+
+  input[type="range"] {
+    /* // */
+  }
+
+  input[type="text"] {
+    width: 32px;
+    padding: 4px;
+
+    color: var(--color-text-secondary);
+    background-color: transparent;
+    border: 2px solid var(--color-border);
+    border-radius: 2px;
+  }
 }
 
 input[type="range"] {
@@ -255,7 +295,6 @@ input[type="range"]::-webkit-slider-thumb {
   display: flex;
   gap: var(--spacing-m);
 }
-
 
 /*
  * Utilities
@@ -299,5 +338,3 @@ input[type="range"]::-webkit-slider-thumb {
     border-top: 1px solid var(--color-border);
   }
 }
-
-
