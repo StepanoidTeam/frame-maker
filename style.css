@@ -1,7 +1,7 @@
-@import "./buttons.css";
-@import "./gallery.css";
+@import './buttons.css';
+@import './gallery.css';
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&display=swap');
 
 /*
  * CSS Variables for Dark Theme
@@ -246,11 +246,11 @@ body {
     /* // */
   }
 
-  input[type="range"] {
+  input[type='range'] {
     /* // */
   }
 
-  input[type="text"] {
+  input[type='text'] {
     width: 32px;
     padding: 4px;
 
@@ -261,7 +261,7 @@ body {
   }
 }
 
-input[type="range"] {
+input[type='range'] {
   appearance: none;
   -webkit-appearance: none;
   width: 100%;
@@ -270,7 +270,7 @@ input[type="range"] {
   border-radius: 3px;
   outline: none;
 }
-input[type="range"]::-webkit-slider-thumb {
+input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 14px;
   height: 14px;
