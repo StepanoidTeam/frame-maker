@@ -243,44 +243,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // 1. Draw User Image (Circular Mask)
+    // 1. Draw User Image
     if (state.userImage) {
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(
-        canvas.width / 2,
-        canvas.height / 2,
-        canvas.width / 2,
-        0,
-        Math.PI * 2
-      );
-      ctx.closePath();
-      ctx.clip();
       ctx.drawImage(state.userImage, 0, 0, canvas.width, canvas.height);
-      ctx.restore();
     }
 
     // 2. Draw Frame (SVG only)
     if (state.frameImage) {
       ctx.drawImage(state.frameImage, 0, 0, canvas.width, canvas.height);
     }
-  }
-
-  // Helper to lighten/darken color
-  function adjustColor(color, amount) {
-    return (
-      '#' +
-      color
-        .replace(/^#/, '')
-        .replace(/../g, (color) =>
-          (
-            '0' +
-            Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(
-              16
-            )
-          ).substr(-2)
-        )
-    );
   }
 
   // --- Event Listeners ---
