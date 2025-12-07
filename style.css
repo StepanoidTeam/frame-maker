@@ -1,8 +1,6 @@
 @import './buttons.css';
 @import './gallery.css';
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&display=swap');
-
 /*
  * CSS Variables for Dark Theme
  */
@@ -50,6 +48,12 @@ body {
   align-items: center;
   height: 100vh;
   overflow: hidden;
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    padding: 1rem;
+  }
 }
 
 .app-container {
@@ -101,6 +105,11 @@ body {
   gap: var(--spacing-m);
   overflow-y: auto;
 }
+@media screen and (max-width: 1000px) {
+  .panel {
+    overflow: visible;
+  }
+}
 
 /*
  * Center Panel: Preview
@@ -116,6 +125,16 @@ body {
   background-color: var(--color-bg-card);
 }
 
+@media screen and (max-width: 1000px) {
+  .preview-panel {
+    overflow: visible;
+  }
+}
+@media screen and (max-width: 500px) {
+  .preview-panel {
+    padding: 10px;
+  }
+}
 .profile-preview {
   position: relative;
   width: 300px;
@@ -137,6 +156,12 @@ body {
   }
 
   overflow: hidden;
+}
+@media screen and (max-width: 500px) {
+  .profile-preview {
+    width: 200px;
+    height: 200px;
+  }
 }
 
 /* Canvas for rendering the final result */
@@ -302,6 +327,16 @@ input[type='range']::-webkit-slider-thumb {
   align-items: center;
 }
 
+@media screen and (max-width: 1000px) {
+  .footer-bar {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .checkbox-container {
+    margin-bottom: 10px;
+  }
+}
+
 .footer-buttons {
   display: flex;
   gap: var(--spacing-m);
@@ -342,6 +377,7 @@ input[type='range']::-webkit-slider-thumb {
   .main-content {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
+    overflow: auto;
   }
 
   .editor-panel {
