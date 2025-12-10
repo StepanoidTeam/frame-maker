@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Event Listeners ---
 
   // --- Gallery Rendering ---
-  function renderGallery() {
+  function renderOldGallery() {
     const galleryList = document.querySelector('.gallery-list');
     galleryList.innerHTML = ''; // Clear existing content
 
@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${iconContent}
                 </div>
                 <span class="gallery-item-text">${displayText}</span>
-            `;
+      `;
 
       item.addEventListener('click', () => {
         // UI Update
@@ -304,6 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Photo Gallery ---
+
   function renderPhotoGallery() {
     const photoGallery = document.getElementById('photo-gallery');
     if (!photoGallery) return;
@@ -341,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Initial Render
-  renderGallery();
+  renderOldGallery();
   renderPhotoGallery();
 
   // Text Input
