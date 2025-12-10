@@ -143,6 +143,13 @@ body {
   align-items: center;
   justify-content: center;
 
+  cursor: pointer;
+  transition: border-radius 200ms ease-in;
+  border-radius: 50%;
+  &.show-preview-overlay {
+    border-radius: 0%;
+  }
+
   .svg-overlay {
     position: absolute;
     width: 100%;

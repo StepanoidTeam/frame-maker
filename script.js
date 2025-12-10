@@ -65,6 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  function togglePreviewOverlay() {
+    $profilePreview.classList.toggle('show-preview-overlay');
+  }
+
+  $profilePreview.addEventListener('click', togglePreviewOverlay);
+
   // --- Presets ---
   // todo(vmyshko): extract to config file
   const presets = {
