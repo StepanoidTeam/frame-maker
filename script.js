@@ -264,80 +264,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Gallery Rendering ---
   function renderOldGallery() {
-    const galleryList = document.querySelector('.gallery-list');
-    galleryList.innerHTML = ''; // Clear existing content
+    $frameGallery.replaceChildren(); // Clear existing content
+
+    const galleryName = 'frames';
 
     Object.keys(presets).forEach((key) => {
       const preset = presets[key];
-      const item = document.createElement('div');
-      item.className = `gallery-item ${
-        key === state.selectedFrameId ? 'active' : ''
-      }`;
-      item.dataset.frame = key;
 
-      const iconContent = `<img src="${preset.src}" alt="${preset.text}">`;
+      const $galleryItem =
+        $tmplGalleryItem.content.firstElementChild.cloneNode(true);
 
-      // Use preset text or fallback to capitalized key for display
-      const displayText =
-        preset.text || key.charAt(0).toUpperCase() + key.slice(1);
+      const $img = $galleryItem.querySelector('img');
+      $img.src = preset.src;
+      $img.alt = preset.text;
 
-      item.innerHTML = `
-                <div class="profile-circle">
-                    ${iconContent}
-                </div>
-                <span class="gallery-item-text">${displayText}</span>
-      `;
+      const $radio = $galleryItem.querySelector('input[type=radio]');
+      $radio.name = galleryName;
+      $radio.checked = key === state.selectedFrameId;
 
-      item.addEventListener('click', () => {
-        // UI Update
-        document
-          .querySelectorAll('.gallery-item')
-          .forEach((i) => i.classList.remove('active'));
-        item.classList.add('active');
+      $galleryItem.dataset.frame = key;
 
+      $galleryItem.addEventListener('click', ({ target }) => {
         // Logic Update
         applyPreset(key);
       });
 
-      galleryList.appendChild(item);
+      $frameGallery.appendChild($galleryItem);
     });
   }
 
   // --- Photo Gallery ---
-
   function renderPhotoGallery() {
-    const photoGallery = document.getElementById('photo-gallery');
-    if (!photoGallery) return;
+    $photoGallery.replaceChildren();
 
-    photoGallery.innerHTML = '';
+    const galleryName = 'photos';
 
     localPhotos.forEach((filename, index) => {
-      const imgPath = `./photos/${filename}`;
-      const thumb = document.createElement('div');
-      thumb.className = 'photo-thumbnail';
+      const $galleryItem =
+        $tmplGalleryItem.content.firstElementChild.cloneNode(true);
+
+      const $img = $galleryItem.querySelector('img');
+      $img.src = `./photos/${filename}`;
+      const $radio = $galleryItem.querySelector('input[type=radio]');
+      $radio.name = galleryName;
+
       if (index === 0) {
-        thumb.classList.add('active');
+        $radio.checked = true;
       }
-      thumb.innerHTML = `<img src="${imgPath}" alt="Photo">`;
 
-      thumb.addEventListener('click', () => {
-        // Update active state
-        document
-          .querySelectorAll('.photo-thumbnail')
-          .forEach((t) => t.classList.remove('active'));
-        thumb.classList.add('active');
-
+      $galleryItem.addEventListener('click', ({ target }) => {
         // Load image
-        const img = new Image();
-        img.crossOrigin = 'Anonymous';
-        img.onload = () => {
-          state.userImage = img;
+        const _img = new Image();
+        _img.crossOrigin = 'Anonymous';
+        _img.onload = () => {
+          state.userImage = _img;
           draw();
         };
-        img.src = imgPath;
+        _img.src = target.src;
       });
 
-      photoGallery.appendChild(thumb);
+      $photoGallery.appendChild($galleryItem);
     });
   }
 
@@ -444,7 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
           draw();
           // Clear gallery selection
           document
-            .querySelectorAll('.photo-thumbnail')
+            .querySelectorAll('.gallery-item')
             .forEach((t) => t.classList.remove('active'));
         };
         img.src = event.target.result;
