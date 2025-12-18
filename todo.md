@@ -1,6 +1,6 @@
 todo
 
-- [ ] replace frame gallery with same as photo gallery
+- [x] replace frame gallery with same as photo gallery
 - [ ] add img frame support (no customization? just static images, maybe allow add text over?)
 - [ ] fix svg frame sizes to be consistent (for fonts size adjustments)
 
@@ -20,3 +20,5 @@ todo
 
 - [ ] impl upload new frame button
 - [ ] add local storage for frames/photos
+
+- [ ] add extra colors to palette from presets

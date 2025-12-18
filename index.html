@@ -17,9 +17,13 @@
     <!-- templates -->
     <template id="$tmplGalleryItem">
       <label class="gallery-item flex-row">
-        <input type="radio" />
-        <img src="" alt="" />
+        <input type="radio" name="" />
+        <img src="not-set" alt="" />
       </label>
+    </template>
+
+    <template id="$tmplColorSwatch">
+      <input type="radio" class="color-swatch" name="palette" value="" />
     </template>
     <!-- END templates -->
 
@@ -36,7 +40,7 @@
             Frame Gallery
           </h2>
           <div id="$frameGallery" class="frame-gallery gallery">
-            <!-- Gallery items will be populated by script.js -->
+            <!-- items will be populated by javascript -->
           </div>
           <button disabled class="btn-secondary create-btn">
             + Upload New Frame
@@ -59,7 +63,7 @@
             <canvas id="preview-canvas"></canvas>
           </div>
 
-          <div class="preview-divider"></div>
+          <hr />
 
           <div class="preview-buttons">
             <button class="upload-btn" id="upload-photo-btn">
@@ -85,7 +89,7 @@
               Or choose a photo
             </h3>
             <div id="$photoGallery" class="photo-gallery gallery">
-              <!-- Photos will be populated by script.js -->
+              <!-- items will be populated by javascript -->
             </div>
           </div>
         </section>
@@ -93,220 +97,123 @@
         <!-- Right Panel: Editor -->
         <section class="panel editor-panel">
           <!-- Text Settings -->
-          <div class="editor-group">
-            <h3>Text & Font</h3>
+          <span class="uppercase">frame settings</span>
+
+          <hr />
+
+          <label class="flex-col w-100 gap-10">
+            <span class="uppercase">text</span>
             <input
               type="text"
-              id="frame-text-input"
+              id="$inputText"
               class="input-field"
               value="#Hiring"
               placeholder="Enter frame text"
             />
+          </label>
 
-            <div class="customization-row">
-              <label
-                style="
-                  color: var(--color-text-secondary);
-                  font-size: 0.9rem;
-                  min-width: 60px;
-                "
-                >Font</label
-              >
-              <select
-                id="font-family-select"
-                class="input-field"
-                style="margin-bottom: 0"
-              >
-                <option value="Inter, sans-serif">Inter</option>
-                <option value="Lato, sans-serif">Lato</option>
+          <label class="flex-col items-start w-100 gap-10">
+            <span class="uppercase">font</span>
+            <select id="font-family-select" class="input uppercase">
+              <option value="Inter, sans-serif">Inter</option>
+              <option value="Lato, sans-serif">Lato</option>
+            </select>
+          </label>
+
+          <div class="flex-row gap-10">
+            <label class="flex-col items-start w-100 gap-10" style="width: 60%">
+              <span class="uppercase">style</span>
+              <select id="font-style-select" class="input">
+                <option value="Inter, sans-serif">regular</option>
+                <option value="Inter, sans-serif">bold</option>
+                <option value="Lato, sans-serif">italic</option>
               </select>
-            </div>
+            </label>
 
-            <div class="customization-row">
-              <label
-                style="color: var(--color-text-secondary); font-size: 0.9rem"
-                >Color</label
-              >
-              <div class="color-palette">
-                <div
-                  class="color-swatch active"
-                  data-type="text"
-                  data-color="#ffffff"
-                  style="background-color: #ffffff"
-                ></div>
-                <div
-                  class="color-swatch"
-                  data-type="text"
-                  data-color="#000000"
-                  style="background-color: #000000"
-                ></div>
-                <div
-                  class="color-swatch"
-                  data-type="text"
-                  data-color="#0a66c2"
-                  style="background-color: #0a66c2"
-                ></div>
-              </div>
-            </div>
-
-            <div class="slider-group">
-              <label>Font Size</label>
-              <input
-                type="range"
-                id="font-size-input"
-                min="10"
-                max="100"
-                value="24"
-              />
-            </div>
-
-            <div class="slider-group">
-              <label>Rotation</label>
-              <input
-                type="range"
-                id="rotation-input"
-                min="-180"
-                max="180"
-                value="0"
-              />
-            </div>
+            <label class="flex-col items-start w-100 gap-10" style="width: 40%">
+              <span class="uppercase">size</span>
+              <input id="$inputFontSize" type="number" min="10" max="200" />
+            </label>
           </div>
 
+          <label class="flex-col gap-10">
+            <span class="uppercase">color</span>
+            <form id="$colorPaletteText" class="color-palette">
+              <!-- items will be populated by javascript -->
+            </form>
+          </label>
+
+          <hr />
+
+          <div class="slider-group">
+            <label>Rotation</label>
+            <input
+              type="range"
+              id="rotation-input"
+              min="-180"
+              max="180"
+              value="0"
+            />
+          </div>
+
+          <hr />
           <!-- Frame Style -->
-          <div class="editor-group">
-            <h3>Frame Style</h3>
-            <div class="customization-row">
-              <label
-                style="color: var(--color-text-secondary); font-size: 0.9rem"
-                >Color</label
-              >
-              <div class="color-palette">
-                <div
-                  class="color-swatch active"
-                  data-type="frame"
-                  data-color="#79389f"
-                  style="background-color: #79389f"
-                ></div>
-                <div
-                  class="color-swatch"
-                  data-type="frame"
-                  data-color="#467031"
-                  style="background-color: #467031"
-                ></div>
-                <div
-                  class="color-swatch"
-                  data-type="frame"
-                  data-color="#0a66c2"
-                  style="background-color: #0a66c2"
-                ></div>
-                <div
-                  class="color-swatch"
-                  data-type="frame"
-                  data-color="#fff000"
-                  style="background-color: #fff000"
-                ></div>
-                <div
-                  class="color-swatch"
-                  data-type="frame"
-                  data-color="#ff80ed"
-                  style="background-color: #ff80ed"
-                ></div>
-                <div
-                  class="color-swatch"
-                  data-type="frame"
-                  data-color="#ffffff"
-                  style="background-color: #ffffff"
-                ></div>
-                <div
-                  class="color-swatch"
-                  data-type="frame"
-                  data-color="#7b5804"
-                  style="background-color: #7b5804"
-                ></div>
-                <div
-                  class="color-swatch"
-                  data-type="frame"
-                  data-color="#00ff00"
-                  style="background-color: #00ff00"
-                ></div>
-                <div
-                  class="color-swatch"
-                  data-type="frame"
-                  data-color="#ff0000"
-                  style="background-color: #ff0000"
-                ></div>
-                <div
-                  class="color-swatch"
-                  data-type="frame"
-                  data-color="#00ffff"
-                  style="background-color: #00ffff"
-                ></div>
-                <div
-                  class="color-swatch"
-                  data-type="frame"
-                  data-color="linear-gradient(89.7deg, rgba(223,0,0,1) 2.7%, rgba(214,91,0,1) 15.1%, rgba(233,245,0,1) 29.5%, rgba(23,255,17,1) 45.8%, rgba(29,255,255,1) 61.5%, rgba(5,17,255,1) 76.4%, rgba(202,0,253,1) 92.4%)"
-                  style="
-                    background: linear-gradient(
-                      89.7deg,
-                      rgba(223, 0, 0, 1) 2.7%,
-                      rgba(214, 91, 0, 1) 15.1%,
-                      rgba(233, 245, 0, 1) 29.5%,
-                      rgba(23, 255, 17, 1) 45.8%,
-                      rgba(29, 255, 255, 1) 61.5%,
-                      rgba(5, 17, 255, 1) 76.4%,
-                      rgba(202, 0, 253, 1) 92.4%
-                    );
-                  "
-                ></div>
-              </div>
-            </div>
 
-            <div class="slider-group">
-              <label>Thickness</label>
+          <div class="customization-row">
+            <label class="flex-col gap-10">
+              <span class="uppercase">color</span>
+
+              <form id="$colorPaletteFrame" class="color-palette">
+                <!-- items will be populated by javascript -->
+              </form>
+            </label>
+          </div>
+
+          <div class="slider-group">
+            <label>Thickness</label>
+            <input
+              type="range"
+              id="thickness-input"
+              min="5"
+              max="50"
+              value="20"
+            />
+          </div>
+
+          <div class="radio-group">
+            <div class="checkbox-container">
               <input
-                type="range"
-                id="thickness-input"
-                min="5"
-                max="50"
-                value="20"
+                type="radio"
+                name="frame-style"
+                id="style-solid"
+                value="solid"
+                checked
               />
+              <label for="style-solid">Solid</label>
             </div>
-
-            <div class="radio-group">
-              <div class="checkbox-container">
-                <input
-                  type="radio"
-                  name="frame-style"
-                  id="style-solid"
-                  value="solid"
-                  checked
-                />
-                <label for="style-solid">Solid</label>
-              </div>
-              <div class="checkbox-container">
-                <input
-                  type="radio"
-                  name="frame-style"
-                  id="style-gradient"
-                  value="gradient"
-                />
-                <label for="style-gradient">Gradient</label>
-              </div>
-              <!-- Pattern not fully implemented yet, but adding UI -->
-              <div class="checkbox-container">
-                <input
-                  type="radio"
-                  name="frame-style"
-                  id="style-pattern"
-                  value="pattern"
-                  disabled
-                />
-                <label
-                  for="style-pattern"
-                  style="color: var(--color-text-secondary)"
-                  >Pattern (Coming Soon)</label
-                >
-              </div>
+            <div class="checkbox-container">
+              <input
+                type="radio"
+                name="frame-style"
+                id="style-gradient"
+                value="gradient"
+              />
+              <label for="style-gradient">Gradient</label>
+            </div>
+            <!-- Pattern not fully implemented yet, but adding UI -->
+            <div class="checkbox-container">
+              <input
+                type="radio"
+                name="frame-style"
+                id="style-pattern"
+                value="pattern"
+                disabled
+              />
+              <label
+                for="style-pattern"
+                style="color: var(--color-text-secondary)"
+                >Pattern (Coming Soon)</label
+              >
             </div>
           </div>
         </section>

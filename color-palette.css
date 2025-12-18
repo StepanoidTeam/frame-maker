@@ -1,0 +1,30 @@
+.color-palette {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+
+  .color-swatch {
+    /* input[type=radio] */
+    all: unset;
+
+    background-color: var(--color, transparent);
+    background-image: var(--color, none);
+
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    box-shadow: 0 0 0 1px var(--color-border);
+
+    &:checked {
+      border-color: var(--color-accent-blue);
+      box-shadow: 0 0 0 1px var(--color-accent-blue),
+        0 0 0 3px rgba(10, 102, 194, 0.3);
+    }
+
+    &:hover {
+      /* todo: impl */
+    }
+  }
+}

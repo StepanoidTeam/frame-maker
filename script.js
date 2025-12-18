@@ -6,10 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // State
   const state = {
     text: '#Hiring',
-    textColor: '#ffffff',
+    textColor: 'black',
     frameColor: '#79389f',
     frameStyle: 'solid', // 'solid', 'gradient', 'pattern'
-    fontSize: 14,
+    fontSize: 50,
     rotation: 0,
     thickness: 20,
     userImage: null, // Will hold the Image object
@@ -20,11 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
     fontFamily: 'Inter, sans-serif',
   };
 
+  function applyState() {
+    // todo(vmyshko): think about it...
+    $inputText.value = state.text;
+    $inputFontSize.value = state.fontSize;
+
+    $colorPaletteText.elements.palette.value = state.textColor;
+    $colorPaletteFrame.elements.palette.value = state.frameColor;
+  }
+
   // DOM Elements
   const canvas = document.getElementById('preview-canvas');
   const ctx = canvas.getContext('2d');
-  const textInput = document.getElementById('frame-text-input');
-  const fontSizeInput = document.getElementById('font-size-input');
   const rotationInput = document.getElementById('rotation-input');
   const thicknessInput = document.getElementById('thickness-input');
   const uploadBtn = document.getElementById('upload-photo-btn');
@@ -104,6 +111,29 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   };
 
+  const textColors = ['black', '#ffffff', '#0a66c2'];
+  const frameColors = [
+    '#79389f',
+    '#467031',
+    '#0a66c2',
+    '#fff000',
+    '#ff80ed',
+    '#ffffff',
+    '#7b5804',
+    '#00ff00',
+    '#ff0000',
+    '#00ffff',
+    // not-gay
+    `linear-gradient(89.7deg, 
+    rgba(223,0,0,1) 2.7%, 
+    rgba(214,91,0,1) 15.1%, 
+    rgba(233,245,0,1) 29.5%, 
+    rgba(23,255,17,1) 45.8%, 
+    rgba(29,255,255,1) 61.5%, 
+    rgba(5,17,255,1) 76.4%, 
+    rgba(202,0,253,1) 92.4%)`,
+  ];
+
   function applyPreset(id) {
     const preset = presets[id];
     if (!preset) return;
@@ -123,21 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
     // Update UI Controls
-    textInput.value = state.text;
-
-    // Update Color Swatches UI
-    document
-      .querySelectorAll('.color-swatch[data-type="frame"]')
-      .forEach((s) => {
-        if (s.dataset.color === state.frameColor) s.classList.add('active');
-        else s.classList.remove('active');
-      });
-    document
-      .querySelectorAll('.color-swatch[data-type="text"]')
-      .forEach((s) => {
-        if (s.dataset.color === state.textColor) s.classList.add('active');
-        else s.classList.remove('active');
-      });
+    $inputText.value = state.text;
 
     // Update Radio Buttons
     styleRadios.forEach((radio) => {
@@ -145,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Enable text input for SVG frames now that they are editable
-    textInput.disabled = false;
+    $inputText.disabled = false;
 
     draw();
   }
@@ -268,7 +284,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const galleryName = 'frames';
 
-    Object.keys(presets).forEach((key) => {
+    [
+      ...Object.keys(presets),
+      ...Object.keys(presets),
+      ...Object.keys(presets),
+    ].forEach((key) => {
       const preset = presets[key];
 
       const $galleryItem =
@@ -332,14 +352,14 @@ document.addEventListener('DOMContentLoaded', () => {
   renderPhotoGallery();
 
   // Text Input
-  textInput.addEventListener('input', (e) => {
+  $inputText.addEventListener('input', (e) => {
     state.text = e.target.value;
     draw();
     updateSVG();
   });
 
   // Sliders
-  fontSizeInput.addEventListener('input', (e) => {
+  $inputFontSize.addEventListener('input', (e) => {
     state.fontSize = parseInt(e.target.value);
     draw();
     updateSVG();
@@ -375,44 +395,46 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Color Pickers (Delegation)
-  document
-    .querySelectorAll('.color-swatch[data-type="text"]')
-    .forEach((swatch) => {
-      swatch.addEventListener('click', (e) => {
-        state.textColor = e.target.dataset.color;
-        // Update active state UI
-        document
-          .querySelectorAll('.color-swatch[data-type="text"]')
-          .forEach((s) => s.classList.remove('active'));
-        e.target.classList.add('active');
+  // Color Pickers
 
-        if (presets[state.selectedFrameId].type === 'svg') {
-          updateSVG();
-        } else {
-          draw();
-        }
-      });
+  function initColorPalette($colorPalette, colors, name) {
+    $colorPalette.replaceChildren();
+
+    colors.forEach((color) => {
+      const $colorSwatch =
+        $tmplColorSwatch.content.firstElementChild.cloneNode(true);
+
+      // $colorSwatch.name = name;
+      $colorSwatch.value = color;
+      $colorSwatch.style.setProperty('--color', color);
+
+      $colorPalette.appendChild($colorSwatch);
     });
+  }
 
-  document
-    .querySelectorAll('.color-swatch[data-type="frame"]')
-    .forEach((swatch) => {
-      swatch.addEventListener('click', (e) => {
-        state.frameColor = e.target.dataset.color;
-        // Update active state UI
-        document
-          .querySelectorAll('.color-swatch[data-type="frame"]')
-          .forEach((s) => s.classList.remove('active'));
-        e.target.classList.add('active');
+  initColorPalette($colorPaletteText, textColors, 'text-colors');
+  initColorPalette($colorPaletteFrame, frameColors, 'frame-colors');
 
-        if (presets[state.selectedFrameId].type === 'svg') {
-          updateSVG();
-        } else {
-          draw();
-        }
-      });
-    });
+  //(Delegation)
+  $colorPaletteText.addEventListener('change', ({ target }) => {
+    state.textColor = target.value;
+
+    if (presets[state.selectedFrameId].type === 'svg') {
+      updateSVG();
+    } else {
+      draw();
+    }
+  });
+
+  $colorPaletteFrame.addEventListener('change', ({ target }) => {
+    state.frameColor = target.value;
+
+    if (presets[state.selectedFrameId].type === 'svg') {
+      updateSVG();
+    } else {
+      draw();
+    }
+  });
 
   // Image Upload
   uploadBtn.addEventListener('click', () => {
@@ -449,4 +471,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initial Draw
   applyPreset('opentowork2'); // Default
+  applyState();
 });
