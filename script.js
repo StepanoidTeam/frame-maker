@@ -335,13 +335,13 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSVG();
   });
 
-  $rotationInput.addEventListener('input', (e) => {
+  $inputRotation.addEventListener('input', (e) => {
     state.rotation = parseInt(e.target.value);
     draw();
   });
 
   // Font Family
-  $fontFamilySelect.addEventListener('change', (e) => {
+  $selectFontFamily.addEventListener('change', (e) => {
     state.fontFamily = e.target.value;
     if (presets[state.selectedFrameId].type === 'svg') {
       updateSVG();
