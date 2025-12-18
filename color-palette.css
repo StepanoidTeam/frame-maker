@@ -25,6 +25,9 @@
 
     &:hover {
       /* todo: impl */
+      transform: scale(1.05);
+      box-shadow: 0 0 0 1px var(--color-accent-blue),
+        0 0 0 3px rgba(10, 102, 194, 0.3);
     }
   }
 }

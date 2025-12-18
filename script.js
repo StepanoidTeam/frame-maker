@@ -3,16 +3,37 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  const textColors = ['black', '#ffffff', '#0a66c2'];
+  const frameColors = [
+    '#79389f',
+    '#467031',
+    '#0a66c2',
+    '#fff000',
+    '#ff80ed',
+    '#ffffff',
+    '#7b5804',
+    '#00ff00',
+    '#ff0000',
+    '#00ffff',
+    // not-gay
+    `linear-gradient(89.7deg, 
+    rgba(223,0,0,1) 2.7%, 
+    rgba(214,91,0,1) 15.1%, 
+    rgba(233,245,0,1) 29.5%, 
+    rgba(23,255,17,1) 45.8%, 
+    rgba(29,255,255,1) 61.5%, 
+    rgba(5,17,255,1) 76.4%, 
+    rgba(202,0,253,1) 92.4%)`,
+  ];
+
   // State
   const state = {
     text: '#Hiring',
-    textColor: 'black',
-    frameColor: '#79389f',
+    textColor: frameColors.at(0),
+    frameColor: frameColors.at(0),
     frameStyle: 'solid', // 'solid', 'gradient', 'pattern'
     fontSize: 50,
     rotation: 0,
-    thickness: 20,
-    userImage: null, // Will hold the Image object
     userImage: null, // Will hold the Image object
     frameImage: null, // Will hold the SVG Image object
     svgContent: null, // Raw SVG string for editing
@@ -33,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('preview-canvas');
   const ctx = canvas.getContext('2d');
   const rotationInput = document.getElementById('rotation-input');
-  const thicknessInput = document.getElementById('thickness-input');
   const uploadBtn = document.getElementById('upload-photo-btn');
   const fileInput = document.getElementById('file-input');
   const downloadBtn = document.getElementById('download-btn');
@@ -92,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     hiring: {
       type: 'svg',
-      src: 'frames-svg/hiring.svg',
+      src: 'frames-svg/zhiring.svg',
       // Keep these for fallback or if user switches to custom
       text: '#Hiring',
       textColor: '#ffffff',
@@ -102,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     opentowork: {
       type: 'svg',
-      src: 'frames-svg/open-to-work.svg',
+      src: 'frames-svg/zopen-to.svg',
       text: '#OPENTOWORK',
       textColor: '#000000',
       frameColor: '#467031',
@@ -110,29 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
       fontSize: 74,
     },
   };
-
-  const textColors = ['black', '#ffffff', '#0a66c2'];
-  const frameColors = [
-    '#79389f',
-    '#467031',
-    '#0a66c2',
-    '#fff000',
-    '#ff80ed',
-    '#ffffff',
-    '#7b5804',
-    '#00ff00',
-    '#ff0000',
-    '#00ffff',
-    // not-gay
-    `linear-gradient(89.7deg, 
-    rgba(223,0,0,1) 2.7%, 
-    rgba(214,91,0,1) 15.1%, 
-    rgba(233,245,0,1) 29.5%, 
-    rgba(23,255,17,1) 45.8%, 
-    rgba(29,255,255,1) 61.5%, 
-    rgba(5,17,255,1) 76.4%, 
-    rgba(202,0,253,1) 92.4%)`,
-  ];
 
   function applyPreset(id) {
     const preset = presets[id];
@@ -142,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
     state.text = preset.text;
     state.textColor = preset.textColor;
     state.frameColor = preset.frameColor;
-    state.frameStyle = preset.frameStyle;
 
     // Load SVG
     fetch(preset.src)
@@ -154,11 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update UI Controls
     $inputText.value = state.text;
-
-    // Update Radio Buttons
-    styleRadios.forEach((radio) => {
-      radio.checked = radio.value === state.frameStyle;
-    });
 
     // Enable text input for SVG frames now that they are editable
     $inputText.disabled = false;
@@ -313,6 +304,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  $frameGallery;
+
   // --- Photo Gallery ---
   function renderPhotoGallery() {
     $photoGallery.replaceChildren();
@@ -370,11 +363,6 @@ document.addEventListener('DOMContentLoaded', () => {
     draw();
   });
 
-  thicknessInput.addEventListener('input', (e) => {
-    state.thickness = parseInt(e.target.value);
-    draw();
-  });
-
   // Font Family
   fontFamilySelect.addEventListener('change', (e) => {
     state.fontFamily = e.target.value;
@@ -383,16 +371,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       draw();
     }
-  });
-
-  // Radio Buttons
-  styleRadios.forEach((radio) => {
-    radio.addEventListener('change', (e) => {
-      if (e.target.checked) {
-        state.frameStyle = e.target.value;
-        draw();
-      }
-    });
   });
 
   // Color Pickers

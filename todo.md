@@ -21,4 +21,8 @@ todo
 - [ ] impl upload new frame button
 - [ ] add local storage for frames/photos
 
+bugs
+
 - [ ] add extra colors to palette from presets
+- [ ] apply frame color etc to frame preview in frame gallery (now most are black)
+- [ ] refac both galleries to event delegation and form approach (as on palettes)
