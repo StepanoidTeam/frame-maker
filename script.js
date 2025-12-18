@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     '1699455018471.jpeg',
     '1744056970861.jpeg',
     '1752057077706.jpeg',
+    'photo_2025-12-16_23-24-09.jpg',
   ];
 
   // Load default placeholder image
