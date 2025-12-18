@@ -17,13 +17,13 @@
     <!-- templates -->
     <template id="$tmplGalleryItem">
       <label class="gallery-item flex-row">
-        <input type="radio" name="" />
+        <input type="radio" name="radioName" />
         <img src="not-set" alt="" />
       </label>
     </template>
 
     <template id="$tmplColorSwatch">
-      <input type="radio" class="color-swatch" name="palette" value="" />
+      <input type="radio" class="color-swatch" name="radioName" value="" />
     </template>
     <!-- END templates -->
 
@@ -39,9 +39,9 @@
           <h2 style="font-size: 1.1rem; margin: 0 0 var(--spacing-m) 0">
             Frame Gallery
           </h2>
-          <div id="$frameGallery" class="frame-gallery gallery">
+          <form id="$frameGallery" class="frame-gallery gallery">
             <!-- items will be populated by javascript -->
-          </div>
+          </form>
           <button disabled class="btn-secondary create-btn">
             + Upload New Frame
           </button>
@@ -60,18 +60,18 @@
                 d="M 0 0 L 0 1 L 1 1 L 1 0 Z M 0 .5 A .5 .5 0 0 0 1 .5 A .5 .5 0 0 0 0 .5Z"
               ></path>
             </svg>
-            <canvas id="preview-canvas"></canvas>
+            <canvas id="$previewCanvas" class="preview-canvas"></canvas>
           </div>
 
           <hr />
 
           <div class="preview-buttons">
-            <button class="upload-btn" id="upload-photo-btn">
+            <button class="upload-btn" id="$uploadPhotoBtn">
               Upload Photo
             </button>
             <input
               type="file"
-              id="file-input"
+              id="$fileInput"
               accept="image/*"
               style="display: none"
             />
@@ -88,9 +88,9 @@
             >
               Or choose a photo
             </h3>
-            <div id="$photoGallery" class="photo-gallery gallery">
+            <form id="$photoGallery" class="photo-gallery gallery">
               <!-- items will be populated by javascript -->
-            </div>
+            </form>
           </div>
         </section>
 
@@ -110,7 +110,7 @@
 
           <label class="flex-col items-start w-100 gap-10">
             <span class="uppercase">font</span>
-            <select id="font-family-select" class="input uppercase">
+            <select id="$fontFamilySelect" class="input uppercase">
               <option value="Inter, sans-serif">Inter</option>
               <option value="Lato, sans-serif">Lato</option>
             </select>
@@ -119,7 +119,7 @@
           <div class="flex-row gap-10">
             <label class="flex-col items-start w-100 gap-10" style="width: 60%">
               <span class="uppercase">style</span>
-              <select id="font-style-select" class="input">
+              <select id="$fontStyleSelect" class="input">
                 <option value="Inter, sans-serif">regular</option>
                 <option value="Inter, sans-serif">bold</option>
                 <option value="Lato, sans-serif">italic</option>
@@ -145,7 +145,7 @@
             <label>Rotation</label>
             <input
               type="range"
-              id="rotation-input"
+              id="$rotationInput"
               min="-180"
               max="180"
               value="0"
@@ -169,11 +169,11 @@
 
       <footer class="footer-bar">
         <div class="checkbox-container">
-          <input type="checkbox" id="visible-check" checked />
-          <label for="visible-check">Visible to all LinkedIn members</label>
+          <input type="checkbox" id="$visibleCheck" checked />
+          <label for="$visibleCheck">Visible to all LinkedIn members</label>
         </div>
         <div class="footer-buttons">
-          <button class="btn-secondary save-btn" id="download-btn">
+          <button class="btn-secondary save-btn" id="$downloadBtn">
             Download
           </button>
           <button class="btn-primary publish-btn">Publish to LinkedIn</button>

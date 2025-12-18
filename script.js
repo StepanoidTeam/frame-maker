@@ -46,19 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
     $inputText.value = state.text;
     $inputFontSize.value = state.fontSize;
 
-    $colorPaletteText.elements.palette.value = state.textColor;
-    $colorPaletteFrame.elements.palette.value = state.frameColor;
+    $colorPaletteText.elements.radioName.value = state.textColor;
+    $colorPaletteFrame.elements.radioName.value = state.frameColor;
   }
 
   // DOM Elements
-  const canvas = document.getElementById('preview-canvas');
+
+  // todo(vmyshko): refac to use just ids starting with $
+  const canvas = $previewCanvas;
   const ctx = canvas.getContext('2d');
-  const rotationInput = document.getElementById('rotation-input');
-  const uploadBtn = document.getElementById('upload-photo-btn');
-  const fileInput = document.getElementById('file-input');
-  const downloadBtn = document.getElementById('download-btn');
-  const styleRadios = document.getElementsByName('frame-style');
-  const fontFamilySelect = document.getElementById('font-family-select');
 
   // Initialize Canvas Resolution
   const CANVAS_SIZE = 800;
@@ -271,15 +267,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Gallery Rendering ---
   function renderOldGallery() {
-    $frameGallery.replaceChildren(); // Clear existing content
+    // REMOVED - replaced by initFrameGallery with delegation
+  }
 
-    const galleryName = 'frames';
+  function initFrameGallery() {
+    $frameGallery.replaceChildren();
 
-    [
-      ...Object.keys(presets),
-      ...Object.keys(presets),
-      ...Object.keys(presets),
-    ].forEach((key) => {
+    const frameIds = Object.keys(presets);
+
+    frameIds.forEach((key) => {
       const preset = presets[key];
 
       const $galleryItem =
@@ -290,27 +286,18 @@ document.addEventListener('DOMContentLoaded', () => {
       $img.alt = preset.text;
 
       const $radio = $galleryItem.querySelector('input[type=radio]');
-      $radio.name = galleryName;
+      $radio.value = key;
       $radio.checked = key === state.selectedFrameId;
 
       $galleryItem.dataset.frame = key;
-
-      $galleryItem.addEventListener('click', ({ target }) => {
-        // Logic Update
-        applyPreset(key);
-      });
 
       $frameGallery.appendChild($galleryItem);
     });
   }
 
-  $frameGallery;
-
   // --- Photo Gallery ---
-  function renderPhotoGallery() {
+  function initPhotoGallery() {
     $photoGallery.replaceChildren();
-
-    const galleryName = 'photos';
 
     localPhotos.forEach((filename, index) => {
       const $galleryItem =
@@ -318,31 +305,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const $img = $galleryItem.querySelector('img');
       $img.src = `./photos/${filename}`;
+
       const $radio = $galleryItem.querySelector('input[type=radio]');
-      $radio.name = galleryName;
+      $radio.value = filename;
 
       if (index === 0) {
         $radio.checked = true;
       }
-
-      $galleryItem.addEventListener('click', ({ target }) => {
-        // Load image
-        const _img = new Image();
-        _img.crossOrigin = 'Anonymous';
-        _img.onload = () => {
-          state.userImage = _img;
-          draw();
-        };
-        _img.src = target.src;
-      });
 
       $photoGallery.appendChild($galleryItem);
     });
   }
 
   // Initial Render
-  renderOldGallery();
-  renderPhotoGallery();
+  initFrameGallery();
+  initPhotoGallery();
 
   // Text Input
   $inputText.addEventListener('input', (e) => {
@@ -358,18 +335,38 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSVG();
   });
 
-  rotationInput.addEventListener('input', (e) => {
+  $rotationInput.addEventListener('input', (e) => {
     state.rotation = parseInt(e.target.value);
     draw();
   });
 
   // Font Family
-  fontFamilySelect.addEventListener('change', (e) => {
+  $fontFamilySelect.addEventListener('change', (e) => {
     state.fontFamily = e.target.value;
     if (presets[state.selectedFrameId].type === 'svg') {
       updateSVG();
     } else {
       draw();
+    }
+  });
+
+  // Frame Gallery (Delegation)
+  $frameGallery.addEventListener('change', ({ target }) => {
+    if (target.type === 'radio') {
+      applyPreset(target.value);
+    }
+  });
+
+  // Photo Gallery (Delegation)
+  $photoGallery.addEventListener('change', ({ target }) => {
+    if (target.type === 'radio') {
+      const _img = new Image();
+      _img.crossOrigin = 'Anonymous';
+      _img.onload = () => {
+        state.userImage = _img;
+        draw();
+      };
+      _img.src = target.closest('.gallery-item').querySelector('img').src;
     }
   });
 
@@ -382,7 +379,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const $colorSwatch =
         $tmplColorSwatch.content.firstElementChild.cloneNode(true);
 
-      // $colorSwatch.name = name;
       $colorSwatch.value = color;
       $colorSwatch.style.setProperty('--color', color);
 
@@ -415,11 +411,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Image Upload
-  uploadBtn.addEventListener('click', () => {
-    fileInput.click();
+  $uploadPhotoBtn.addEventListener('click', () => {
+    $fileInput.click();
   });
 
-  fileInput.addEventListener('change', (e) => {
+  $fileInput.addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -440,7 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Download
-  downloadBtn.addEventListener('click', () => {
+  $downloadBtn.addEventListener('click', () => {
     const link = document.createElement('a');
     link.download = 'frame-avatar.png';
     link.href = canvas.toDataURL('image/png');
