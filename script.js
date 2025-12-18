@@ -31,9 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
     text: '#Hiring',
     textColor: frameColors.at(0),
     frameColor: frameColors.at(0),
+    textRotation: 0,
+    frameRotation: 0,
     frameStyle: 'solid', // 'solid', 'gradient', 'pattern'
-    fontSize: 50,
-    rotation: 0,
+    fontSize: 80,
     userImage: null, // Will hold the Image object
     frameImage: null, // Will hold the SVG Image object
     svgContent: null, // Raw SVG string for editing
@@ -169,6 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 --font-size: ${state.fontSize};
                 --text-color: ${state.textColor};
                 --font-family: ${state.fontFamily};
+                --text-rotation: ${state.textRotation}deg;
+                --frame-rotation: ${state.frameRotation}deg;
             }
         `;
     doc.documentElement.prepend(styleEl);
@@ -179,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
       textEl.textContent = state.text;
     }
 
-    // Update Frame Color
+    // Update Frame Color and Rotation
     const pathEl = doc.getElementById('frame-path');
     if (pathEl) {
       // If user selected a specific color (not gradient default), override fill
@@ -335,9 +338,24 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSVG();
   });
 
-  $inputRotation.addEventListener('input', (e) => {
-    state.rotation = parseInt(e.target.value);
-    draw();
+  $inputTextRotation.addEventListener('input', (e) => {
+    state.textRotation = parseInt(e.target.value);
+    // todo(vmyshko): make common approach for this shit
+    if (presets[state.selectedFrameId].type === 'svg') {
+      updateSVG();
+    } else {
+      draw();
+    }
+  });
+
+  $inputFrameRotation.addEventListener('input', (e) => {
+    state.frameRotation = parseInt(e.target.value);
+
+    if (presets[state.selectedFrameId].type === 'svg') {
+      updateSVG();
+    } else {
+      draw();
+    }
   });
 
   // Font Family

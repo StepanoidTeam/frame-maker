@@ -9,10 +9,21 @@
 
     <g>
         <!-- Removed background rect and circle to allow transparency -->
-        <path id="frame-path" d="M 30 0 A 30 30 0 0 1 30 60 A 30 30 0 0 1 30 0 Z M 30 4 A 26 26 0 0 0 30 56 A 26 26 0 0 0 30 4 Z" fill="url(#hiringGradient)"/>
+        <path id="frame-path" 
+            style="transform-origin: center; transform: rotate(var(--frame-rotation, 0%));"
+            d="M 30 0 A 30 30 0 0 1 30 60 A 30 30 0 0 1 30 0 Z M 30 4 A 26 26 0 0 0 30 56 A 26 26 0 0 0 30 4 Z" fill="url(#hiringGradient)"/>
 
-        <rect id="text-bg" x="15" y="40" width="30" height="12" rx="3" fill="rgba(0,0,0,0.5)"/>
         
-        <text id="frame-text" x="30" y="49" font-family="var(--font-family)" font-size="5" fill="var(--text-color)" text-anchor="middle" font-weight="bold">#HIRING</text>
+        
+        <g
+        style="transform-origin: center; transform: rotate(var(--text-rotation, 0%))"
+        >
+        <rect id="text-bg" 
+            x="15" y="40" width="30" height="12" rx="3" fill="rgba(0,0,0,0.5)"/>
+        
+        <text id="frame-text" 
+        
+        x="30" y="49" font-family="var(--font-family)" font-size="5" fill="var(--text-color)" text-anchor="middle" font-weight="bold">#HIRING</text>
+        </g>
     </g>
 </svg>

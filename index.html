@@ -141,15 +141,32 @@
 
           <hr />
 
-          <div class="slider-group">
-            <label>Rotation</label>
-            <input
-              type="range"
-              id="$inputRotation"
-              min="-180"
-              max="180"
-              value="0"
-            />
+          <div class="flex-row gap-10">
+            <label class="flex-col w-100 gap-10"
+              >text Rotation
+              <span>
+                <input
+                  type="number"
+                  id="$inputTextRotation"
+                  min="-360"
+                  max="360"
+                  step="1"
+                  value="0"
+                />
+              </span>
+            </label>
+
+            <label class="flex-col w-100 gap-10"
+              >frame Rotation
+              <input
+                type="number"
+                id="$inputFrameRotation"
+                min="-360"
+                max="360"
+                step="1"
+                value="0"
+              />
+            </label>
           </div>
 
           <hr />
