@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     '1699455018471.jpeg',
     '1744056970861.jpeg',
     '1752057077706.jpeg',
+    '1765933298027.jpeg',
     'photo_2025-12-16_23-24-09.jpg',
   ];
 
@@ -443,10 +444,6 @@ document.addEventListener('DOMContentLoaded', () => {
         img.onload = () => {
           state.userImage = img;
           draw();
-          // Clear gallery selection
-          document
-            .querySelectorAll('.gallery-item')
-            .forEach((t) => t.classList.remove('active'));
         };
         img.src = event.target.result;
       };
