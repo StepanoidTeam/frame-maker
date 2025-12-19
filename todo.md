@@ -26,3 +26,16 @@ bugs
 - [ ] add extra colors to palette from presets
 - [x] apply frame color etc to frame preview in frame gallery (now most are black) -- i set default fallbacks in svg itself
 - [x] refac both galleries to event delegation and form approach (as on palettes)
+
+big features
+
+- [ ] propose text/frame props dynamically, based on svg variables inside specific frame
+      thoughts:
+      parse svg (as text),
+      find all variables (starting with --)
+      or/and make custom props inside svg,
+      that describes prop value type/range/step
+      then props may apply directly, or still via vars
+      svg should still be valid
+
+OR make it possible to select separate elements and customize them? (sounds hard - micro-figma)
