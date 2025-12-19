@@ -14,7 +14,7 @@ todo
 - [ ] show slider values
 - [ ] add font customization (bold, italic, etc.)
 - [ ] add font caps
-- [ ] add text/frame rotation?
+- [x] add text/frame rotation?
 
 - [ ] add watermark? at the corner of the avatar
 
@@ -24,5 +24,5 @@ todo
 bugs
 
 - [ ] add extra colors to palette from presets
-- [ ] apply frame color etc to frame preview in frame gallery (now most are black)
-- [ ] refac both galleries to event delegation and form approach (as on palettes)
+- [x] apply frame color etc to frame preview in frame gallery (now most are black) -- i set default fallbacks in svg itself
+- [x] refac both galleries to event delegation and form approach (as on palettes)
