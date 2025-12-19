@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const frameColors = [
     '#79389f',
     '#467031',
+    '#FF7745',
     '#0a66c2',
     '#fff000',
     '#ff80ed',
@@ -40,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     svgContent: null, // Raw SVG string for editing
     selectedFrameId: 'opentowork2', // 'hiring', 'opentowork', 'custom'
     fontFamily: 'Inter, sans-serif',
+    textScale: 0.9, //0..1
   };
 
   function applyState() {
@@ -174,6 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 --font-family: ${state.fontFamily};
                 --text-rotation: ${state.textRotation}deg;
                 --frame-rotation: ${state.frameRotation}deg;
+
+                --text-scale: ${state.textScale};
             }
         `;
     doc.documentElement.prepend(styleEl);
@@ -462,4 +466,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initial Draw
   applyPreset('opentowork2'); // Default
   applyState();
+
+  // Text Scale
+  $inputTextScale.addEventListener('input', (e) => {
+    state.textScale = parseFloat(e.target.value);
+
+    if (presets[state.selectedFrameId].type === 'svg') {
+      updateSVG();
+    } else {
+      draw();
+    }
+  });
 });

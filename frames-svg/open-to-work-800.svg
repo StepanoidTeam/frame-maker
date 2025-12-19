@@ -9,7 +9,7 @@
 
 <!-- <defs> -->
 
-<path x="0" y="0" id="curve" stroke="#ff00ffff00" stroke-width="10" d="M00 400 A 100 100 0 0 0 800 400 A 100 100 0 0 0 0 400" transform="translate(40, 60) scale(0.87)" />
+<path x="0" y="0" id="curve" stroke="#ff00ffff00" style="transform-origin: center; transform:scale(var(--text-scale, 0.9));" stroke-width="10" d="M00 400 A 100 100 0 0 0 800 400 A 100 100 0 0 0 0 400Z" />
 <!-- <path x="0" y="0" id="curve" stroke="#ff00ffff" stroke-width="10" d="M00 400 A 300 300 0 1 0 0 403" transform="translate(610, 60) scale(0.87)" /> -->
 <!-- todo: make position/transform configurable, and arc params too -->
 <!-- ref to svg arc explanation:  -->

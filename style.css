@@ -5,6 +5,17 @@
 /*
  * CSS Variables for Dark Theme
  */
+
+.theme-figma {
+  /* --body-bg: #131314; from google */
+
+  --main-bg: #1e1e1e;
+  --side-panel: #2c2c2c;
+  --input-bg: #383838;
+  /* also primary button color */
+  --input-border-active: #0f8be8;
+}
+
 :root {
   --color-bg-primary: #08070b;
   --color-bg-secondary: #1b1f23; /*linkedin*/
@@ -350,6 +361,10 @@ input[type='text'] {
   color: var(--color-text-primary);
   box-sizing: border-box;
   font-size: 0.95rem;
+
+  &:focus-visible {
+    outline: 1px solid #0f8be8;
+  }
 }
 
 input[type='range'] {
