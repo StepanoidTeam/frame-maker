@@ -2,7 +2,9 @@
  * Frame Maker Logic
  */
 
+// todo(vmyshko): wtf is this? do not wrap whole app
 document.addEventListener('DOMContentLoaded', () => {
+  // todo(vmyshko): extract colors to separate file
   const textColors = ['black', '#ffffff', '#0a66c2'];
   const frameColors = [
     '#79389f',
@@ -16,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     '#00ff00',
     '#ff0000',
     '#00ffff',
+    'black',
     // not-gay
     `linear-gradient(89.7deg, 
     rgba(223,0,0,1) 2.7%, 
@@ -27,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     rgba(202,0,253,1) 92.4%)`,
   ];
 
+  // todo(vmyshko): extract state as module
   // State
   const state = {
     text: '#Hiring',
@@ -79,12 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
   placeholderImg.crossOrigin = 'Anonymous';
 
   // Use the first photo from the gallery as default
-  if (localPhotos.length > 0) {
-    placeholderImg.src = `./photos/${localPhotos[0]}`;
-  } else {
-    // Fallback if no photos
-    placeholderImg.src = './photos/1688381504089.jpeg';
-  }
+
+  placeholderImg.src = `./photos/${localPhotos.at(0)}`;
 
   placeholderImg.onload = () => {
     if (!state.userImage) {
@@ -93,10 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  // todo(vmyshko): extract as a plugin (not sure)
   function togglePreviewOverlay() {
     $profilePreview.classList.toggle('show-preview-overlay');
   }
-
   $profilePreview.addEventListener('click', togglePreviewOverlay);
 
   // --- Presets ---
@@ -136,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const preset = presets[id];
     if (!preset) return;
 
+    // todo(vmyshko): make generic approach - set all preset data to state
     state.selectedFrameId = id;
     state.text = preset.text;
     state.textColor = preset.textColor;
@@ -148,6 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
         state.svgContent = svgText; // Store raw SVG
         updateSVG(); // Parse and update SVG based on state
       });
+
+    // todo(vmyshko): get/parse svg vars/props somewhere here
+    // to make dynamic editor elements and wire things up
 
     // Update UI Controls
     $inputText.value = state.text;
@@ -166,6 +170,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Inject Font Styles
     const styleEl = doc.createElementNS('http://www.w3.org/2000/svg', 'style');
+    // todo(vmyshko): vars/props should apply dynamically based on prev parsed state?
+    // todo(vmyshko): font-family should be set dynamically here.
+    // we should have config with font names and links, it should be wired to font select dropdown
     styleEl.textContent = `
             @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lato:wght@400;700&display=swap');
             text { font-family: ${state.fontFamily}; }
@@ -182,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     doc.documentElement.prepend(styleEl);
 
+    // todo(vmyshko): also should be getting by custom prop mark from svg
     // Update Text
     const textEl = doc.getElementById('frame-text');
     if (textEl) {
@@ -191,24 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update Frame Color and Rotation
     const pathEl = doc.getElementById('frame-path');
     if (pathEl) {
-      // If user selected a specific color (not gradient default), override fill
-      // We check if the current color matches the preset default.
-      // If it's different, we apply the solid color.
-      // Or simpler: always apply solid color if it's not the default gradient ID?
-      // For now, let's just apply the color. If it was a gradient, this will overwrite it with solid color.
-      // To keep gradient, we'd need more complex logic.
-      // Let's assume if user picks a color, they want that solid color.
-      // But we need to know if we should keep the default gradient.
-
-      // Hack: Check if the current state color matches the preset's default color.
-      // If it matches AND the preset uses a gradient, we might want to keep the gradient.
-      // However, the SVG has `fill="url(#hiringGradient)"`.
-      // If we set `fill` attribute, it overrides.
-
-      // Let's just set the fill. If the user wants the original gradient, they might need to "reset".
-      // But wait, the "Hiring" preset default color is #79389f.
-      // If state.frameColor is #79389f, we might want to NOT touch the fill if it's supposed to be a gradient.
-
       const preset = presets[state.selectedFrameId];
       if (
         preset &&
@@ -222,6 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // todo(vmyshko): this is some custom shit, i need to investigate...
     // Update Background Pill Width
     const bgEl = doc.getElementById('text-bg');
     if (bgEl && textEl) {
@@ -272,12 +263,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --- Event Listeners ---
-
-  // --- Gallery Rendering ---
-  function renderOldGallery() {
-    // REMOVED - replaced by initFrameGallery with delegation
+  // todo(vmyshko): refac this draw and updateSvg approaches.
+  function updateAndDraw() {
+    if (presets[state.selectedFrameId].type === 'svg') {
+      updateSVG();
+    } else {
+      draw();
+    }
   }
+
+  // --- Event Listeners ---
 
   function initFrameGallery() {
     $frameGallery.replaceChildren();
@@ -333,45 +328,32 @@ document.addEventListener('DOMContentLoaded', () => {
   // Text Input
   $inputText.addEventListener('input', (e) => {
     state.text = e.target.value;
-    draw();
-    updateSVG();
+    // todo(vmyshko): i dont like this repeated updateAndDraw() on each handler,
+    // it should be called automatically for any compoent (related to svg state props) was changed
+    updateAndDraw();
   });
 
   // Sliders
   $inputFontSize.addEventListener('input', (e) => {
     state.fontSize = parseInt(e.target.value);
-    draw();
-    updateSVG();
+    updateAndDraw();
   });
 
   $inputTextRotation.addEventListener('input', (e) => {
     state.textRotation = parseInt(e.target.value);
-    // todo(vmyshko): make common approach for this shit
-    if (presets[state.selectedFrameId].type === 'svg') {
-      updateSVG();
-    } else {
-      draw();
-    }
+    updateAndDraw();
   });
 
   $inputFrameRotation.addEventListener('input', (e) => {
     state.frameRotation = parseInt(e.target.value);
 
-    if (presets[state.selectedFrameId].type === 'svg') {
-      updateSVG();
-    } else {
-      draw();
-    }
+    updateAndDraw();
   });
 
   // Font Family
   $selectFontFamily.addEventListener('change', (e) => {
     state.fontFamily = e.target.value;
-    if (presets[state.selectedFrameId].type === 'svg') {
-      updateSVG();
-    } else {
-      draw();
-    }
+    updateAndDraw();
   });
 
   // Frame Gallery (Delegation)
@@ -417,21 +399,13 @@ document.addEventListener('DOMContentLoaded', () => {
   $colorPaletteText.addEventListener('change', ({ target }) => {
     state.textColor = target.value;
 
-    if (presets[state.selectedFrameId].type === 'svg') {
-      updateSVG();
-    } else {
-      draw();
-    }
+    updateAndDraw();
   });
 
   $colorPaletteFrame.addEventListener('change', ({ target }) => {
     state.frameColor = target.value;
 
-    if (presets[state.selectedFrameId].type === 'svg') {
-      updateSVG();
-    } else {
-      draw();
-    }
+    updateAndDraw();
   });
 
   // Image Upload
@@ -471,10 +445,6 @@ document.addEventListener('DOMContentLoaded', () => {
   $inputTextScale.addEventListener('input', (e) => {
     state.textScale = parseFloat(e.target.value);
 
-    if (presets[state.selectedFrameId].type === 'svg') {
-      updateSVG();
-    } else {
-      draw();
-    }
+    updateAndDraw();
   });
 });
