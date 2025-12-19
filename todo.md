@@ -2,18 +2,20 @@ todo
 
 - [x] replace frame gallery with same as photo gallery
 - [ ] add img frame support (no customization? just static images, maybe allow add text over?)
-- [ ] fix svg frame sizes to be consistent (for fonts size adjustments)
+- [ ] fix svg frame sizes to be consistent (for fonts size adjustments) (should be 800px?)
 
 - [ ] allow to upload non-square photos -- do not squeeze those
 - [ ] impl crop/resize photos tools
 
 - [x] add more colors to color palettes
 - [ ] add support for gradient colors
-- [ ] add more fonts, and fix font family select
+- [ ] fix font family select
+- [ ] add more fonts
 
-- [ ] show slider values
 - [ ] add font customization (bold, italic, etc.)
-- [ ] add font caps
+- [ ] add font CAPITALIZE
+- [ ] make all of those as checkboxes
+
 - [x] add text/frame rotation?
 
 - [ ] add watermark? at the corner of the avatar
@@ -39,3 +41,6 @@ big features
       svg should still be valid
 
 OR make it possible to select separate elements and customize them? (sounds hard - micro-figma)
+
+TODO-TODO:
+make feature roadmap? prioritize? assign to salt?
