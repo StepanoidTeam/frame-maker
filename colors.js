@@ -2,7 +2,7 @@
  * Color configurations for Frame Maker
  */
 
-export const textColors = ['black', '#ffffff', '#0a66c2'];
+export const textColors = ['black', '#ffffff', '#0a66c2', 'yellow'];
 
 export const frameColors = [
   '#79389f',
