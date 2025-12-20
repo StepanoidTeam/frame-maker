@@ -7,6 +7,12 @@
 import { textColors, frameColors } from './colors.js';
 import { presets, localPhotos } from './config.js';
 import { createReactiveState } from './state.js';
+import {
+  parseSvgConfig,
+  applySvgConfig,
+  getDefaultsFromConfig,
+} from './svg-config.js';
+import { generateUI } from './ui-generator.js';
 
 /**
  * Default state configuration
@@ -27,6 +33,8 @@ const defaultState = {
   textScale: 0.9, //0..1
 };
 
+let currentFrameConfig = null;
+
 // Reactive state - automatically calls updateAndDraw on changes
 // Properties that should trigger redraw
 const renderTriggerProperties = [
@@ -41,17 +49,19 @@ const renderTriggerProperties = [
   'textScale',
 ];
 
+const renderPropsSet = new Set(renderTriggerProperties);
+
 // Properties that only need simple draw (no SVG update)
 const drawOnlyProperties = ['userImage', 'frameImage'];
 
 const [state, addStatePropListener] = createReactiveState(defaultState);
 
 addStatePropListener(renderTriggerProperties, (propName, value, oldValue) => {
-  console.log('⚛️up+draw', propName, value, oldValue);
+  // console.log('⚛️up+draw', propName, value, oldValue);
   updateAndDraw();
 });
 addStatePropListener(drawOnlyProperties, (propName, value, oldValue) => {
-  console.log('⚛️draw', propName, value, oldValue);
+  // console.log('⚛️draw', propName, value, oldValue);
   draw();
 });
 
@@ -81,59 +91,34 @@ function updateSVG() {
   const parser = new DOMParser();
   const doc = parser.parseFromString(state.svgContent, 'image/svg+xml');
 
-  // Inject Font Styles with CSS custom properties
-  const styleEl = doc.createElementNS('http://www.w3.org/2000/svg', 'style');
-  // todo(vmyshko): vars/props should apply dynamically based on prev parsed state?
-  // todo(vmyshko): font-family should be set dynamically here.
-  // we should have config with font names and links, it should be wired to font select dropdown
-  styleEl.textContent = `
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lato:wght@400;700&display=swap');
-    text { font-family: ${state.fontFamily}; }
-    :root{
-      --color: ${state.frameColor};
-      --font-size: ${state.fontSize};
-      --text-color: ${state.textColor};
-      --font-family: ${state.fontFamily};
-      --text-rotation: ${state.textRotation}deg;
-      --frame-rotation: ${state.frameRotation}deg;
-      --text-scale: ${state.textScale};
+  if (!currentFrameConfig) {
+    currentFrameConfig = parseSvgConfig(doc);
+
+    const configDefaults = getDefaultsFromConfig(currentFrameConfig);
+    Object.entries(configDefaults).forEach(([key, value]) => {
+      if (state[key] === undefined || state[key] === defaultState[key]) {
+        state[key] = value;
+      }
+    });
+
+    const newProps = Array.from(currentFrameConfig.keys()).filter(
+      (prop) => !renderPropsSet.has(prop)
+    );
+    if (newProps.length) {
+      addStatePropListener(newProps, () => {
+        updateAndDraw();
+      });
+      newProps.forEach((prop) => renderPropsSet.add(prop));
     }
-  `;
-  doc.documentElement.prepend(styleEl);
 
-  // Update Text element
-  const textEl = doc.getElementById('frame-text');
-  if (textEl) {
-    textEl.textContent = state.text;
-  }
-
-  // Update Frame Color and Rotation
-  const pathEl = doc.getElementById('frame-path');
-  if (pathEl) {
-    const preset = presets[state.selectedFrameId];
-    if (
-      preset &&
-      preset.frameStyle === 'gradient' &&
-      state.frameColor === preset.frameColor
-    ) {
-      // Keep original fill (likely url(#gradient))
-    } else {
-      pathEl.setAttribute('fill', state.frameColor);
+    const dynamicControlsContainer =
+      document.getElementById('dynamic-controls');
+    if (dynamicControlsContainer && currentFrameConfig.size > 0) {
+      generateUI(currentFrameConfig, state, dynamicControlsContainer);
     }
   }
 
-  // Update Background Pill Width for text
-  const bgEl = doc.getElementById('text-bg');
-  if (bgEl && textEl) {
-    const fontSize = parseFloat(textEl.getAttribute('font-size'));
-    const charWidth = fontSize * 0.6;
-    const textWidth = state.text.length * charWidth;
-    const padding = 10;
-    const newWidth = textWidth + padding;
-
-    bgEl.setAttribute('width', newWidth);
-    bgEl.setAttribute('x', 30 - newWidth / 2);
-  }
+  applySvgConfig(doc, currentFrameConfig, state);
 
   // Serialize back to string
   const serializer = new XMLSerializer();
@@ -160,38 +145,41 @@ function updateAndDraw() {
   }
 }
 
-// Sync UI with state
-function applyStateToUI() {
-  $inputText.value = state.text;
-  $inputFontSize.value = state.fontSize;
-  $colorPaletteText.elements.radioName.value = state.textColor;
-  $colorPaletteFrame.elements.radioName.value = state.frameColor;
-}
-
 // Preset management
 function applyPreset(id) {
   const preset = presets[id];
   if (!preset) return;
 
-  // Batch state updates without triggering multiple renders
-  const oldSvgContent = state.svgContent;
-
+  currentFrameConfig = null;
   state.selectedFrameId = id;
-  state.text = preset.text;
-  state.textColor = preset.textColor;
-  state.frameColor = preset.frameColor;
 
   // Load SVG
   fetch(preset.src)
     .then((response) => response.text())
     .then((svgText) => {
       state.svgContent = svgText;
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(svgText, 'image/svg+xml');
+      currentFrameConfig = parseSvgConfig(doc);
+
+      const defaultsFromConfig = getDefaultsFromConfig(currentFrameConfig);
+      Object.entries(defaultsFromConfig).forEach(([key, value]) => {
+        state[key] = value;
+      });
+
+      if (preset.text) state.text = preset.text;
+      if (preset.textColor) state.textColor = preset.textColor;
+      if (preset.frameColor) state.frameColor = preset.frameColor;
+
+      const dynamicControlsContainer =
+        document.getElementById('dynamic-controls');
+      if (dynamicControlsContainer && currentFrameConfig.size > 0) {
+        generateUI(currentFrameConfig, state, dynamicControlsContainer);
+      }
+
+      currentFrameConfig = null;
       updateSVG();
     });
-
-  // Update UI
-  $inputText.value = state.text;
-  $inputText.disabled = false;
 
   draw();
 }
@@ -239,18 +227,6 @@ function initPhotoGallery() {
   });
 }
 
-function initColorPalette($colorPalette, colors) {
-  $colorPalette.replaceChildren();
-
-  colors.forEach((color) => {
-    const $colorSwatch =
-      $tmplColorSwatch.content.firstElementChild.cloneNode(true);
-    $colorSwatch.value = color;
-    $colorSwatch.style.setProperty('--color', color);
-    $colorPalette.appendChild($colorSwatch);
-  });
-}
-
 // Preview overlay toggle
 function togglePreviewOverlay() {
   $profilePreview.classList.toggle('show-preview-overlay');
@@ -260,33 +236,6 @@ function togglePreviewOverlay() {
 function setupEventListeners() {
   // Preview overlay
   $profilePreview.addEventListener('click', togglePreviewOverlay);
-
-  // Text Input - state change triggers automatic redraw
-  $inputText.addEventListener('input', (e) => {
-    state.text = e.target.value;
-  });
-
-  // Sliders - state changes trigger automatic redraw
-  $inputFontSize.addEventListener('input', (e) => {
-    state.fontSize = parseInt(e.target.value);
-  });
-
-  $inputTextRotation.addEventListener('input', (e) => {
-    state.textRotation = parseInt(e.target.value);
-  });
-
-  $inputFrameRotation.addEventListener('input', (e) => {
-    state.frameRotation = parseInt(e.target.value);
-  });
-
-  $inputTextScale.addEventListener('input', (e) => {
-    state.textScale = parseFloat(e.target.value);
-  });
-
-  // Font Family
-  $selectFontFamily.addEventListener('change', (e) => {
-    state.fontFamily = e.target.value;
-  });
 
   // Frame Gallery (Delegation)
   $frameGallery.addEventListener('change', ({ target }) => {
@@ -305,15 +254,6 @@ function setupEventListeners() {
       };
       img.src = target.closest('.gallery-item').querySelector('img').src;
     }
-  });
-
-  // Color Pickers (Delegation)
-  $colorPaletteText.addEventListener('change', ({ target }) => {
-    state.textColor = target.value;
-  });
-
-  $colorPaletteFrame.addEventListener('change', ({ target }) => {
-    state.frameColor = target.value;
   });
 
   // Image Upload
@@ -362,14 +302,11 @@ function loadDefaultImage() {
 function init() {
   initFrameGallery();
   initPhotoGallery();
-  initColorPalette($colorPaletteText, textColors);
-  initColorPalette($colorPaletteFrame, frameColors);
   setupEventListeners();
   loadDefaultImage();
 
   // Apply default preset
   applyPreset('opentowork2');
-  applyStateToUI();
 }
 
 // Start the application

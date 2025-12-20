@@ -1,11 +1,100 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none" data-jetski-tab-id="327592918">
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
 
-<g width="60" height="60" viewBox="0 0 60 60" fill="none" data-jetski-tab-id="327592918">
+    <config id="fm-config" display="none">
+        <property
+            name="text"
+            type="text"
+            target="#frame-text"
+            attr="textContent"
+            default="#OpenToWork"
+            label="Text"
+        />
+
+        <property
+            name="frameColor"
+            type="color"
+            target="--color"
+            default="#467031"
+            label="Frame Color"
+            palette="frame"
+        />
+
+        <property
+            name="textColor"
+            type="color"
+            target="--text-color"
+            default="#FFFFFF"
+            label="Text Color"
+            palette="text"
+        />
+
+        <property
+            name="fontSize"
+            type="range"
+            target="--font-size"
+            default="5"
+            min="3"
+            max="9"
+            step="0.1"
+            unit="px"
+            label="Font Size"
+        />
+
+        <property
+            name="fontFamily"
+            type="select"
+            target="--font-family"
+            default="Inter, sans-serif"
+            options="Inter, sans-serif|Lato, sans-serif|Arial, sans-serif|Georgia, serif"
+            label="Font Family"
+        />
+
+        <property
+            name="textRotation"
+            type="range"
+            target="--text-rotation"
+            default="0"
+            min="-180"
+            max="180"
+            step="1"
+            unit="deg"
+            label="Text Rotation"
+        />
+
+        <property
+            name="textScale"
+            type="range"
+            target="--text-scale"
+            default="1"
+            min="0.7"
+            max="1.4"
+            step="0.05"
+            label="Text Scale"
+        />
+    </config>
+
     <g>
         <!-- Removed background rect and circle to allow transparency -->
-        <path id="frame-path" d="M 30 0 A 30 30 0 0 1 30 60 A 30 30 0 0 1 30 0 Z M 30 4 A 26 26 0 0 0 30 56 A 26 26 0 0 0 30 4 Z" fill="var(--color)"/>
-        <rect id="text-bg" x="10" y="40" width="40" height="12" rx="3" fill="rgba(0,0,0,0.5)"/>
-        <text id="frame-text" x="30" y="49" font-family="var(--font-family)" font-size="5" fill="var(--text-color)" text-anchor="middle" font-weight="bold">#OpenToWork</text>
+        <path
+            id="frame-path"
+            d="M 30 0 A 30 30 0 0 1 30 60 A 30 30 0 0 1 30 0 Z M 30 4 A 26 26 0 0 0 30 56 A 26 26 0 0 0 30 4 Z"
+            fill="var(--color, #467031)"
+        />
+        <g
+            style="transform-origin: center; transform: rotate(var(--text-rotation, 0deg)) scale(var(--text-scale, 1));"
+        >
+            <rect id="text-bg" x="10" y="40" width="40" height="12" rx="3" fill="rgba(0,0,0,0.5)" />
+
+            <text
+                id="frame-text"
+                x="30"
+                y="49"
+                font-family="var(--font-family, Inter, sans-serif)"
+                font-size="var(--font-size, 5px)"
+                fill="var(--text-color, #ffffff)"
+                text-anchor="middle"
+                font-weight="bold"
+            >#OpenToWork</text>
+        </g>
     </g>
-</g>
 </svg>

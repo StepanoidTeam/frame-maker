@@ -100,103 +100,10 @@
 
         <!-- Right Panel: Editor -->
         <section class="panel editor-panel">
-          <!-- Text Settings -->
-          <label class="flex-col w-100 gap-10">
-            <span class="uppercase">text</span>
-            <input
-              type="text"
-              id="$inputText"
-              class="input-field"
-              value="#Hiring"
-              placeholder="Enter frame text"
-            />
-          </label>
-
-          <label class="flex-col items-start w-100 gap-10">
-            <span class="uppercase">font</span>
-            <select id="$selectFontFamily" class="input uppercase">
-              <option value="Inter, sans-serif">Inter</option>
-              <option value="Lato, sans-serif">Lato</option>
-            </select>
-          </label>
-
-          <div class="flex-row gap-10">
-            <label class="flex-col items-start w-100 gap-10" style="width: 60%">
-              <span class="uppercase">style</span>
-              <select id="$selectFontStyle" class="input">
-                <option value="Inter, sans-serif">regular</option>
-                <option value="Inter, sans-serif">bold</option>
-                <option value="Lato, sans-serif">italic</option>
-              </select>
-            </label>
-
-            <label class="flex-col items-start w-100 gap-10" style="width: 40%">
-              <span class="uppercase">size</span>
-              <input id="$inputFontSize" type="number" min="10" max="200" />
-            </label>
-          </div>
-
-          <label class="flex-col items-start w-100 gap-10">
-            <span class="uppercase">text scale</span>
-            <input
-              id="$inputTextScale"
-              type="number"
-              min="0"
-              max="1"
-              step="0.01"
-              value="1"
-            />
-          </label>
-
-          <div class="flex-col gap-10">
-            <span class="uppercase">text color</span>
-            <form id="$colorPaletteText" class="color-palette">
-              <!-- items will be populated by javascript -->
-            </form>
-          </div>
-
-          <hr />
-
-          <div class="flex-row gap-10">
-            <label class="flex-col w-100 gap-10"
-              >text Rotation
-              <span>
-                <input
-                  type="number"
-                  id="$inputTextRotation"
-                  min="-360"
-                  max="360"
-                  step="1"
-                  value="0"
-                />
-              </span>
-            </label>
-
-            <label class="flex-col w-100 gap-10"
-              >frame Rotation
-              <input
-                type="number"
-                id="$inputFrameRotation"
-                min="-360"
-                max="360"
-                step="1"
-                value="0"
-              />
-            </label>
-          </div>
-
-          <hr />
-          <!-- Frame Style -->
-
-          <div class="customization-row">
-            <div class="flex-col gap-10">
-              <span class="uppercase">frame color</span>
-
-              <form id="$colorPaletteFrame" class="color-palette">
-                <!-- items will be populated by javascript -->
-              </form>
-            </div>
-          </div>
+          <section class="controls-section">
+            <h3 class="uppercase" style="margin: 0">Frame Settings</h3>
+            <div id="dynamic-controls"></div>
+          </section>
         </section>
       </main>
 
