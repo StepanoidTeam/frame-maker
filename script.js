@@ -29,7 +29,7 @@ const defaultState = {
 
 // Reactive state - automatically calls updateAndDraw on changes
 // Properties that should trigger redraw
-const renderTriggerProperties = new Set([
+const renderTriggerProperties = [
   'text',
   'textColor',
   'frameColor',
@@ -39,22 +39,21 @@ const renderTriggerProperties = new Set([
   'fontSize',
   'fontFamily',
   'textScale',
-]);
+];
 
 // Properties that only need simple draw (no SVG update)
-const drawOnlyProperties = new Set(['userImage', 'frameImage']);
+const drawOnlyProperties = ['userImage', 'frameImage'];
 
-const state = createReactiveState(
-  defaultState,
-  (property, newValue, oldValue) => {
-    // todo(vmyshko): refac this, not sure about that approach with prop-check
-    if (renderTriggerProperties.has(property)) {
-      updateAndDraw();
-    } else if (drawOnlyProperties.has(property)) {
-      draw();
-    }
-  }
-);
+const [state, addStatePropListener] = createReactiveState(defaultState);
+
+addStatePropListener(renderTriggerProperties, (propName, value, oldValue) => {
+  console.log('⚛️up+draw', propName, value, oldValue);
+  updateAndDraw();
+});
+addStatePropListener(drawOnlyProperties, (propName, value, oldValue) => {
+  console.log('⚛️draw', propName, value, oldValue);
+  draw();
+});
 
 // Canvas setup
 const canvas = $previewCanvas;
