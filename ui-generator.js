@@ -9,6 +9,22 @@ const colorPalettes = {
   text: textColors,
 };
 
+const templates = {
+  group: '$tmplControlGroup',
+  text: '$tmplControlText',
+  color: '$tmplControlColor',
+  range: '$tmplControlRange',
+  select: '$tmplControlSelect',
+  swatch: '$tmplColorSwatch',
+};
+
+function cloneTemplate(id) {
+  const tmpl = document.getElementById(id);
+  if (!tmpl) return null;
+  const node = tmpl.content.firstElementChild.cloneNode(true);
+  return node;
+}
+
 /**
  * Generate UI controls from SVG config.
  * @param {Map<string, import('./svg-config.js').SvgProperty>} config
@@ -27,14 +43,17 @@ export function generateUI(config, state, container) {
 }
 
 function createControlGroup(prop, state) {
-  const group = document.createElement('div');
-  group.className = 'control-group';
+  const group = cloneTemplate(templates.group);
+  if (!group) return null;
+
   group.dataset.property = prop.name;
 
-  const label = document.createElement('label');
-  label.textContent = prop.label;
-  label.htmlFor = `control-${prop.name}`;
-  group.appendChild(label);
+  const label = group.querySelector('label');
+  const slot = group.querySelector('.control-slot');
+  if (label) {
+    label.textContent = prop.label;
+    label.htmlFor = `control-${prop.name}`;
+  }
 
   let control;
 
@@ -56,18 +75,18 @@ function createControlGroup(prop, state) {
       return null;
   }
 
-  if (control) {
-    group.appendChild(control);
+  if (control && slot) {
+    slot.appendChild(control);
   }
 
   return group;
 }
 
 function createTextInput(prop, state) {
-  const input = document.createElement('input');
+  const input = cloneTemplate(templates.text);
+  if (!input) return null;
   input.type = 'text';
   input.id = `control-${prop.name}`;
-  input.className = 'text-input';
   input.value = state[prop.name] ?? prop.default;
   input.placeholder = prop.label;
 
@@ -79,22 +98,21 @@ function createTextInput(prop, state) {
 }
 
 function createColorPalette(prop, state) {
-  const wrapper = document.createElement('div');
-  wrapper.className = 'color-palette-wrapper';
+  const wrapper = cloneTemplate(templates.color);
+  if (!wrapper) return null;
 
-  const palette = document.createElement('form');
-  palette.className = 'color-palette';
+  const palette = wrapper.querySelector('form.color-palette');
+  if (!palette) return null;
   palette.id = `control-${prop.name}`;
 
   const colors = (prop.palette && colorPalettes[prop.palette]) || frameColors;
 
   colors.forEach((color, index) => {
-    const radio = document.createElement('input');
-    radio.type = 'radio';
+    const radio = cloneTemplate(templates.swatch);
+    if (!radio) return;
     radio.name = `color-${prop.name}`;
     radio.value = color;
     radio.id = `${prop.name}-color-${index}`;
-    radio.className = 'color-swatch';
     radio.checked = color === (state[prop.name] ?? prop.default);
     radio.style.setProperty('--color', color);
 
@@ -110,20 +128,18 @@ function createColorPalette(prop, state) {
 }
 
 function createRangeSlider(prop, state) {
-  const wrapper = document.createElement('div');
-  wrapper.className = 'range-wrapper';
+  const wrapper = cloneTemplate(templates.range);
+  if (!wrapper) return null;
 
-  const input = document.createElement('input');
-  input.type = 'range';
+  const input = wrapper.querySelector('input.range-slider');
+  const valueDisplay = wrapper.querySelector('.range-value');
+  if (!input || !valueDisplay) return null;
+
   input.id = `control-${prop.name}`;
-  input.className = 'range-slider';
   input.min = prop.min;
   input.max = prop.max;
   input.step = prop.step;
   input.value = state[prop.name] ?? prop.default;
-
-  const valueDisplay = document.createElement('span');
-  valueDisplay.className = 'range-value';
   valueDisplay.textContent = `${input.value}${prop.unit}`;
 
   input.addEventListener('input', (e) => {
@@ -132,16 +148,13 @@ function createRangeSlider(prop, state) {
     valueDisplay.textContent = `${value}${prop.unit}`;
   });
 
-  wrapper.appendChild(input);
-  wrapper.appendChild(valueDisplay);
-
   return wrapper;
 }
 
 function createSelect(prop, state) {
-  const select = document.createElement('select');
+  const select = cloneTemplate(templates.select);
+  if (!select) return null;
   select.id = `control-${prop.name}`;
-  select.className = 'select-input';
 
   const options = prop.options || [prop.default];
 
