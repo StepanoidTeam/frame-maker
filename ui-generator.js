@@ -3,6 +3,7 @@
  */
 
 import { textColors, frameColors } from './colors.js';
+import { FONT_FAMILIES } from './fonts.js';
 
 const colorPalettes = {
   frame: frameColors,
@@ -156,7 +157,8 @@ function createSelect(prop, state) {
   if (!select) return null;
   select.id = `control-${prop.name}`;
 
-  const options = prop.options || [prop.default];
+  const options =
+    prop.name === 'fontFamily' ? FONT_FAMILIES : prop.options || [prop.default];
 
   options.forEach((optionValue) => {
     const option = document.createElement('option');

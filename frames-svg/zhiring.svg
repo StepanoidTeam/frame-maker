@@ -52,7 +52,6 @@
                 type="select"
                 target="--font-family"
                 default="Inter, sans-serif"
-                options="Inter, sans-serif|Lato, sans-serif|Arial, sans-serif|Georgia, serif"
                 label="Font Family"
             />
 

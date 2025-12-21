@@ -98,6 +98,8 @@ export function getDefaultsFromConfig(config) {
  * @param {Map<string, SvgProperty>} config - Parsed config
  * @param {Object} state - Current state values
  */
+import { FONT_IMPORTS } from './fonts.js';
+
 export function applySvgConfig(svgDoc, config, state) {
   const cssVars = [];
 
@@ -131,8 +133,19 @@ export function applySvgConfig(svgDoc, config, state) {
       svgDoc.documentElement.prepend(styleEl);
     }
 
+    // Import only the selected font family (first token before comma)
+    const selectedFamily = (
+      state.fontFamily ||
+      config.get('fontFamily')?.default ||
+      ''
+    )
+      .split(',')[0]
+      .trim();
+    const importUrl = FONT_IMPORTS[selectedFamily];
+
     styleEl.textContent = `
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Lato:wght@400;700&display=swap');
+      /* Fonts: import only selected family */
+      ${importUrl ? `@import url('${importUrl}');` : ''}
       :root {
         ${cssVars.join('\n        ')}
       }

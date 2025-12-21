@@ -6,6 +6,7 @@
 <rect y="-0.799988" width="800" height="800" fill="url(#paint0_radial_46_29)"/>
 </g>
 
+
 <config id="fm-config" display="none">
     <property
         name="text"
@@ -51,7 +52,6 @@
         type="select"
         target="--font-family"
         default="Inter, sans-serif"
-        options="Inter, sans-serif|Lato, sans-serif|Arial, sans-serif|Georgia, serif"
         label="Font Family"
     />
 
