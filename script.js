@@ -23,7 +23,6 @@ const defaultState = {
   frameColor: frameColors.at(0),
   textRotation: 0,
   frameRotation: 0,
-  frameStyle: 'solid', // 'solid', 'gradient', 'pattern'
   fontSize: 80,
   userImage: null, // Will hold the Image object
   frameImage: null, // Will hold the SVG Image object
@@ -43,7 +42,6 @@ const renderTriggerProperties = [
   'frameColor',
   'textRotation',
   'frameRotation',
-  'frameStyle',
   'fontSize',
   'fontFamily',
   'textScale',
@@ -152,36 +150,49 @@ function applyPreset(id) {
 
   currentFrameConfig = null;
   state.selectedFrameId = id;
+  if (preset.type === 'svg') {
+    // Load SVG
+    fetch(preset.src)
+      .then((response) => response.text())
+      .then((svgText) => {
+        state.svgContent = svgText;
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(svgText, 'image/svg+xml');
+        currentFrameConfig = parseSvgConfig(doc);
 
-  // Load SVG
-  fetch(preset.src)
-    .then((response) => response.text())
-    .then((svgText) => {
-      state.svgContent = svgText;
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(svgText, 'image/svg+xml');
-      currentFrameConfig = parseSvgConfig(doc);
+        const defaultsFromConfig = getDefaultsFromConfig(currentFrameConfig);
+        Object.entries(defaultsFromConfig).forEach(([key, value]) => {
+          state[key] = value;
+        });
 
-      const defaultsFromConfig = getDefaultsFromConfig(currentFrameConfig);
-      Object.entries(defaultsFromConfig).forEach(([key, value]) => {
-        state[key] = value;
+        if (preset.text) state.text = preset.text;
+        if (preset.textColor) state.textColor = preset.textColor;
+        if (preset.frameColor) state.frameColor = preset.frameColor;
+
+        const dynamicControlsContainer =
+          document.getElementById('dynamic-controls');
+        if (dynamicControlsContainer && currentFrameConfig.size > 0) {
+          generateUI(currentFrameConfig, state, dynamicControlsContainer);
+        }
+
+        currentFrameConfig = null;
+        updateSVG();
       });
+  } else {
+    // Load static image (PNG/JPG)
+    state.svgContent = null;
+    const img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.onload = () => {
+      state.frameImage = img;
+      draw();
+    };
+    img.src = preset.src;
 
-      if (preset.text) state.text = preset.text;
-      if (preset.textColor) state.textColor = preset.textColor;
-      if (preset.frameColor) state.frameColor = preset.frameColor;
-
-      const dynamicControlsContainer =
-        document.getElementById('dynamic-controls');
-      if (dynamicControlsContainer && currentFrameConfig.size > 0) {
-        generateUI(currentFrameConfig, state, dynamicControlsContainer);
-      }
-
-      currentFrameConfig = null;
-      updateSVG();
-    });
-
-  draw();
+    const dynamicControlsContainer =
+      document.getElementById('dynamic-controls');
+    if (dynamicControlsContainer) dynamicControlsContainer.innerHTML = '';
+  }
 }
 
 // Gallery initialization
