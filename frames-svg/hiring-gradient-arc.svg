@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" fill="none">
+  <config id="fm-config" display="none">
+    <property
+      name="text"
+      type="text"
+      target="#frame-text"
+      attr="textContent"
+      default="#HIRING"
+      label="Text"
+    />
+
+    <property
+      name="wedgeColor"
+      type="color"
+      target="--wedge-color"
+      default="#8344cb"
+      label="Wedge Color"
+      palette="frame"
+    />
+
+    <property
+      name="textColor"
+      type="color"
+      target="--text-color"
+      default="#FFFFFF"
+      label="Text Color"
+      palette="text"
+    />
+
+    <property
+      name="fontSize"
+      type="range"
+      target="--font-size"
+      default="74"
+      min="48"
+      max="110"
+      step="1"
+      unit="px"
+      label="Font Size"
+    />
+
+    <property
+      name="fontFamily"
+      type="select"
+      target="--font-family"
+      default="Inter, sans-serif"
+      label="Font Family"
+    />
+
+    <property
+      name="textScale"
+      type="range"
+      target="--text-scale"
+      default="1"
+      min="0.8"
+      max="1.4"
+      step="0.05"
+      label="Text Scale"
+    />
+
+    <property
+      name="textRotation"
+      type="range"
+      target="--text-rotation"
+      default="0"
+      min="-180"
+      max="180"
+      step="1"
+      unit="deg"
+      label="Text Rotation"
+    />
+  </config>
+
+  <defs>
+    <!-- Text path guide (lower inner arc) -->
+    <path id="text-path" d="M 192.16 280 A 240 240 0 0 1 607.84 280" fill="none" />
+
+    <!-- Purple wedge gradient: opaque at left, fading to bottom-right -->
+    <linearGradient id="wedgeGradient" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="var(--wedge-color, #8344cb)" stop-opacity="1" />
+      <stop offset="60%" stop-color="var(--wedge-color, #8344cb)" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="var(--wedge-color, #8344cb)" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Wedge + Text rotate/scale together -->
+  <g style="transform-origin: 400px 400px; transform: rotate(var(--text-rotation, 0deg)) scale(var(--text-scale, 1));">
+    <!-- Arc wedge (thicker donut segment) -->
+    <path
+      d="M 88.24 220 A 360 360 0 0 1 711.76 220 L 573.20 300 A 200 200 0 0 0 226.80 300 Z"
+      fill="url(#wedgeGradient)"
+    />
+
+    <!-- Arc text -->
+    <text
+      id="frame-text"
+      fill="var(--text-color, #ffffff)"
+      font-family="var(--font-family, Inter, sans-serif)"
+      font-size="var(--font-size, 74px)"
+      font-weight="800"
+      letter-spacing="0.08em"
+      dy="18"
+    >
+      <textPath href="#text-path" startOffset="6%">#HIRING</textPath>
+    </text>
+  </g>
+</svg>

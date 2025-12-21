@@ -23,6 +23,11 @@ export const presets = {
     src: 'frames-svg/zone-hiring.svg',
     frameStyle: 'solid',
   },
+  hiringarc: {
+    type: 'svg',
+    src: 'frames-svg/hiring-gradient-arc.svg',
+    frameStyle: 'gradient',
+  },
 };
 
 export const localPhotos = [
