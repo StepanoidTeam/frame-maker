@@ -11,7 +11,6 @@ const colorPalettes = {
 };
 
 const templates = {
-  group: '$tmplControlGroup',
   text: '$tmplControlText',
   color: '$tmplControlColor',
   range: '$tmplControlRange',
@@ -33,7 +32,7 @@ function cloneTemplate(id) {
  * @param {HTMLElement} container - Container element for controls
  */
 export function generateUI(config, state, container) {
-  container.innerHTML = '';
+  container.replaceChildren();
 
   for (const [, prop] of config) {
     const controlGroup = createControlGroup(prop, state);
@@ -44,18 +43,6 @@ export function generateUI(config, state, container) {
 }
 
 function createControlGroup(prop, state) {
-  const group = cloneTemplate(templates.group);
-  if (!group) return null;
-
-  group.dataset.property = prop.name;
-
-  const label = group.querySelector('label');
-  const slot = group.querySelector('.control-slot');
-  if (label) {
-    label.textContent = prop.label;
-    label.htmlFor = `control-${prop.name}`;
-  }
-
   let control;
 
   switch (prop.type) {
@@ -76,18 +63,24 @@ function createControlGroup(prop, state) {
       return null;
   }
 
-  if (control && slot) {
-    slot.appendChild(control);
+  const labelSpan = control.querySelector('label>span');
+  const slot = control.querySelector('.control-slot');
+  if (labelSpan) {
+    labelSpan.textContent = prop.label;
   }
 
-  return group;
+  control.dataset.property = prop.name;
+
+  return control;
 }
 
 function createTextInput(prop, state) {
-  const input = cloneTemplate(templates.text);
-  if (!input) return null;
-  input.type = 'text';
-  input.id = `control-${prop.name}`;
+  const textControl = cloneTemplate(templates.text);
+  if (!textControl) return null;
+
+  const input = textControl.querySelector('input');
+
+  input.id = `$control_${prop.name}`;
   input.value = state[prop.name] ?? prop.default;
   input.placeholder = prop.label;
 
@@ -95,7 +88,7 @@ function createTextInput(prop, state) {
     state[prop.name] = e.target.value;
   });
 
-  return input;
+  return textControl;
 }
 
 function createColorPalette(prop, state) {
@@ -104,16 +97,14 @@ function createColorPalette(prop, state) {
 
   const palette = wrapper.querySelector('form.color-palette');
   if (!palette) return null;
-  palette.id = `control-${prop.name}`;
+  palette.id = `$control_${prop.name}`;
 
   const colors = (prop.palette && colorPalettes[prop.palette]) || frameColors;
 
   colors.forEach((color, index) => {
     const radio = cloneTemplate(templates.swatch);
     if (!radio) return;
-    radio.name = `color-${prop.name}`;
     radio.value = color;
-    radio.id = `${prop.name}-color-${index}`;
     radio.checked = color === (state[prop.name] ?? prop.default);
     radio.style.setProperty('--color', color);
 
@@ -153,13 +144,14 @@ function createRangeSlider(prop, state) {
 }
 
 function createSelect(prop, state) {
-  const select = cloneTemplate(templates.select);
-  if (!select) return null;
-  select.id = `control-${prop.name}`;
+  const dropDown = cloneTemplate(templates.select);
+  if (!dropDown) return null;
+  dropDown.id = `control-${prop.name}`;
 
   const options =
     prop.name === 'fontFamily' ? FONT_FAMILIES : prop.options || [prop.default];
 
+  const select = dropDown.querySelector('select');
   options.forEach((optionValue) => {
     const option = document.createElement('option');
     option.value = optionValue;
@@ -172,7 +164,7 @@ function createSelect(prop, state) {
     state[prop.name] = e.target.value;
   });
 
-  return select;
+  return dropDown;
 }
 
 /**

@@ -19,7 +19,7 @@
     <template id="$tmplGalleryItem">
       <label class="gallery-item flex-row">
         <input type="radio" name="radioName" />
-        <img src="not-set" alt="" />
+        <img src="./not-set.png" alt="" />
       </label>
     </template>
 
@@ -27,32 +27,45 @@
       <input type="radio" class="color-swatch" name="radioName" value="" />
     </template>
 
-    <template id="$tmplControlGroup">
-      <div class="control-group">
-        <label></label>
-        <div class="control-slot"></div>
-      </div>
-    </template>
-
     <template id="$tmplControlText">
-      <input type="text" class="text-input" />
+      <label>
+        <span>label not set</span>
+        <div class="control-slot">
+          <input type="text" class="text-input" />
+        </div>
+      </label>
     </template>
 
     <template id="$tmplControlColor">
-      <div class="color-palette-wrapper">
-        <form class="color-palette"></form>
-      </div>
+      <label>
+        <span>label not set</span>
+        <div class="control-slot">
+          <div class="color-palette-wrapper">
+            <form class="color-palette"></form>
+          </div>
+        </div>
+      </label>
     </template>
 
     <template id="$tmplControlRange">
-      <div class="range-wrapper">
-        <input type="range" class="range-slider" />
-        <span class="range-value"></span>
-      </div>
+      <label>
+        <span>label not set</span>
+        <div class="control-slot">
+          <div class="range-wrapper">
+            <input type="range" class="range-slider" />
+            <span class="range-value"></span>
+          </div>
+        </div>
+      </label>
     </template>
 
     <template id="$tmplControlSelect">
-      <select class="select-input"></select>
+      <label>
+        <span>label not set</span>
+        <div class="control-slot">
+          <select class="select-input"></select>
+        </div>
+      </label>
     </template>
     <!-- END templates -->
 
