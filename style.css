@@ -34,6 +34,7 @@ html {
   --canvas-width: 400px;
   --frame-size: 100px;
   --photo-size: 50px;
+  --swatch-size: 20px;
   --logo-size: 2.5rem;
   --avatar-size: 2.5rem;
   --toolbar-icon-size: 1.5rem;
@@ -659,11 +660,6 @@ input[type='range']::-webkit-slider-thumb {
   outline: none;
 }
 
-.color-palette-wrapper {
-  /* overflow-x: auto; */
-  margin: 0 -4px;
-  padding: 4px;
-}
 .color-palette {
   display: flex;
   gap: var(--btn-gap);
@@ -671,8 +667,8 @@ input[type='range']::-webkit-slider-thumb {
 
   & .color-swatch {
     appearance: none;
-    width: 32px;
-    height: 32px;
+    width: var(--swatch-size);
+    height:  var(--swatch-size);
     border-radius: 50%;
     background-color: var(--color, transparent);
     background-image: var(--color, none);
@@ -681,9 +677,9 @@ input[type='range']::-webkit-slider-thumb {
     cursor: pointer;
     transition: transform 0.2s, border-color 0.2s;
   }
-  & .color-swatch:hover {
+  /* & .color-swatch:hover {
     transform: scale(1.1);
-  }
+  } */
   & .color-swatch:checked {
     box-shadow: 0 0 0 3px var(--text-color);
   }
