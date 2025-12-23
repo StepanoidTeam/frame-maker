@@ -14,6 +14,8 @@ import {
 } from './svg-config.js';
 import { generateUI } from './ui-generator.js';
 
+import './theme-switcher.js';
+
 /**
  * Default state configuration
  */
