@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -56,97 +56,111 @@
     </template>
     <!-- END templates -->
 
-    <div class="app-container">
-      <header class="header">
-        <h1>Frames</h1>
-        <button class="close-btn">&times;</button>
+    <div class="app-container fullscreen">
+      <header class="panel-layout top">
+        <div class="main-toolbar-container">
+          <div class="toolbar-logo">
+            <div class="logo-container">
+              <a href="#home">
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="logo-icon"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
+              </a>
+            </div>
+          </div>
+          <div class="toolbar-tools">
+            <ul>
+              <li class="btn" id="$newBtn">New</li>
+              <li class="btn" id="$downloadBtn">Download</li>
+              <li class="btn" id="$publishBtn">Publish</li>
+            </ul>
+          </div>
+          <div class="toolbar-user">
+            <ul>
+              <li class="toolbar-icon toggle-theme-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="light-icon"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dark-icon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+              </li>
+              <li class="avatar-container">
+                <img src="./photos/1688381504089.jpeg" alt="">
+              </li>
+            </ul>
+          </div>
+        </div>
       </header>
 
-      <main class="main-content">
-        <!-- Left Panel: Gallery -->
-        <section class="panel gallery-panel">
-          <h2 style="font-size: 1.1rem; margin: 0 0 var(--spacing-m) 0">
-            Frame Gallery
-          </h2>
-          <form id="$frameGallery" class="frame-gallery gallery">
-            <!-- items will be populated by javascript -->
-          </form>
-          <button disabled class="btn-secondary create-btn">
-            + Upload New Frame
-          </button>
-        </section>
+      <section class="panel-layout left">
+        <!-- Left Panel: Frames -->
+        <div class="left-toolbar-container">
+          <ul>
+            <li class="btn frame" id="addFrame">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            </li>
+            <li>
+              <form id="$frameGallery" class="frame-gallery gallery">
+                <!-- items will be populated by javascript -->
+              </form>
+            </li>
+          </ul>
+        </div>
+      </section>
 
-        <!-- Center Panel: Preview -->
-        <section class="preview-panel">
-          <div
-            id="$profilePreview"
-            class="profile-preview show-preview-overlay"
-          >
-            <svg class="svg-overlay" viewBox="0 0 100 100">
-              <!-- Circular mask overlay using simplified path -->
-              <defs>
-                <mask id="circleMask">
-                  <rect width="100" height="100" fill="white" />
-                  <circle cx="50" cy="50" r="50" fill="black" />
-                </mask>
-              </defs>
-              <rect width="100" height="100" mask="url(#circleMask)" />
-            </svg>
-            <canvas id="$previewCanvas" class="preview-canvas"></canvas>
-          </div>
-
-          <hr />
-
-          <div class="preview-buttons">
-            <button class="upload-btn" id="$uploadPhotoBtn">
-              Upload Photo
-            </button>
-            <input
-              type="file"
-              id="$fileInput"
-              accept="image/*"
-              style="display: none"
-            />
-          </div>
-
-          <div class="photo-gallery-container">
-            <h3
-              style="
-                font-size: 0.9rem;
-                color: var(--color-text-secondary);
-                margin-bottom: var(--spacing-sm);
-                font-weight: normal;
-              "
-            >
-              Or choose a photo
-            </h3>
-            <form id="$photoGallery" class="photo-gallery gallery">
-              <!-- items will be populated by javascript -->
-            </form>
-          </div>
-        </section>
-
+      <section class="panel-layout right">
         <!-- Right Panel: Editor -->
-        <section class="panel editor-panel">
+        <section class="frame-settings-container panel editor-panel">
           <section class="controls-section">
             <h3 class="uppercase" style="margin: 0">Frame Settings</h3>
-            <div id="dynamic-controls"></div>
+            <div id="dynamic-controls">
+              <!-- items will be populated by javascript -->
+            </div>
           </section>
         </section>
-      </main>
+      </section>
 
-      <footer class="footer-bar">
-        <div class="checkbox-container">
-          <input type="checkbox" id="$visibleCheck" checked />
-          <label for="$visibleCheck">Visible to all LinkedIn members</label>
+      <section class="panel-layout bottom">
+        <div class="bottom-toolbar-container">
+          <ul>
+            <li class="btn photo" id="$uploadPhotoBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+              <input
+                  type="file"
+                  id="$fileInput"
+                  accept="image/*"
+                  style="display: none"
+              />
+            </li>
+            <li>
+              <form id="$photoGallery" class="photo-gallery gallery">
+                <!-- items will be populated by javascript -->
+              </form>
+            </li>
+          </ul>
         </div>
-        <div class="footer-buttons">
-          <button class="btn-secondary save-btn" id="$downloadBtn">
-            Download
-          </button>
-          <button class="btn-primary publish-btn">Publish to LinkedIn</button>
+      </section>
+
+      <section class="panel-layout canvas">
+        <div class="canvas-container">
+          <!-- Center Panel: Preview -->
+          <section class="preview-panel">
+            <div
+              id="$profilePreview"
+              class="profile-preview show-preview-overlay"
+            >
+              <svg class="svg-overlay" viewBox="0 0 100 100">
+                <!-- Circular mask overlay using simplified path -->
+                <defs>
+                  <mask id="circleMask">
+                    <rect width="100" height="100" fill="white" />
+                    <circle cx="50" cy="50" r="50" fill="black" />
+                  </mask>
+                </defs>
+                <rect width="100" height="100" mask="url(#circleMask)" />
+              </svg>
+              <canvas id="$previewCanvas" class="preview-canvas"></canvas>
+            </div>
+          </section>
         </div>
-      </footer>
+      </section>
     </div>
+
+    <script src="./theme-switcher.js"></script>
   </body>
 </html>

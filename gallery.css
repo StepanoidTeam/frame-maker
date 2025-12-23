@@ -1,15 +1,15 @@
 /* only common styles for abstract gallery here */
 .gallery {
-  --size: 75px;
+  --size: var(--photo-size);
 
   display: flex;
   gap: var(--spacing-sm);
   overflow-x: auto;
-  padding: var(--spacing-xs);
+  /* padding: var(--spacing-xs); */
 
   /* scrollbar styles */
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-border) transparent;
+  scrollbar-width: none;
+  /* scrollbar-color: var(--color-border) transparent; */
 
   &::-webkit-scrollbar {
     height: 6px;
