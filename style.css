@@ -357,7 +357,7 @@ body {
   & ul {
     display: flex;
     flex-direction: row;
-    gap: var(--btn-gap);
+    gap: calc(var(--btn-gap) / 2);;
     align-items: center;
 
     & li {

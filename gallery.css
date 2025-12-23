@@ -3,7 +3,7 @@
   --size: var(--photo-size);
 
   display: flex;
-  gap: var(--spacing-sm);
+  gap: calc(var(--btn-gap) / 3);
   overflow-x: auto;
   /* padding: var(--spacing-xs); */
 
