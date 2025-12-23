@@ -81,6 +81,12 @@ input, button, select, textarea {
 .spacer {
   flex-grow: 1;
 }
+.hidden {
+  display: none;
+}
+[hidden] {
+  display: none;
+}
 
 .panel-layout {
   position: absolute;
@@ -247,13 +253,6 @@ body {
       width: var(--toolbar-icon-size);
       height: var(--toolbar-icon-size);
     }
-  }
-
-  & .dark-icon.hidden {
-    display: none;
-  }
-  & .light-icon.hidden {
-    display: none;
   }
 }
 .logo-container {
