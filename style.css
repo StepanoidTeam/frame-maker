@@ -29,7 +29,7 @@ html {
 
   --top-panel-height: 4rem;
   --right-panel-width: 300px;
-  --btn-gap: 0.75rem;
+  --btn-gap: 0.5rem;
   --btn-padding: 0.3rem;
   --canvas-width: 400px;
   --frame-size: 100px;
@@ -116,7 +116,6 @@ input, button, select, textarea {
  */
 
 .theme-figma {
-
   --main-bg: #1e1e1e;
   --side-panel: #2c2c2c;
   --input-bg: #383838;
@@ -323,16 +322,16 @@ body {
       cursor: pointer;
     }
   }
-}
 
-.frame-gallery {
-  flex-direction: column;
-  max-height: 50vh;
-  max-height: 50dvh;
+  & .frame-gallery {
+    flex-direction: column;
+    max-height: 50vh;
+    max-height: 50dvh;
+    --size: var(--frame-size);
 
-  --size: 100px;
-  & .gallery-item {
-    border-radius: 50%;
+    & .gallery-item {
+      border-radius: 50%;
+    }
   }
 }
 
@@ -343,6 +342,9 @@ body {
   width: var(--right-panel-width);
   border-radius: var(--panel-radius);
   padding: calc(var(--panel-padding) * 2);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
 .bottom-toolbar-container {
@@ -357,7 +359,7 @@ body {
   & ul {
     display: flex;
     flex-direction: row;
-    gap: calc(var(--btn-gap) / 2);;
+    gap: var(--btn-gap);
     align-items: center;
 
     & li {
@@ -380,7 +382,6 @@ body {
   border-radius: calc(var(--panel-radius) * 2);
   width: min(var(--canvas-width), 100vw);
   overflow: hidden;
-  display: flex;
 
   & section {
     width: 100%;
@@ -392,86 +393,6 @@ body {
 /*//////////////////////////////////*/
 
 /*
- * Main Layout
- */
-.main-content {
-  flex-grow: 1;
-  display: grid;
-  grid-template-columns: 280px 1fr 280px;
-  overflow: hidden;
-}
-
-.panel {
-  padding: var(--spacing-sm) var(--spacing-m);
-  background-color: var(--color-bg-secondary);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  overflow-y: auto;
-}
-@media screen and (max-width: 1000px) {
-  .panel {
-    overflow: visible;
-  }
-}
-
-/*
- * Photo Gallery
- */
-/* .photo-gallery-container {
-  width: 100%;
-  margin-top: var(--spacing-m);
-} */
-
-/* @media (max-width: 400px) {
-  .photo-gallery {
-    flex-wrap: wrap;
-  }
-} */
-
-/* Responsive */
-/* @media (max-width: 1000px) {
-  .gallery-panel {
-    border-right: none;
-    border-bottom: 1px solid var(--color-border);
-    flex-direction: row;
-    overflow-x: auto;
-    padding-bottom: var(--spacing-sm);
-  }
-  .frame-gallery {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-} */
-
-/* @media (max-width: 500px) {
-  .gallery-item {
-    flex-direction: column;
-  }
-} */
-
-/* .gallery-panel {
-  border-right: 1px solid var(--color-border);
-} */
-
-/* .profile-circle {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow: 0 0 0 2px var(--color-bg-secondary);
-  position: relative;
-  flex-shrink: 0;
-  background-color: #333;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-} */
-
-/*
  * Center Panel: Preview
  */
 .preview-panel {
@@ -479,22 +400,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* padding: var(--spacing-xl);
-  gap: var(--spacing-l); */
   overflow: hidden;
-  /* background-color: var(--color-bg-card); */
 }
 
-/* @media screen and (max-width: 1000px) {
-  .preview-panel {
-    overflow: visible;
-  }
-}
-@media screen and (max-width: 500px) {
-  .preview-panel {
-    padding: 10px;
-  }
-} */
 .profile-preview {
   --size: var(--canvas-width);
 
@@ -541,14 +449,6 @@ body {
   object-fit: cover;
 }
 
-/* hr {
-  all: unset;
-  width: 100%;
-  height: 1px;
-  background-color: var(--color-border);
-  margin: var(--spacing-sm) 0;
-} */
-
 .preview-buttons {
   display: flex;
   gap: var(--spacing-m);
@@ -557,9 +457,6 @@ body {
 /*
  * Right Panel: Editor
  */
-.editor-panel {
-  border-left: 1px solid var(--color-border);
-}
 
 .editor-group {
   display: flex;
@@ -798,33 +695,4 @@ input[type='range']::-webkit-slider-thumb {
 #dynamic-controls {
   display: flex;
   flex-direction: column;
-}
-
-/*
- * Utilities
- */
-.frame-indicator {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 4px solid var(--color-accent-purple);
-  box-sizing: border-box;
-  z-index: 10;
-}
-
-/* Responsive */
-@media (max-width: 1000px) {
-  .main-content {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
-    overflow: auto;
-  }
-
-  .editor-panel {
-    border-left: none;
-    border-top: 1px solid var(--color-border);
-  }
 }
