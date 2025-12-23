@@ -193,7 +193,9 @@ function applyPreset(id) {
 
     const dynamicControlsContainer =
       document.getElementById('dynamic-controls');
-    if (dynamicControlsContainer) dynamicControlsContainer.innerHTML = '';
+    if (dynamicControlsContainer) {
+      dynamicControlsContainer.replaceChildren();
+    }
   }
 }
 
