@@ -1,4 +1,4 @@
-todo
+# todo
 
 - [x] replace frame gallery with same as photo gallery
 - [ ] add img frame support (no customization? just static images, maybe allow add text over?)
@@ -23,13 +23,13 @@ todo
 - [ ] impl upload new frame button
 - [ ] add local storage for frames/photos
 
-bugs
+## bugs
 
 - [ ] add extra colors to palette from presets
 - [x] apply frame color etc to frame preview in frame gallery (now most are black) -- i set default fallbacks in svg itself
 - [x] refac both galleries to event delegation and form approach (as on palettes)
 
-big features
+## big features
 
 - [ ] propose text/frame props dynamically, based on svg variables inside specific frame
       thoughts:
@@ -42,5 +42,6 @@ big features
 
 OR make it possible to select separate elements and customize them? (sounds hard - micro-figma)
 
-TODO-TODO:
+## TODO-TODO:
+
 make feature roadmap? prioritize? assign to salt?
