@@ -577,25 +577,24 @@ input[type='range']::-webkit-slider-thumb {
 #dynamic-controls {
   display: flex;
   flex-direction: column;
-}
-
-.control-group {
-  display: flex;
-  flex-direction: column;
   gap: var(--btn-gap);
   padding-top: var(--btn-gap);
   padding-bottom: var(--btn-gap);
-  border-bottom: var(--panel-border-width) solid var(--partition-color);
 
   & > label {
+    display: flex;
+    flex-direction: column;
+    gap: var(--btn-gap);
     font-size: 0.75rem;
     font-weight: 600;
     color: var(--label-text-color);
-    width: fit-content; /* decrease clickable area */
-  }
+    border-bottom: var(--panel-border-width) solid var(--partition-color);
+    padding-bottom: calc(var(--btn-gap) * 1.5);
 
-  &:last-child {
-    border-bottom: none;
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: none;
+    }
   }
 }
 

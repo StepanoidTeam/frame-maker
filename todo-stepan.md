@@ -2,8 +2,8 @@
 
 ## ui-theme:
 
-[ ] make initial theme based on user config  
-[ ] save theme settings to localstorage (if user sets custom)
+[x] make initial theme based on user config  
+[x] save theme settings to localstorage (if user sets custom)
 [ ] allow user to reset theme to auto-switch
 [ ] add transition for theme switching
 
