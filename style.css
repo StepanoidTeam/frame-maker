@@ -29,15 +29,19 @@ html {
 
   --top-panel-height: 4rem;
   --right-panel-width: 300px;
+  --canvas-width: 400px;
+
   --btn-gap: 0.5rem;
   --btn-padding: 0.3rem;
-  --canvas-width: 400px;
+  --btn-icon-size: 1rem;
+
   --frame-size: 100px;
   --photo-size: 50px;
   --swatch-size: 20px;
   --logo-size: 2.5rem;
   --avatar-size: 2.5rem;
   --toolbar-icon-size: 1.5rem;
+  
   --btn-bg: hsla(0, 0%, 60%, 0.15);
   --partition-color: hsla(0, 0%, 60%, 0.15);
   --transparent: hsla(0, 0%, 0%, 0);
@@ -290,6 +294,15 @@ body {
     padding: 0;
     overflow: hidden;
     background: none;
+  }
+
+  &:has(svg) {
+    gap: var(--btn-padding);
+
+    & svg {
+      width: var(--btn-icon-size);
+      height: var(--btn-icon-size);
+    }
   }
 
   &.photo {
