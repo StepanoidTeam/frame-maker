@@ -693,12 +693,12 @@ input[type='range']::-webkit-slider-thumb {
     border: var(--panel-border-width) solid transparent;
     box-shadow: 0 0 0 1px var(--toolbar-border);
     cursor: pointer;
-    transition: transform 0.2s, border-color 0.2s;
+    transition: transform 0.2s;
   }
-  /* & .color-swatch:hover {
+  & .color-swatch:hover {
     transform: scale(1.1);
-  } */
+  }
   & .color-swatch:checked {
-    box-shadow: 0 0 0 3px var(--text-color);
+    box-shadow: 0 0 0 2px var(--bg-color), 0 0 0 4px var(--text-color);
   }
 }
