@@ -9,6 +9,6 @@
 
 ## main stuff
 
-[ ] highlight selected frame and photo in lists
+[x] highlight selected frame and photo in lists
 [ ] increase photos size in gallery
 [ ] extract svg icons to separate files, and include as images

@@ -15,6 +15,7 @@ import {
 import { generateUI } from './ui-generator.js';
 
 import './theme-switcher.js';
+import './scroll-mask-feature.js';
 
 /**
  * Default state configuration
