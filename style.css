@@ -361,6 +361,8 @@ body {
     max-height: 50vh;
     max-height: 50dvh;
     --size: var(--frame-size);
+    margin: calc(var(--panel-padding) * (-1));
+    padding: var(--panel-padding);
 
     & .gallery-item {
       border-radius: 50%;
@@ -400,6 +402,11 @@ body {
       flex-direction: row;
       align-items: center;
       cursor: pointer;
+
+      & .photo-gallery {
+        margin: calc(var(--panel-padding) * (-1));
+        padding: var(--panel-padding);
+      }
     }
   }
 }
@@ -699,6 +706,6 @@ input[type='range']::-webkit-slider-thumb {
     transform: scale(1.1);
   }
   & .color-swatch:checked {
-    box-shadow: 0 0 0 2px var(--bg-color), 0 0 0 4px var(--text-color);
+    box-shadow: 0 0 0 2px var(--toolbar-bg), 0 0 0 4px var(--text-color);
   }
 }

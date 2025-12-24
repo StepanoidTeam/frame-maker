@@ -37,21 +37,12 @@
     transition: transform 0.2s;
 
     &:has(input[type='radio']:checked) {
-      position: relative;
-      &::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        box-shadow: inset 0 0 0 2px var(--text-color), inset 0 0 0 4px var(--bg-color);
-        border-radius: calc(var(--panel-radius) / 2);
-        z-index: 1;
-      }
+      box-shadow: 0 0 0 2px var(--toolbar-bg), 0 0 0 4px var(--text-color);
     }
 
-    /* &.gallery-item:hover {
+    &.gallery-item:hover {
       transform: scale(1.05);
-    } */
+    }
 
     img {
       width: 100%;
@@ -63,12 +54,6 @@
       position: absolute;
       opacity: 0;
       /* z-index: 0; */
-    }
-  }
-  /* only for frame gallery */
-  &.frame-gallery .gallery-item:has(input[type='radio']:checked) {
-    &::after {
-      border-radius: 50%;
     }
   }
 }
