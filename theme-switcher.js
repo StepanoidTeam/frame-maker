@@ -1,3 +1,7 @@
+//////////////////////////////////
+/////     theme switcher     /////
+//////////////////////////////////
+
 const root = document.documentElement;
 const toggleThemeBtn = document.querySelector('.toggle-theme-btn');
 const darkIcon = document.querySelector('.dark-icon');
