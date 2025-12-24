@@ -27,44 +27,36 @@
       <input type="radio" class="color-swatch" name="radioName" value="" />
     </template>
 
+    <!-- settings:controls -->
+
     <template id="$tmplControlText">
-      <label>
+      <label class="flex-col">
         <span>label not set</span>
-        <div class="control-slot">
-          <input type="text" class="text-input" />
-        </div>
+        <input type="text" class="text-input" />
       </label>
     </template>
 
     <template id="$tmplControlColor">
-      <label>
+      <label class="flex-col">
         <span>label not set</span>
-        <div class="control-slot">
-          <div class="color-palette-wrapper">
-            <form class="color-palette"></form>
-          </div>
-        </div>
+        <form class="color-palette"></form>
       </label>
     </template>
 
     <template id="$tmplControlRange">
-      <label>
+      <label class="flex-col">
         <span>label not set</span>
-        <div class="control-slot">
-          <div class="range-wrapper">
-            <input type="range" class="range-slider" />
-            <span class="range-value"></span>
-          </div>
+        <div class="range-wrapper">
+          <input type="range" class="range-slider" />
+          <span class="range-value"></span>
         </div>
       </label>
     </template>
 
     <template id="$tmplControlSelect">
-      <label>
+      <label class="flex-col">
         <span>label not set</span>
-        <div class="control-slot">
-          <select class="select-input"></select>
-        </div>
+        <select class="select-input"></select>
       </label>
     </template>
     <!-- END templates -->
