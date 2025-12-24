@@ -44,14 +44,14 @@ html {
   --accent-color: #0a66c2;
 }
 
-:root[theme="light"] {
+:root[data-theme="light"] {
   --bg-color: #efefef;
   --text-color: hsla(0, 0%, 33%, 1);
   --label-text-color: hsla(0, 0%, 33%, 0.5);
   --toolbar-bg: rgb(255, 255, 255);
   --toolbar-border: #e0e0e0;
 }
-:root[theme="dark"] {
+:root[data-theme="dark"] {
   --bg-color: #111;
   --text-color: hsla(0, 0%, 87%, 1);
   --label-text-color: hsla(0, 0%, 87%, 0.5);
@@ -119,6 +119,7 @@ input, button, select, textarea {
   }
 
   &.canvas {
+    z-index: revert; /* reset z-index for canvas */
     top: 50%;
     left: calc(50% - (var(--right-panel-width) + var(--panel-gap))/2);
     transform: translate(-50%, -50%);
