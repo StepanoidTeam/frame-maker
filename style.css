@@ -22,6 +22,8 @@ html {
 }
 
 :root {
+  color-scheme: light dark; /* auto theme switcher */
+
   --panel-padding: 0.5rem;
   --panel-radius: 0.5rem;
   --panel-border-width: 1px;
@@ -41,7 +43,7 @@ html {
   --logo-size: 2.5rem;
   --avatar-size: 2.5rem;
   --toolbar-icon-size: 1.5rem;
-  
+
   --btn-bg: hsla(0, 0%, 60%, 0.15);
   --partition-color: hsla(0, 0%, 60%, 0.15);
   --transparent: hsla(0, 0%, 0%, 0);
@@ -49,6 +51,8 @@ html {
 }
 
 :root[data-theme="light"] {
+  color-scheme: light; /* manual theme switcher */
+
   --bg-color: #efefef;
   --text-color: hsla(0, 0%, 33%, 1);
   --label-text-color: hsla(0, 0%, 33%, 0.5);
@@ -56,6 +60,8 @@ html {
   --toolbar-border: #e0e0e0;
 }
 :root[data-theme="dark"] {
+  color-scheme: dark; /* manual theme switcher */
+
   --bg-color: #111;
   --text-color: hsla(0, 0%, 87%, 1);
   --label-text-color: hsla(0, 0%, 87%, 0.5);
