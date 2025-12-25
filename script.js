@@ -15,7 +15,7 @@ import {
 import { generateUI } from './ui-generator.js';
 
 import './theme-switcher.js';
-import './scroll-mask-feature.js';
+import { updateMask } from './scroll-mask-feature.js';
 
 /**
  * Default state configuration
@@ -172,7 +172,11 @@ function applyPreset(id) {
 
         if (currentFrameConfig.size > 0) {
           generateUI(currentFrameConfig, state, $dynamicControlsContainer);
+          /////////////////////
+          // mask refreshing
           console.log('settings are here'); // temp debug
+          updateMask($dynamicControlsContainer, 'vertical');
+          /////////////////////
         } else {
           // todo(vmyshko): no settings? add stub
         }

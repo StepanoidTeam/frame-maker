@@ -2,7 +2,7 @@
 /////     dynamic mask gradient     /////
 /////////////////////////////////////////
 
-function updateMask(scrollableElement, verticalOrHorizontal) {
+export function updateMask(scrollableElement, verticalOrHorizontal) {
   let scrollTop = scrollableElement.scrollTop; // расстояние от верха прокрученное
   let scrollHeight = scrollableElement.scrollHeight; // полная высота контента
   let clientHeight = scrollableElement.clientHeight; // видимая высота "окна"
