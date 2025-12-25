@@ -6,7 +6,7 @@ function updateMask(scrollableElement, verticalOrHorizontal) {
   let scrollTop = scrollableElement.scrollTop; // расстояние от верха прокрученное
   let scrollHeight = scrollableElement.scrollHeight; // полная высота контента
   let clientHeight = scrollableElement.clientHeight; // видимая высота "окна"
-  
+
   let gradientAxis = 'to bottom';
   if(verticalOrHorizontal === 'horizontal') {
     scrollTop = scrollableElement.scrollLeft;
@@ -43,7 +43,9 @@ function updateMask(scrollableElement, verticalOrHorizontal) {
 }
 
 $frameGallery.addEventListener('scroll', ()=>updateMask($frameGallery, 'vertical'));
-window.addEventListener('load', ()=>updateMask($frameGallery, 'vertical')); // бесполезное, но пусть будет...
+window.addEventListener('load', ()=>updateMask($frameGallery, 'vertical')); // чтоб обновляло маску при загрузке
 window.addEventListener('resize', ()=>updateMask($frameGallery, 'vertical')); // чтоб обновляло маску при изменении размера окна тоже
 
 $photoGallery.addEventListener('scroll', ()=>updateMask($photoGallery, 'horizontal'));
+window.addEventListener('load', ()=>updateMask($photoGallery, 'horizontal')); // чтоб обновляло маску при загрузке
+window.addEventListener('resize', ()=>updateMask($photoGallery, 'horizontal')); // чтоб обновляло маску при изменении размера окна тоже
