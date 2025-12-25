@@ -112,10 +112,8 @@ function updateSVG() {
       newProps.forEach((prop) => renderPropsSet.add(prop));
     }
 
-    const dynamicControlsContainer =
-      document.getElementById('dynamic-controls');
-    if (dynamicControlsContainer && currentFrameConfig.size > 0) {
-      generateUI(currentFrameConfig, state, dynamicControlsContainer);
+    if (currentFrameConfig.size > 0) {
+      generateUI(currentFrameConfig, state, $dynamicControlsContainer);
     }
   }
 
@@ -172,10 +170,10 @@ function applyPreset(id) {
         if (preset.textColor) state.textColor = preset.textColor;
         if (preset.frameColor) state.frameColor = preset.frameColor;
 
-        const dynamicControlsContainer =
-          document.getElementById('dynamic-controls');
-        if (dynamicControlsContainer && currentFrameConfig.size > 0) {
-          generateUI(currentFrameConfig, state, dynamicControlsContainer);
+        if (currentFrameConfig.size > 0) {
+          generateUI(currentFrameConfig, state, $dynamicControlsContainer);
+        } else {
+          // todo(vmyshko): no settings? add stub
         }
 
         currentFrameConfig = null;
@@ -192,11 +190,11 @@ function applyPreset(id) {
     };
     img.src = preset.src;
 
-    const dynamicControlsContainer =
-      document.getElementById('dynamic-controls');
-    if (dynamicControlsContainer) {
-      dynamicControlsContainer.replaceChildren();
-    }
+    $dynamicControlsContainer.replaceChildren();
+
+    const $controlsStub =
+      $tmplControlsStub.content.firstElementChild.cloneNode(true);
+    $dynamicControlsContainer.appendChild($controlsStub);
   }
 }
 
