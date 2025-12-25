@@ -6,8 +6,9 @@
   display: flex;
   flex-direction: column;
   gap: var(--btn-gap);
-  padding-top: var(--btn-gap);
-  padding-bottom: var(--btn-gap);
+  overflow-y: auto;
+  margin-right: calc(var(--panel-padding) * (-2));
+  padding-right: calc(var(--panel-padding) * 2);
 
   & > label {
     display: flex;

@@ -5,21 +5,19 @@
   z-index: 999;
 
   &.top {
-    top: var(--panel-gap);
-    width: calc(100% - (var(--panel-gap) * 2));
-    left: 50%;
-    transform: translateX(-50%);
-    height: var(--top-panel-height);
+    top: 0;
+    left: 0;
+    bottom: 0;
   }
 
   &.right {
     right: var(--panel-gap);
-    top: calc(var(--panel-gap) + var(--top-panel-height) + var(--panel-gap));
+    top: var(--panel-gap);
     bottom: var(--panel-gap);
   }
 
   &.left {
-    left: var(--panel-gap);
+    left: calc(var(--panel-gap) + var(--panel-padding) + var(--panel-padding) + var(--logo-size));
     top: 50%;
     transform: translateY(-50%);
   }

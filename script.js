@@ -172,6 +172,7 @@ function applyPreset(id) {
 
         if (currentFrameConfig.size > 0) {
           generateUI(currentFrameConfig, state, $dynamicControlsContainer);
+          console.log('settings are here'); // temp debug
         } else {
           // todo(vmyshko): no settings? add stub
         }

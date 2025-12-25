@@ -2,12 +2,17 @@
 
 .btn {
   background-color: var(--btn-bg);
-  padding: var(--btn-padding) calc(var(--btn-padding) * 2);
+  padding: var(--btn-padding);
   border-radius: calc(var(--panel-radius) / 2);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+
+  &:has(span) {
+    padding: var(--btn-padding) calc(var(--btn-padding) * 2);
+  }
 
   &:has(img) {
     padding: 0;

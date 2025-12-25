@@ -30,9 +30,9 @@
   --frame-size: 100px;
   --photo-size: 50px;
   --swatch-size: 20px;
-  --logo-size: 2.5rem;
-  --avatar-size: 2.5rem;
-  --toolbar-icon-size: 1.5rem;
+  --logo-size: 2rem;
+  --avatar-size: 2rem;
+  --toolbar-icon-size: 1.25rem;
 
   --btn-bg: hsla(0, 0%, 60%, 0.15);
   --partition-color: hsla(0, 0%, 60%, 0.15);
@@ -138,49 +138,58 @@ body {
 
 .main-toolbar-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  padding-left: calc(var(--panel-padding) * 2);
-  padding-right: calc(var(--panel-padding) * 2);
+  padding: var(--panel-padding);
+  padding-bottom: calc(var(--panel-padding) * 2);
   width: 100%;
   height: 100%;
   background: var(--toolbar-bg);
-  border: var(--panel-border-width) solid var(--toolbar-border);
-  border-radius: var(--panel-radius);
+  border-right: var(--panel-border-width) solid var(--toolbar-border);
 }
 .toolbar-logo {
-  margin-right: calc(var(--panel-padding) * 2);
+  margin-bottom: calc(var(--panel-padding) * 2);
 }
 .toolbar-tools {
   flex-grow: 1;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   & ul {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: var(--btn-gap);
     align-items: center;
 
     & li {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       align-items: center;
-      cursor: pointer;
     }
   }
 }
 .toolbar-user {
-  margin-left: calc(var(--panel-padding) * 2);
+  margin-top: calc(var(--panel-padding) * 2);
+
   & ul {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: var(--btn-gap);
     align-items: center;
 
     & li {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       align-items: center;
       cursor: pointer;
+
+      & svg {
+        width: 100%;
+        height: 100%;
+      }
     }
 
     & li.toolbar-icon {
@@ -258,7 +267,11 @@ body {
   padding: calc(var(--panel-padding) * 2);
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  gap: var(--btn-gap);
+
+  & .btn {
+    margin-top: auto;
+  }
 }
 
 .bottom-toolbar-container {

@@ -11,7 +11,7 @@
 
 [x] highlight selected frame and photo in lists
 [ ] increase photos size in gallery
-[ ] extract svg icons to separate files, and include as images
+[x] extract svg icons to separate files, and include as images
 [ ] extract color-palette css into separate file
-[ ] extract controls/settings-related css into separate file
+[x] extract controls/settings-related css into separate file
 [ ]
