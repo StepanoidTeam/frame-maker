@@ -50,7 +50,7 @@ html {
   --accent-color: #0a66c2;
 }
 
-:root[data-theme="light"] {
+:root[data-theme='light'] {
   color-scheme: light; /* manual theme switcher */
 
   --bg-color: #efefef;
@@ -59,7 +59,7 @@ html {
   --toolbar-bg: rgb(255, 255, 255);
   --toolbar-border: #e0e0e0;
 }
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   color-scheme: dark; /* manual theme switcher */
 
   --bg-color: #111;
@@ -69,7 +69,8 @@ html {
   --toolbar-border: rgb(48, 46, 51);
 }
 
-ul, ol {
+ul,
+ol {
   list-style-type: none;
 }
 
@@ -79,11 +80,16 @@ a {
   text-decoration: revert; /* back to default */
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   font-size: 1rem; /* by default, iOS will zoom in so that the input text is the equivalent of 16px */
 }
 
-input, button, select, textarea {
+input,
+button,
+select,
+textarea {
   font: inherit; /* consistent and inheritable fonts */
   color: inherit; /* consistent and inheritable colors */
 }
@@ -124,14 +130,14 @@ input, button, select, textarea {
 
   &.bottom {
     bottom: var(--panel-gap);
-    left: calc(50% - (var(--right-panel-width) + var(--panel-gap))/2);
+    left: calc(50% - (var(--right-panel-width) + var(--panel-gap)) / 2);
     transform: translateX(-50%);
   }
 
   &.canvas {
     z-index: revert; /* reset z-index for canvas */
     top: 50%;
-    left: calc(50% - (var(--right-panel-width) + var(--panel-gap))/2);
+    left: calc(50% - (var(--right-panel-width) + var(--panel-gap)) / 2);
     transform: translate(-50%, -50%);
   }
 }
@@ -272,7 +278,7 @@ body {
   height: var(--logo-size);
   width: var(--logo-size);
 
-  & svg {
+  & img {
     width: 100%;
   }
 }
@@ -341,7 +347,7 @@ body {
   border: var(--panel-border-width) solid var(--toolbar-border);
   border-radius: var(--panel-radius);
   padding: var(--panel-padding);
-  
+
   & ul {
     display: flex;
     flex-direction: column;
@@ -390,7 +396,7 @@ body {
   border: var(--panel-border-width) solid var(--toolbar-border);
   border-radius: var(--panel-radius);
   padding: var(--panel-padding);
-  
+
   & ul {
     display: flex;
     flex-direction: row;
@@ -495,7 +501,7 @@ body {
 /*/////////////////////////////////////////*/
 /*//////// Dynamic Editor Controls ////////*/
 /*/////////////////////////////////////////*/
-#dynamic-controls {
+.dynamic-controls {
   display: flex;
   flex-direction: column;
   gap: var(--btn-gap);
@@ -588,7 +594,7 @@ body {
   & .color-swatch {
     appearance: none;
     width: var(--swatch-size);
-    height:  var(--swatch-size);
+    height: var(--swatch-size);
     border-radius: 50%;
     background-color: var(--color, transparent);
     background-image: var(--color, none);
