@@ -90,12 +90,12 @@
 <!--
 ===================================
 HTML:
-<svg class="plus-icon" width="24" height="24">
+<svg class="plus-icon">
   <use xlink:href="#plus-icon" />
 </svg>
 ===================================
 CSS:
-& svg {
+.plus-icon {
   width: var(--btn-icon-size);
   height: var(--btn-icon-size);
 }
