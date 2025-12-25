@@ -1,25 +1,15 @@
+@import url(./reset.css);
+@import url(./layout.css);
 @import url(./helpers.css);
 @import url(./buttons.css);
 @import url(./gallery.css);
 @import url(./color-palette.css);
+@import url(./ui-elements.css);
+@import url(./ui-editor.css);
 
 /*//////////////////////////////////*/
 /*//////////////////////////////////*/
 /*//////////////////////////////////*/
-html {
-  box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-}
 
 :root {
   color-scheme: light dark; /* auto theme switcher */
@@ -67,82 +57,6 @@ html {
   --label-text-color: hsla(0, 0%, 87%, 0.5);
   --toolbar-bg: rgb(33, 33, 38);
   --toolbar-border: rgb(48, 46, 51);
-}
-
-/* todo: extract those to reset.css -- all related to default styles for default html elements */
-ul,
-ol {
-  list-style-type: none;
-}
-
-a {
-  color: inherit; /* cancel default link color behavior */
-  text-decoration: none;
-  text-decoration: revert; /* back to default */
-}
-
-input,
-select,
-textarea {
-  font-size: 1rem; /* by default, iOS will zoom in so that the input text is the equivalent of 16px */
-}
-
-input,
-button,
-select,
-textarea {
-  font: inherit; /* consistent and inheritable fonts */
-  color: inherit; /* consistent and inheritable colors */
-}
-
-/* todo: extract BOOTSTRAP-like into helpers.css */
-.spacer {
-  flex-grow: 1;
-}
-.hidden {
-  display: none;
-}
-[hidden] {
-  display: none;
-}
-
-/* todo: extract */
-.panel-layout {
-  position: absolute;
-  z-index: 999;
-
-  &.top {
-    top: var(--panel-gap);
-    width: calc(100% - (var(--panel-gap) * 2));
-    left: 50%;
-    transform: translateX(-50%);
-    height: var(--top-panel-height);
-  }
-
-  &.right {
-    right: var(--panel-gap);
-    top: calc(var(--panel-gap) + var(--top-panel-height) + var(--panel-gap));
-    bottom: var(--panel-gap);
-  }
-
-  &.left {
-    left: var(--panel-gap);
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  &.bottom {
-    bottom: var(--panel-gap);
-    left: calc(50% - (var(--right-panel-width) + var(--panel-gap)) / 2);
-    transform: translateX(-50%);
-  }
-
-  &.canvas {
-    z-index: revert; /* reset z-index for canvas */
-    top: 50%;
-    left: calc(50% - (var(--right-panel-width) + var(--panel-gap)) / 2);
-    transform: translate(-50%, -50%);
-  }
 }
 
 /*//////////////////////////////////*/
@@ -295,51 +209,6 @@ body {
 
   & img {
     width: 100%;
-  }
-}
-.btn {
-  background-color: var(--btn-bg);
-  padding: var(--btn-padding) calc(var(--btn-padding) * 2);
-  border-radius: calc(var(--panel-radius) / 2);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-
-  &:has(img) {
-    padding: 0;
-    overflow: hidden;
-    background: none;
-  }
-
-  &:has(svg) {
-    gap: var(--btn-padding);
-
-    & svg {
-      width: var(--btn-icon-size);
-      height: var(--btn-icon-size);
-    }
-  }
-
-  &.photo {
-    height: var(--photo-size);
-    width: var(--photo-size);
-
-    & img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-    }
-  }
-  &.frame {
-    height: var(--frame-size);
-    width: var(--frame-size);
-
-    & img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-    }
   }
 }
 
@@ -497,123 +366,4 @@ body {
 .preview-buttons {
   display: flex;
   gap: var(--spacing-m);
-}
-
-/* todo: extract */
-
-/*
- * Right Panel: Editor
- */
-/*/////////////////////////////////////////*/
-/*//////// Dynamic Editor Controls ////////*/
-/*/////////////////////////////////////////*/
-.dynamic-controls {
-  display: flex;
-  flex-direction: column;
-  gap: var(--btn-gap);
-  padding-top: var(--btn-gap);
-  padding-bottom: var(--btn-gap);
-
-  & > label {
-    display: flex;
-    flex-direction: column;
-    gap: var(--btn-gap);
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--label-text-color);
-    border-bottom: var(--panel-border-width) solid var(--partition-color);
-    padding-bottom: calc(var(--btn-gap) * 1.5);
-
-    &:last-child {
-      border-bottom: none;
-      padding-bottom: none;
-    }
-  }
-}
-
-.text-input {
-  padding: calc(var(--btn-padding) * 2) calc(var(--btn-padding) * 3);
-  border: calc(var(--panel-border-width) * 2) solid var(--transparent);
-  border-radius: calc(var(--panel-radius) / 2);
-  background: var(--btn-bg);
-  transition: border 0.2s;
-
-  &:focus {
-    outline: none;
-    border-color: var(--text-color);
-  }
-}
-
-.range-wrapper {
-  display: flex;
-  align-items: center;
-  gap: var(--btn-gap);
-}
-.range-slider {
-  flex: 1;
-  height: 6px;
-  border-radius: 3px;
-  background: var(--toolbar-border);
-  appearance: none;
-  cursor: pointer;
-}
-.range-slider::-webkit-slider-thumb {
-  appearance: none;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  background: var(--text-color);
-  cursor: grab;
-  transition: transform 0.2s;
-}
-.range-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
-}
-.range-slider::-webkit-slider-thumb:active {
-  cursor: grabbing;
-}
-.range-value {
-  min-width: 60px;
-  text-align: right;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--label-text-color);
-  /* font-variant-numeric: tabular-nums; */
-}
-
-.select-input {
-  padding: var(--btn-padding) calc(var(--btn-padding) * 2);
-  border: calc(var(--panel-border-width) * 2) solid var(--transparent);
-  border-radius: calc(var(--panel-radius) / 2);
-  background: var(--btn-bg);
-  cursor: pointer;
-}
-.select-input:focus {
-  outline: none;
-}
-
-/* todo: extract */
-.color-palette {
-  display: flex;
-  gap: var(--btn-gap);
-  flex-wrap: wrap;
-
-  & .color-swatch {
-    appearance: none;
-    width: var(--swatch-size);
-    height: var(--swatch-size);
-    border-radius: 50%;
-    background-color: var(--color, transparent);
-    background-image: var(--color, none);
-    border: var(--panel-border-width) solid transparent;
-    box-shadow: 0 0 0 1px var(--toolbar-border);
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  & .color-swatch:hover {
-    transform: scale(1.1);
-  }
-  & .color-swatch:checked {
-    box-shadow: 0 0 0 2px var(--toolbar-bg), 0 0 0 4px var(--text-color);
-  }
 }

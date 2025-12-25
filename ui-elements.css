@@ -1,0 +1,47 @@
+/* UI elements */
+
+.btn {
+  background-color: var(--btn-bg);
+  padding: var(--btn-padding) calc(var(--btn-padding) * 2);
+  border-radius: calc(var(--panel-radius) / 2);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  &:has(img) {
+    padding: 0;
+    overflow: hidden;
+    background: none;
+  }
+
+  &:has(svg) {
+    gap: var(--btn-padding);
+
+    & svg {
+      width: var(--btn-icon-size);
+      height: var(--btn-icon-size);
+    }
+  }
+
+  &.photo {
+    height: var(--photo-size);
+    width: var(--photo-size);
+
+    & img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  &.frame {
+    height: var(--frame-size);
+    width: var(--frame-size);
+
+    & img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}

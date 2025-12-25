@@ -1,0 +1,39 @@
+/* general layout logic */
+
+.panel-layout {
+  position: absolute;
+  z-index: 999;
+
+  &.top {
+    top: var(--panel-gap);
+    width: calc(100% - (var(--panel-gap) * 2));
+    left: 50%;
+    transform: translateX(-50%);
+    height: var(--top-panel-height);
+  }
+
+  &.right {
+    right: var(--panel-gap);
+    top: calc(var(--panel-gap) + var(--top-panel-height) + var(--panel-gap));
+    bottom: var(--panel-gap);
+  }
+
+  &.left {
+    left: var(--panel-gap);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &.bottom {
+    bottom: var(--panel-gap);
+    left: calc(50% - (var(--right-panel-width) + var(--panel-gap)) / 2);
+    transform: translateX(-50%);
+  }
+
+  &.canvas {
+    z-index: revert; /* reset z-index for canvas */
+    top: 50%;
+    left: calc(50% - (var(--right-panel-width) + var(--panel-gap)) / 2);
+    transform: translate(-50%, -50%);
+  }
+}
