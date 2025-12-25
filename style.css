@@ -281,7 +281,7 @@ body {
   height: var(--logo-size);
   width: var(--logo-size);
 
-  & img {
+  & svg {
     width: 100%;
     height: 100%;
   }
