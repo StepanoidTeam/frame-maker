@@ -10,8 +10,24 @@
   justify-content: center;
   cursor: pointer;
 
+  & svg {
+    transition: transform 0.2s;
+  }
+
+  &.pressedBtn{
+    box-shadow: 0 0 0 1px var(--text-color);
+  }
+
+  &:hover svg {
+    transform: scale(1.25);
+  }
+
   &:has(span) {
     padding: var(--btn-padding) calc(var(--btn-padding) * 2);
+    
+    &:hover svg {
+      transform: scale(1);
+    }
   }
 
   &:has(img) {

@@ -37,7 +37,6 @@
   --btn-bg: hsla(0, 0%, 60%, 0.15);
   --partition-color: hsla(0, 0%, 60%, 0.15);
   --transparent: hsla(0, 0%, 0%, 0);
-  --accent-color: #0a66c2;
 }
 
 :root[data-theme='light'] {
@@ -48,6 +47,7 @@
   --label-text-color: hsla(0, 0%, 33%, 0.5);
   --toolbar-bg: rgb(255, 255, 255);
   --toolbar-border: #e0e0e0;
+  --accent-color: skyblue;
 }
 :root[data-theme='dark'] {
   color-scheme: dark; /* manual theme switcher */
@@ -57,6 +57,7 @@
   --label-text-color: hsla(0, 0%, 87%, 0.5);
   --toolbar-bg: rgb(33, 33, 38);
   --toolbar-border: rgb(48, 46, 51);
+  --accent-color: yellow;
 }
 
 /*//////////////////////////////////*/

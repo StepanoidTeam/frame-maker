@@ -220,17 +220,17 @@
           </div>
           <div class="toolbar-tools">
             <ul>
-              <li class="btn">
+              <li class="btn" id="$photoBtn">
                 <svg class="photo-icon">
                   <use xlink:href="#photo-icon" />
                 </svg>
               </li>
-              <li class="btn">
+              <li class="btn" id="$frameBtn">
                 <svg class="frame-icon">
                   <use xlink:href="#frame-icon" />
                 </svg>
               </li>
-              <li class="btn">
+              <li class="btn" id="$settingsBtn">
                 <svg class="settings-icon">
                   <use xlink:href="#settings-icon" />
                 </svg>
@@ -255,7 +255,7 @@
         </div>
       </header>
 
-      <section class="panel-layout left">
+      <section class="panel-layout left" id="$framePanel">
         <!-- Left Panel: Frames -->
         <div class="left-toolbar-container">
           <ul>
@@ -273,7 +273,7 @@
         </div>
       </section>
 
-      <section class="panel-layout right">
+      <section class="panel-layout right" id="$settingsPanel">
         <!-- Right Panel: Editor -->
         <section class="frame-settings-container">
           <h3>Frame Settings</h3>
@@ -289,7 +289,7 @@
         </section>
       </section>
 
-      <section class="panel-layout bottom">
+      <section class="panel-layout bottom" id="$photoPanel">
         <div class="bottom-toolbar-container">
           <ul>
             <li class="btn photo" id="$uploadPhotoBtn">

@@ -3,8 +3,11 @@
 .panel-layout {
   position: absolute;
   z-index: 999;
+  opacity: 1;
+  transition: transform 0.5s ease-in-out, opacity 0.5s, bottom 0.5s ease-in-out, right 0.5s ease-in-out;
 
   &.top {
+    z-index: 1000; /* the toppest panel */
     top: 0;
     left: 0;
     bottom: 0;
@@ -14,18 +17,33 @@
     right: var(--panel-gap);
     top: var(--panel-gap);
     bottom: var(--panel-gap);
+
+    &.hiddenPanel {
+      opacity: 0;
+      transform: translateX(calc(100% + var(--panel-gap)));
+    }
   }
 
   &.left {
     left: calc(var(--panel-gap) + var(--panel-padding) + var(--panel-padding) + var(--logo-size));
     top: var(--panel-gap);
     bottom: calc(var(--panel-gap) + var(--panel-padding) + var(--photo-size) + var(--panel-padding) + var(--panel-gap));
+
+    &.hiddenPanel {
+      opacity: 0;
+      transform: translateX(calc(-1 * (100% + var(--panel-gap) + var(--panel-padding) + var(--panel-padding) + var(--logo-size))));
+    }
   }
 
   &.bottom {
     bottom: var(--panel-gap);
     left: calc(var(--panel-gap) + var(--panel-padding) + var(--panel-padding) + var(--logo-size));
     right: calc(var(--panel-gap) + var(--right-panel-width) + var(--panel-gap));
+
+    &.hiddenPanel {
+      opacity: 0;
+      transform: translateY(calc(100% + var(--panel-gap)));
+    }
   }
 
   &.canvas {
