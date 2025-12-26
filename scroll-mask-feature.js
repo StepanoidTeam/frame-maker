@@ -23,7 +23,6 @@ export function updateMask(scrollableElement, verticalOrHorizontal) {
   if (isAtTop && isAtBottom) {
     // всё помещается и скролл не нужен, его нет у блока
     gradient = "none";
-    console.log(`no effect - ${scrollableElement.id}`);
   } else if (isAtTop) {
     // Только нижняя тень
     console.log('top');
@@ -54,4 +53,3 @@ window.addEventListener('resize', ()=>updateMask($photoGallery, 'horizontal')); 
 $dynamicControlsContainer.addEventListener('scroll', ()=>updateMask($dynamicControlsContainer, 'vertical'));
 window.addEventListener('load', ()=>updateMask($dynamicControlsContainer, 'vertical')); // чтоб обновляло маску при загрузке
 window.addEventListener('resize', ()=>updateMask($dynamicControlsContainer, 'vertical')); // чтоб обновляло маску при изменении размера окна тоже
-$frameGallery.addEventListener('click', ()=>updateMask($dynamicControlsContainer, 'vertical')); // чтоб обновляло маску при клике на галерею рамок

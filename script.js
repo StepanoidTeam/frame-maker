@@ -174,7 +174,6 @@ function applyPreset(id) {
           generateUI(currentFrameConfig, state, $dynamicControlsContainer);
           /////////////////////
           // mask refreshing
-          console.log('settings are here'); // temp debug
           updateMask($dynamicControlsContainer, 'vertical');
           /////////////////////
         } else {
