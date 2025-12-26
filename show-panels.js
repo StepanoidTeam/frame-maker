@@ -1,3 +1,5 @@
+import { updateMask } from './scroll-mask-feature.js';
+
 //////////////////////////////////////
 /////     show / hide panels     /////
 //////////////////////////////////////
@@ -6,6 +8,9 @@ function togglePanel(currentPanel, triggerBtn) {
   currentPanel.classList.toggle('hiddenPanel');
   checkCurrentLayout();
   btnSetup(currentPanel, triggerBtn);
+  // mask refreshing
+  updateMask($photoPanel, 'horizontal');
+  updateMask($framePanel, 'vertical');
 }
 
 $frameBtn.addEventListener('click', ()=>togglePanel($framePanel, $frameBtn));
