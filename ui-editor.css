@@ -9,6 +9,8 @@
   overflow-y: auto;
   margin-right: calc(var(--panel-padding) * (-2));
   padding-right: calc(var(--panel-padding) * 2);
+  margin-left: calc(var(--panel-padding) * (-2));
+  padding-left: calc(var(--panel-padding) * 2);
 
   & > label {
     display: flex;
