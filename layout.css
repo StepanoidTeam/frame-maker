@@ -18,20 +18,23 @@
 
   &.left {
     left: calc(var(--panel-gap) + var(--panel-padding) + var(--panel-padding) + var(--logo-size));
-    top: 50%;
-    transform: translateY(-50%);
+    top: var(--panel-gap);
+    bottom: calc(var(--panel-gap) + var(--panel-padding) + var(--photo-size) + var(--panel-padding) + var(--panel-gap));
   }
 
   &.bottom {
     bottom: var(--panel-gap);
-    left: calc(50% - (var(--right-panel-width) + var(--panel-gap)) / 2);
-    transform: translateX(-50%);
+    left: calc(var(--panel-gap) + var(--panel-padding) + var(--panel-padding) + var(--logo-size));
+    right: calc(var(--panel-gap) + var(--right-panel-width) + var(--panel-gap));
   }
 
   &.canvas {
     z-index: revert; /* reset z-index for canvas */
     top: 50%;
-    left: calc(50% - (var(--right-panel-width) + var(--panel-gap)) / 2);
+    left: calc(50% - (
+      var(--right-panel-width) + var(--panel-gap) -
+      (var(--panel-gap) + var(--panel-padding) + var(--panel-padding) + var(--logo-size) + var(--panel-gap) + var(--panel-padding) + var(--panel-padding) + var(--frame-size))
+      ) / 2);
     transform: translate(-50%, -50%);
   }
 }

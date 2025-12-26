@@ -24,7 +24,7 @@
   --canvas-width: 400px;
 
   --btn-gap: 0.5rem;
-  --btn-padding: 0.3rem;
+  --btn-padding: 0.5rem;
   --btn-icon-size: 1rem;
 
   --frame-size: 100px;
@@ -229,31 +229,41 @@ body {
   border: var(--panel-border-width) solid var(--toolbar-border);
   border-radius: var(--panel-radius);
   padding: var(--panel-padding);
+  height: 100%;
 
   & ul {
     display: flex;
     flex-direction: column;
     gap: var(--btn-gap);
     align-items: center;
+    height: 100%;
 
     & li {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       align-items: center;
       cursor: pointer;
-    }
-  }
 
-  & .frame-gallery {
-    flex-direction: column;
-    max-height: 50vh;
-    max-height: 50dvh;
-    --size: var(--frame-size);
-    margin: calc(var(--panel-padding) * (-1));
-    padding: var(--panel-padding);
+      &.btn {
+        flex-shrink: 0;
+      }
 
-    & .gallery-item {
-      border-radius: 50%;
+      &:not(.btn) {
+        overflow-x: auto;
+        margin: calc(var(--panel-padding) * (-1));
+        /* padding: var(--panel-padding); */
+      }
+
+      & .frame-gallery {
+        flex-direction: column;
+        --size: var(--frame-size);
+        /* margin: calc(var(--panel-padding) * (-1)); */
+        padding: var(--panel-padding);
+
+        & .gallery-item {
+          border-radius: 50%;
+        }
+      }
     }
   }
 }
@@ -282,12 +292,14 @@ body {
   border: var(--panel-border-width) solid var(--toolbar-border);
   border-radius: var(--panel-radius);
   padding: var(--panel-padding);
+  width: 100%;
 
   & ul {
     display: flex;
     flex-direction: row;
     gap: var(--btn-gap);
     align-items: center;
+    width: 100%;
 
     & li {
       display: flex;
@@ -295,10 +307,18 @@ body {
       align-items: center;
       cursor: pointer;
 
-      & .photo-gallery {
+      &.btn {
+        flex-shrink: 0;
+      }
+
+      &:not(.btn) {
+        overflow-x: auto;
         margin: calc(var(--panel-padding) * (-1));
+      }
+
+      & .photo-gallery {
+        /* margin: calc(var(--panel-padding) * (-1)); */
         padding: var(--panel-padding);
-        max-width: 30vw;
       }
     }
   }
