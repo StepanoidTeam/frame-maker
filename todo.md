@@ -31,7 +31,7 @@
 
 ## big features
 
-- [ ] propose text/frame props dynamically, based on svg variables inside specific frame
+- [x] propose text/frame props dynamically, based on svg variables inside specific frame
       thoughts:
       parse svg (as text),
       find all variables (starting with --)
@@ -44,4 +44,4 @@ OR make it possible to select separate elements and customize them? (sounds hard
 
 ## TODO-TODO:
 
-make feature roadmap? prioritize? assign to salt?
+[ ] make feature roadmap? prioritize? assign to salt? (requested by Timon)
