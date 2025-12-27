@@ -40,6 +40,12 @@ export const localPhotos = [
   '1752057077706.jpeg',
   '1765933298027.jpeg',
   'photo_2025-12-16_23-24-09.jpg',
+
+  '1516839120841.jpeg',
+  '1516856965487.jpeg',
+  '1517506584047.jpeg',
+  '1756203294622.jpeg',
+
   'IMG_6294.PNG',
   'cat.jpg',
   'makak.jpg',
@@ -63,5 +69,5 @@ export const localPhotos = [
   'user-16.jpeg',
   'user-17.jpeg',
   'user-18.jpeg',
-  'user-19.jpeg'
+  'user-19.jpeg',
 ];
