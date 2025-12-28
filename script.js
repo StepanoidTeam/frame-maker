@@ -16,7 +16,6 @@ import { generateUI } from './ui-generator.js';
 
 import './theme-switcher.js';
 import { updateMask } from './scroll-mask-feature.js';
-import './show-panels.js';
 import './drag-panels.js';
 
 /**

@@ -18,32 +18,26 @@
     top: var(--panel-gap);
     bottom: var(--panel-gap);
 
-    &.hiddenPanel {
-      opacity: 0;
-      transform: translateX(calc(100% + var(--panel-gap)));
-    }
+    opacity: 0;
+    transform: translateX(calc(100% + var(--panel-gap)));
   }
 
   &.left {
     left: calc(var(--panel-gap) + var(--panel-padding) + var(--panel-padding) + var(--logo-size));
     top: var(--panel-gap);
-    bottom: calc(var(--panel-gap) + var(--panel-padding) + var(--photo-size) + var(--panel-padding) + var(--panel-gap));
+    bottom: var(--panel-gap);
 
-    &.hiddenPanel {
-      opacity: 0;
-      transform: translateX(calc(-1 * (100% + var(--panel-gap) + var(--panel-padding) + var(--panel-padding) + var(--logo-size))));
-    }
+    opacity: 0;
+    transform: translateX(calc(-1 * (100% + var(--panel-gap) + var(--panel-padding) + var(--panel-padding) + var(--logo-size))));
   }
 
   &.bottom {
     bottom: var(--panel-gap);
     left: calc(var(--panel-gap) + var(--panel-padding) + var(--panel-padding) + var(--logo-size));
-    right: calc(var(--panel-gap) + var(--right-panel-width) + var(--panel-gap));
+    right: var(--panel-gap);
 
-    &.hiddenPanel {
-      opacity: 0;
-      transform: translateY(calc(100% + var(--panel-gap)));
-    }
+    opacity: 0;
+    transform: translateY(calc(100% + var(--panel-gap)));
   }
 
   &.canvas {
@@ -62,4 +56,25 @@
       cursor: grabbing;
     }
   }
+}
+
+.app-container:has(.frame-checkbox:checked) .left {
+  opacity: 1;
+  transform: revert;
+}
+.app-container:has(.photo-checkbox:checked) .left {
+  bottom: calc(var(--panel-gap) + var(--panel-padding) + var(--photo-size) + var(--panel-padding) + var(--panel-gap));
+}
+
+.app-container:has(.photo-checkbox:checked) .bottom {
+  opacity: 1;
+  transform: revert;
+}
+.app-container:has(.settings-checkbox:checked) .bottom {
+  right: calc(var(--panel-gap) + var(--right-panel-width) + var(--panel-gap));
+}
+
+.app-container:has(.settings-checkbox:checked) .right {
+  opacity: 1;
+  transform: revert;
 }

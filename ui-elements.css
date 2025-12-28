@@ -14,7 +14,7 @@
     transition: transform 0.2s;
   }
 
-  &.pressedBtn{
+  &:has(input:checked) {
     box-shadow: 0 0 0 1px var(--text-color);
   }
 
