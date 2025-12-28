@@ -48,11 +48,18 @@
 
   &.canvas {
     z-index: revert; /* reset z-index for canvas */
-    top: 50%;
-    left: calc(50% - (
-      var(--right-panel-width) + var(--panel-gap) -
-      (var(--panel-gap) + var(--panel-padding) + var(--panel-padding) + var(--logo-size) + var(--panel-gap) + var(--panel-padding) + var(--panel-padding) + var(--frame-size))
-      ) / 2);
+    transition: revert; /* reset smoothness for canvas */
     transform: translate(-50%, -50%);
+    --x: 50%;
+    --y: 50%;
+    left: var(--x);
+    top: var(--y);
+    
+    & * {
+      cursor: grab;
+    }
+    &.panning-active * {
+      cursor: grabbing;
+    }
   }
 }

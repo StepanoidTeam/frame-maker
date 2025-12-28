@@ -17,23 +17,16 @@ import { generateUI } from './ui-generator.js';
 import './theme-switcher.js';
 import { updateMask } from './scroll-mask-feature.js';
 import './show-panels.js';
+import './drag-panels.js';
 
 /**
  * Default state configuration
  */
 const defaultState = {
-  text: '#Hiring',
-  textColor: frameColors.at(0),
-  frameColor: frameColors.at(0),
-  textRotation: 0,
-  frameRotation: 0,
-  fontSize: 80,
   userImage: null, // Will hold the Image object
   frameImage: null, // Will hold the SVG Image object
   svgContent: null, // Raw SVG string for editing
-  selectedFrameId: 'opentowork2', // 'hiring', 'opentowork', 'custom'
-  fontFamily: 'Inter, sans-serif',
-  textScale: 0.9, //0..1
+  selectedFrameId: 'hiring', // 'hiring', 'opentowork', 'custom'
 };
 
 let currentFrameConfig = null;
