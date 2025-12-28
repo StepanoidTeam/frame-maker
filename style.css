@@ -26,6 +26,7 @@
   --btn-gap: 0.5rem;
   --btn-padding: 0.5rem;
   --btn-icon-size: 1rem;
+  --btn-radius: calc(var(--panel-radius) / 2);
 
   --frame-size: 100px;
   --photo-size: 75px;

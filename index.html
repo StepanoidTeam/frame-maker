@@ -78,23 +78,23 @@
             </div>
           </div>
           <div class="toolbar-tools">
-            <label class="btn" id="$photoBtn">
+            <label class="btn">
               <svg class="photo-icon">
                 <use xlink:href="./icon-system-sprite.svg#photo-icon" />
               </svg>
-              <input type="checkbox" class="photo-checkbox" checked>
+              <input id="photo-checkbox" type="checkbox" class="photo-checkbox" checked>
             </label>
-            <label class="btn" id="$frameBtn">
+            <label class="btn">
               <svg class="frame-icon">
                 <use xlink:href="./icon-system-sprite.svg#frame-icon" />
               </svg>
-              <input type="checkbox" class="frame-checkbox" checked>
+              <input id="frame-checkbox" type="checkbox" class="frame-checkbox" checked>
             </label>
-            <label class="btn" id="$settingsBtn">
+            <label class="btn">
               <svg class="settings-icon">
                 <use xlink:href="./icon-system-sprite.svg#settings-icon" />
               </svg>
-              <input type="checkbox" class="settings-checkbox" checked>
+              <input id="settings-checkbox" type="checkbox" class="settings-checkbox" checked>
             </label>
           </div>
           <div class="toolbar-user">
@@ -130,12 +130,26 @@
               </form>
             </li>
           </ul>
+          <button class="panel-close-container">
+            <label class="btn" for="frame-checkbox">
+              <svg>
+                <use xlink:href="./icon-system-sprite.svg#slide-to-left-icon" />
+              </svg>
+            </label>
+          </button>
         </div>
       </section>
 
       <section class="panel-layout right" id="$settingsPanel">
         <!-- Right Panel: Editor -->
         <section class="frame-settings-container">
+          <button class="panel-close-container">
+            <label class="btn" for="settings-checkbox">
+              <svg>
+                <use xlink:href="./icon-system-sprite.svg#slide-to-right-icon" />
+              </svg>
+            </label>
+          </button>
           <h3>Frame Settings</h3>
           <div id="$dynamicControlsContainer" class="dynamic-controls">
             <!-- items will be populated by javascript -->
@@ -169,6 +183,13 @@
               </form>
             </li>
           </ul>
+          <button class="panel-close-container">
+            <label class="btn" for="photo-checkbox">
+              <svg>
+                <use xlink:href="./icon-system-sprite.svg#slide-to-bottom-icon" />
+              </svg>
+            </label>
+          </button>
         </div>
       </section>
 

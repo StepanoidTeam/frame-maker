@@ -3,7 +3,7 @@
 .btn {
   background-color: var(--btn-bg);
   padding: var(--btn-padding);
-  border-radius: calc(var(--panel-radius) / 2);
+  border-radius: var(--btn-radius);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -65,4 +65,45 @@
       object-fit: cover;
     }
   }
+}
+
+.panel-close-container {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+  flex-grow: 0;
+  background: var(--toolbar-bg);
+  border: none;
+  border-radius: var(--btn-radius);
+  box-shadow: 0 0 0 1px var(--label-text-color);
+  overflow: hidden;
+}
+.right:hover .panel-close-container,
+.left:hover .panel-close-container,
+.bottom:hover .panel-close-container {
+  display: flex;
+}
+.right .panel-close-container {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateX(-80%);
+  width: 20px;
+}
+.left .panel-close-container {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateX(80%);
+  width: 20px;
+}
+.bottom .panel-close-container {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateY(-80%);
+  height: 20px;
 }
