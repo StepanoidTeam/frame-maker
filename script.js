@@ -25,7 +25,7 @@ const defaultState = {
   userImage: null, // Will hold the Image object
   frameImage: null, // Will hold the SVG Image object
   svgContent: null, // Raw SVG string for editing
-  selectedFrameId: 'hiring', // 'hiring', 'opentowork', 'custom'
+  selectedFrameId: 'opentowork2', // 'hiring', 'opentowork', 'custom'
 };
 
 let currentFrameConfig = null;
