@@ -14,6 +14,6 @@
 [x] extract svg icons to separate files, and include as images
 [ ] extract color-palette css into separate file
 [x] extract controls/settings-related css into separate file
-[ ] remove li
+[x] remove li
 [x] "btn pressedBtn" replace by checkboxes (input:checkbox + label) similar to gallery items
 [ ] put panel icons closer to panels themselves

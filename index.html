@@ -118,18 +118,16 @@
       <section class="panel-layout left" id="$framePanel">
         <!-- Left Panel: Frames -->
         <div class="left-toolbar-container">
-          <ul>
-            <li class="btn frame" id="addFrame">
-              <svg class="frame-icon">
-                <use xlink:href="./icon-system-sprite.svg#frame-icon" />
-              </svg>
-            </li>
-            <li>
-              <form id="$frameGallery" class="frame-gallery gallery">
-                <!-- items will be populated by javascript -->
-              </form>
-            </li>
-          </ul>
+          <div class="btn frame" id="addFrame">
+            <svg class="frame-icon">
+              <use xlink:href="./icon-system-sprite.svg#frame-icon" />
+            </svg>
+          </div>
+          <div class="frame-gallery-container">
+            <form id="$frameGallery" class="frame-gallery gallery">
+              <!-- items will be populated by javascript -->
+            </form>
+          </div>
           <div class="panel-close-hover-area">
             <button class="panel-close-container">
               <label class="btn" for="frame-checkbox">
@@ -169,24 +167,22 @@
 
       <section class="panel-layout bottom" id="$photoPanel">
         <div class="bottom-toolbar-container">
-          <ul>
-            <li class="btn photo" id="$uploadPhotoBtn">
-              <svg class="photo-icon">
-                <use xlink:href="./icon-system-sprite.svg#photo-icon" />
-              </svg>
-              <input
-                type="file"
-                id="$fileInput"
-                accept="image/*"
-                style="display: none"
-              />
-            </li>
-            <li>
-              <form id="$photoGallery" class="photo-gallery gallery">
-                <!-- items will be populated by javascript -->
-              </form>
-            </li>
-          </ul>
+          <div class="btn photo" id="$uploadPhotoBtn">
+            <svg class="photo-icon">
+              <use xlink:href="./icon-system-sprite.svg#photo-icon" />
+            </svg>
+            <input
+              type="file"
+              id="$fileInput"
+              accept="image/*"
+              style="display: none"
+            />
+          </div>
+          <div class="photo-gallery-container">
+            <form id="$photoGallery" class="photo-gallery gallery">
+              <!-- items will be populated by javascript -->
+            </form>
+          </div>
           <div class="panel-close-hover-area">
             <button class="panel-close-container">
               <label class="btn" for="photo-checkbox">

@@ -225,44 +225,35 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: var(--btn-gap);
   background: var(--toolbar-bg);
   border: var(--panel-border-width) solid var(--toolbar-border);
   border-radius: var(--panel-radius);
   padding: var(--panel-padding);
   height: 100%;
 
-  & ul {
+  & div {
     display: flex;
     flex-direction: column;
-    gap: var(--btn-gap);
     align-items: center;
-    height: 100%;
+    cursor: pointer;
 
-    & li {
-      display: flex;
+    &.btn {
+      flex-shrink: 0;
+    }
+    &.frame-gallery-container {
+      overflow-x: auto;
+      margin: calc(var(--panel-padding) * (-1));
+      /* padding: var(--panel-padding); */
+    }
+    & .frame-gallery {
       flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-
-      &.btn {
-        flex-shrink: 0;
-      }
-
-      &:not(.btn) {
-        overflow-x: auto;
-        margin: calc(var(--panel-padding) * (-1));
-        /* padding: var(--panel-padding); */
-      }
-
-      & .frame-gallery {
-        flex-direction: column;
-        --size: var(--frame-size);
-        /* margin: calc(var(--panel-padding) * (-1)); */
-        padding: var(--panel-padding);
-
-        & .gallery-item {
-          border-radius: 50%;
-        }
+      --size: var(--frame-size);
+      /* margin: calc(var(--panel-padding) * (-1)); */
+      padding: var(--panel-padding);
+      
+      & .gallery-item {
+        border-radius: 50%;
       }
     }
   }
@@ -288,38 +279,29 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: var(--btn-gap);
   background: var(--toolbar-bg);
   border: var(--panel-border-width) solid var(--toolbar-border);
   border-radius: var(--panel-radius);
   padding: var(--panel-padding);
   width: 100%;
 
-  & ul {
+  & div {
     display: flex;
     flex-direction: row;
-    gap: var(--btn-gap);
     align-items: center;
-    width: 100%;
+    cursor: pointer;
 
-    & li {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      cursor: pointer;
-
-      &.btn {
-        flex-shrink: 0;
-      }
-
-      &:not(.btn) {
-        overflow-x: auto;
-        margin: calc(var(--panel-padding) * (-1));
-      }
-
-      & .photo-gallery {
-        /* margin: calc(var(--panel-padding) * (-1)); */
-        padding: var(--panel-padding);
-      }
+    &.btn {
+      flex-shrink: 0;
+    }
+    &.photo-gallery-container {
+      overflow-x: auto;
+      margin: calc(var(--panel-padding) * (-1));
+    }
+    & .photo-gallery {
+      /* margin: calc(var(--panel-padding) * (-1)); */
+      padding: var(--panel-padding);
     }
   }
 }
