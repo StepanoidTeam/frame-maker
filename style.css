@@ -251,7 +251,7 @@ body {
       --size: var(--frame-size);
       /* margin: calc(var(--panel-padding) * (-1)); */
       padding: var(--panel-padding);
-      
+
       & .gallery-item {
         border-radius: 50%;
       }
@@ -355,7 +355,7 @@ body {
     width: 100%;
     height: 100%;
 
-    fill: hsla(0, 0%, 0%, 0);
+    fill: hsla(0, 0%, 0%, 0.75);
     fill-rule: evenodd;
   }
 
