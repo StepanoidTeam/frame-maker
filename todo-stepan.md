@@ -5,7 +5,7 @@
 [x] make initial theme based on user config  
 [x] save theme settings to localstorage (if user sets custom)
 [ ] allow user to reset theme to auto-switch
-[ ] add transition for theme switching
+[x] add transition for theme switching
 
 ## main stuff
 
