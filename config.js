@@ -31,6 +31,10 @@ export const presets = {
     type: 'png',
     src: 'frames-img/open-to-work.png',
   },
+  frame_ee: {
+    type: 'svg',
+    src: 'frames-svg/frame-ee.svg',
+  },
 };
 
 export const localPhotos = [
