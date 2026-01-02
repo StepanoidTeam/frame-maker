@@ -1,10 +1,7 @@
 /**
  * Frame Maker Logic
- *
- * Refactored to use ES modules and reactive state management
  */
 
-import { textColors, frameColors } from './colors.js';
 import { presets, localPhotos } from './config.js';
 import { createReactiveState } from './state.js';
 import {
@@ -43,21 +40,24 @@ const renderTriggerProperties = [
   'textScale',
 ];
 
-const renderPropsSet = new Set(renderTriggerProperties);
+const imageErrorPng = './no-image.png';
 
-// Properties that only need simple draw (no SVG update)
-const drawOnlyProperties = ['userImage', 'frameImage'];
+const renderPropsSet = new Set(renderTriggerProperties);
 
 const [state, addStatePropListener] = createReactiveState(defaultState);
 
-addStatePropListener(renderTriggerProperties, (propName, value, oldValue) => {
-  // console.log('⚛️up+draw', propName, value, oldValue);
-  updateAndDraw();
-});
-addStatePropListener(drawOnlyProperties, (propName, value, oldValue) => {
-  // console.log('⚛️draw', propName, value, oldValue);
-  draw();
-});
+addStatePropListener(
+  renderTriggerProperties,
+  (_propName, _value, _oldValue) => {
+    updateAndDraw();
+  }
+);
+addStatePropListener(
+  ['userImage', 'frameImage'],
+  (_propName, _value, _oldValue) => {
+    draw();
+  }
+);
 
 // Canvas setup
 const canvas = $previewCanvas;
@@ -208,6 +208,12 @@ function initFrameGallery() {
     $img.src = preset.src;
     $img.alt = preset.text;
 
+    $img.addEventListener('error', (e) => {
+      console.log('error', e);
+      $img.src = imageErrorPng;
+      $img.alt = '404';
+    });
+
     const $radio = $galleryItem.querySelector('input[type=radio]');
     $radio.value = key;
     $radio.checked = key === state.selectedFrameId;
@@ -226,6 +232,12 @@ function initPhotoGallery() {
 
     const $img = $galleryItem.querySelector('img');
     $img.src = `./photos/${filename}`;
+
+    $img.addEventListener('error', (e) => {
+      console.log('error', e);
+      $img.src = imageErrorPng;
+      $img.alt = '404';
+    });
 
     const $radio = $galleryItem.querySelector('input[type=radio]');
     $radio.value = filename;
@@ -317,7 +329,8 @@ function init() {
   loadDefaultImage();
 
   // Apply default preset
-  applyPreset('opentowork2');
+
+  applyPreset(state.selectedFrameId);
 }
 
 // Start the application
