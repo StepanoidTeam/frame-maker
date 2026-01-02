@@ -157,31 +157,32 @@
         </div>
       </section>
 
-      <section class="panel-layout right" id="$settingsPanel">
-        <!-- Right Panel: Editor -->
-        <section class="frame-settings-container">
-          <div class="panel-close-hover-area">
-            <button class="panel-close-container">
-              <label class="btn" for="settings-checkbox">
-                <svg>
-                  <use
-                    xlink:href="./icon-system-sprite.svg#slide-to-right-icon"
-                  />
-                </svg>
-              </label>
-            </button>
-          </div>
-          <h3>Frame Settings</h3>
-          <div id="$dynamicControlsContainer" class="dynamic-controls">
-            <!-- items will be populated by javascript -->
-          </div>
-          <div class="btn" id="$downloadBtn">
-            <svg class="btn-icon">
-              <use xlink:href="./icon-system-sprite.svg#download-icon" />
-            </svg>
-            <span>Download</span>
-          </div>
-        </section>
+      <!-- Right Panel: Editor -->
+      <section
+        class="frame-settings-container panel-layout right"
+        id="$settingsPanel"
+      >
+        <div class="panel-close-hover-area">
+          <button class="panel-close-container">
+            <label class="btn" for="settings-checkbox">
+              <svg>
+                <use
+                  xlink:href="./icon-system-sprite.svg#slide-to-right-icon"
+                />
+              </svg>
+            </label>
+          </button>
+        </div>
+        <h3>Frame Settings</h3>
+        <div id="$dynamicControlsContainer" class="dynamic-controls">
+          <!-- items will be populated by javascript -->
+        </div>
+        <div class="btn" id="$downloadBtn">
+          <svg class="btn-icon">
+            <use xlink:href="./icon-system-sprite.svg#download-icon" />
+          </svg>
+          <span>Download</span>
+        </div>
       </section>
 
       <section class="panel-layout bottom" id="$photoPanel">
@@ -216,10 +217,10 @@
         </div>
       </section>
 
-      <section class="panel-layout canvas-panel" id="canvas-panel">
+      <section class="panel-layout canvas-panel" id="$board">
         <div class="canvas-container">
           <!-- Center Panel: Preview -->
-          <section class="preview-panel">
+          <div class="preview-panel">
             <div
               id="$profilePreview"
               class="profile-preview show-preview-overlay"
@@ -236,7 +237,7 @@
               </svg>
               <canvas id="$previewCanvas" class="preview-canvas"></canvas>
             </div>
-          </section>
+          </div>
         </div>
       </section>
     </div>
