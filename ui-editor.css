@@ -36,6 +36,8 @@
   background: var(--btn-bg);
   transition: border 0.2s;
 
+  color: var(--text-color);
+
   &:focus {
     outline: none;
     border-color: var(--text-color);
