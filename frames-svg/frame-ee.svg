@@ -63,6 +63,18 @@
         label="Frame Rotation"
     />
 
+     <property
+        name="hueRotation"
+        type="range"
+        target="--hue-rotate"
+        default="0"
+        min="-180"
+        max="180"
+        step="1"
+        unit="deg"
+        label="Frame Hue"
+    />
+
     <property
         name="textScale"
         type="range"
@@ -112,19 +124,22 @@
 </defs>
 
 
-<path x="0" y="0" id="curve" stroke="none"
-style="
-transform-origin: center; 
-transform:scale(var(--text-scale, 0.9));
-" stroke-width="10" d="M00 400 A 100 100 0 0 0 800 400 A 100 100 0 0 0 0 400Z" />
 
-<g id="ee-logo" style="transform-origin: center; transform: rotate(var(--frame-rotation, 0deg));">
+<g id="ee-logo" style="
+transform-origin: center; transform: rotate(var(--frame-rotation, 0deg));
+filter: hue-rotate(var(--hue-rotate, 0deg));
+">
 <g id="logo">
 <path id="donut" fill-rule="evenodd" clip-rule="evenodd" d="M400 800C620.914 800 800 620.914 800 400C800 179.086 620.914 0 400 0C179.086 0 0 179.086 0 400C0 620.914 179.086 800 400 800ZM400 668C548.012 668 668 548.012 668 400C668 251.988 548.012 132 400 132C251.988 132 132 251.988 132 400C132 548.012 251.988 668 400 668Z" fill="url(#paint0_linear_115_15)"/>
 <path id="shadow" fill-rule="evenodd" clip-rule="evenodd" d="M800 400C800 620.914 620.914 800 400 800C179.086 800 0 620.914 0 400M132 400C132 582.806 281.313 731 465.5 731C649.687 731 799 582.806 799 400M668.333 400C668.333 216.642 518.349 68.0001 333.333 68.0001C148.318 68.0001 -1.6665 216.642 -1.6665 400M132.333 400C132.333 252.54 252.321 133 400.333 133C548.346 133 668.333 252.54 668.333 400" fill="black" fill-opacity="0.3"/>
 </g>
 </g>
 
+<path x="0" y="0" id="curve" stroke="none"
+style="
+transform-origin: center; 
+transform:scale(var(--text-scale, 0.9));
+" stroke-width="10" d="M00 400 A 100 100 0 0 0 800 400 A 100 100 0 0 0 0 400Z" />
 <text fill="var(--text-color, white)" xml:space="preserve"
     style="
     white-space: pre; 
