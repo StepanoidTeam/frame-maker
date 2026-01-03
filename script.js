@@ -73,11 +73,37 @@ canvas.width = CANVAS_SIZE;
 canvas.height = CANVAS_SIZE;
 
 // Drawing functions
+function drawImageContain(img) {
+  const canvasAspect = canvas.width / canvas.height;
+  const imgAspect = img.width / img.height;
+
+  let drawWidth;
+  let drawHeight;
+  let offsetX;
+  let offsetY;
+
+  if (imgAspect > canvasAspect) {
+    // Image is wider relative to canvas
+    drawWidth = canvas.width;
+    drawHeight = canvas.width / imgAspect;
+    offsetX = 0;
+    offsetY = (canvas.height - drawHeight) / 2;
+  } else {
+    // Image is taller relative to canvas
+    drawHeight = canvas.height;
+    drawWidth = canvas.height * imgAspect;
+    offsetX = (canvas.width - drawWidth) / 2;
+    offsetY = 0;
+  }
+
+  ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+}
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   if (state.userImage) {
-    ctx.drawImage(state.userImage, 0, 0, canvas.width, canvas.height);
+    drawImageContain(state.userImage);
   }
 
   if (state.frameImage) {
