@@ -83,3 +83,24 @@ button {
   padding: 8px 18px;
   border-radius: var(--radius-rounded);
 }
+
+/* todo(vmyshko): restyle */
+.checkbox-group {
+  .btn {
+    &:first-child {
+      border-radius: 50px 0 0 50px;
+    }
+
+    &:last-child {
+      border-radius: 0 50px 50px 0;
+    }
+
+    &:has(input:checked) {
+      color: var(--text-color);
+    }
+  }
+
+  label > input[type='checkbox'] {
+    display: none;
+  }
+}
