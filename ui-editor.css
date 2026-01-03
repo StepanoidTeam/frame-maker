@@ -50,19 +50,31 @@
   gap: var(--btn-gap);
 }
 .range-slider {
+  position: relative;
   flex: 1;
   height: 6px;
   border-radius: 3px;
   background: var(--toolbar-border);
   appearance: none;
   cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: inherit;
+
+    width: attr(data-width %);
+
+    /* todo(vmyshko): somehow make thumb in front of this line */
+    background-color: var(--text-color);
+  }
 }
 .range-slider::-webkit-slider-thumb {
   appearance: none;
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  background: var(--text-color);
+  background-color: var(--text-color);
   cursor: grab;
   transition: transform 0.2s;
 }

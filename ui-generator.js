@@ -127,16 +127,22 @@ function createRangeSlider(prop, state) {
   const valueDisplay = wrapper.querySelector('.range-value');
   if (!input || !valueDisplay) return null;
 
+  const getWidthPt = (value) =>
+    ((value - prop.min) / (prop.max - prop.min)) * 100;
+
   input.id = `control-${prop.name}`;
   input.min = prop.min;
   input.max = prop.max;
   input.step = prop.step;
+  // todo(vmyshko): refac some duplicated code here
   input.value = state[prop.name] ?? prop.default;
+  input.setAttribute('data-width', getWidthPt(input.value));
   valueDisplay.textContent = `${input.value}${prop.unit}`;
 
   input.addEventListener('input', (e) => {
     const value = parseFloat(e.target.value);
     state[prop.name] = value;
+    input.setAttribute('data-width', getWidthPt(value));
     valueDisplay.textContent = `${value}${prop.unit}`;
   });
 
