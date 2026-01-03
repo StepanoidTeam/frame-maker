@@ -2,7 +2,7 @@
  * Frame Maker Logic
  */
 
-import { presets, localPhotos } from './config.js';
+import { presets } from './config.js';
 import { createReactiveState } from './state.js';
 import {
   parseSvgConfig,
@@ -10,6 +10,12 @@ import {
   getDefaultsFromConfig,
 } from './svg-config.js';
 import { generateUI } from './ui-generator.js';
+import {
+  photosList,
+  uploadedPhotos,
+  loadPhotosFromStorage,
+  addUploadedPhoto,
+} from './photo-storage.js';
 
 import './theme-switcher.js';
 import { updateMask } from './scroll-mask-feature.js';
@@ -208,8 +214,8 @@ function initFrameGallery() {
     $img.src = preset.src;
     $img.alt = preset.text;
 
-    $img.addEventListener('error', (e) => {
-      console.log('error', e);
+    $img.addEventListener('error', (error) => {
+      console.warn(`Failed to load frame: ${key}`, error);
       $img.src = imageErrorPng;
       $img.alt = '404';
     });
@@ -226,21 +232,21 @@ function initFrameGallery() {
 function initPhotoGallery() {
   $photoGallery.replaceChildren();
 
-  localPhotos.forEach((filename, index) => {
+  photosList.forEach((photoId, index) => {
     const $galleryItem =
       $tmplGalleryItem.content.firstElementChild.cloneNode(true);
 
     const $img = $galleryItem.querySelector('img');
-    $img.src = `./photos/${filename}`;
+    $img.src = uploadedPhotos[photoId];
 
-    $img.addEventListener('error', (e) => {
-      console.log('error', e);
+    $img.addEventListener('error', (error) => {
+      console.warn(`Failed to load photo: ${photoId}`, error);
       $img.src = imageErrorPng;
       $img.alt = '404';
     });
 
     const $radio = $galleryItem.querySelector('input[type=radio]');
-    $radio.value = filename;
+    $radio.value = photoId;
 
     if (index === 0) {
       $radio.checked = true;
@@ -275,7 +281,9 @@ function setupEventListeners() {
       img.onload = () => {
         state.userImage = img;
       };
-      img.src = target.closest('.gallery-item').querySelector('img').src;
+
+      const photoId = target.value;
+      img.src = uploadedPhotos[photoId];
     }
   });
 
@@ -292,6 +300,22 @@ function setupEventListeners() {
         const img = new Image();
         img.onload = () => {
           state.userImage = img;
+
+          // Generate short ID for uploaded photo
+          const photoId = `uploaded-${Date.now()}`;
+          const dataUrl = event.target.result;
+
+          // Add to storage
+          addUploadedPhoto(photoId, dataUrl);
+
+          // Rebuild photo gallery
+          initPhotoGallery();
+
+          // Select the newly uploaded photo
+          const firstRadio = $photoGallery.querySelector('input[type=radio]');
+          if (firstRadio) {
+            firstRadio.checked = true;
+          }
         };
         img.src = event.target.result;
       };
@@ -312,7 +336,11 @@ function setupEventListeners() {
 function loadDefaultImage() {
   const placeholderImg = new Image();
   placeholderImg.crossOrigin = 'Anonymous';
-  placeholderImg.src = `./photos/${localPhotos.at(0)}`;
+
+  const firstPhotoId = photosList.at(0);
+  if (!firstPhotoId) return; // No photos available
+
+  placeholderImg.src = uploadedPhotos[firstPhotoId];
 
   placeholderImg.onload = () => {
     if (!state.userImage) {
@@ -322,14 +350,16 @@ function loadDefaultImage() {
 }
 
 // Initialize application
-function init() {
+async function init() {
+  // Load photos from localStorage
+  loadPhotosFromStorage();
+
   initFrameGallery();
   initPhotoGallery();
   setupEventListeners();
   loadDefaultImage();
 
   // Apply default preset
-
   applyPreset(state.selectedFrameId);
 }
 

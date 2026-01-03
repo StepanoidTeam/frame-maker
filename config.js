@@ -36,19 +36,3 @@ export const presets = {
     src: 'frames-svg/frame-ee.svg',
   },
 };
-
-export const localPhotos = [
-  '1688381504089.jpeg',
-  '1699455018471.jpeg',
-  '1744056970861.jpeg',
-  '1752057077706.jpeg',
-  '1765933298027.jpeg',
-  'photo_2025-12-16_23-24-09.jpg',
-
-  '1516839120841.jpeg',
-  '1516856965487.jpeg',
-  '1517506584047.jpeg',
-  '1756203294622.jpeg',
-
-  'BAD_IMAGE_404.PNG',
-];
