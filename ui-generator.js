@@ -64,7 +64,7 @@ function createControlGroup(prop, state) {
   }
 
   const labelSpan = control.querySelector('label>span');
-  const slot = control.querySelector('.control-slot');
+
   if (labelSpan) {
     labelSpan.textContent = prop.label;
   }
