@@ -81,7 +81,7 @@
   --bg-color: #efefef;
   --text-color: hsla(0, 0%, 33%, 1);
   --label-text-color: hsla(0, 0%, 33%, 0.5);
-  --toolbar-bg: rgb(255, 255, 255);
+  --toolbar-bg: rgb(255, 255, 255, 0.8);
   --toolbar-border: #e0e0e0;
   --accent-color: skyblue;
   --canvas-overlay: hsla(0, 100%, 100%, 0.75);
@@ -92,7 +92,7 @@
   --bg-color: #111;
   --text-color: hsla(0, 0%, 87%, 1);
   --label-text-color: hsla(0, 0%, 87%, 0.5);
-  --toolbar-bg: rgb(33, 33, 38);
+  --toolbar-bg: rgb(33, 33, 38, 0.8);
   --toolbar-border: rgb(48, 46, 51);
   --accent-color: yellow;
   --canvas-overlay: hsla(0, 0%, 0%, 0.75);
@@ -173,6 +173,11 @@ body {
   overflow: hidden;
 }
 
+.toolbar {
+  background-color: var(--toolbar-bg);
+  backdrop-filter: blur(10px);
+}
+
 .main-toolbar-container {
   display: flex;
   flex-direction: column;
@@ -181,7 +186,7 @@ body {
   padding-bottom: calc(var(--panel-padding) * 2);
   width: 100%;
   height: 100%;
-  background: var(--toolbar-bg);
+
   border-right: var(--panel-border-width) solid var(--toolbar-border);
 }
 .toolbar-logo {
@@ -261,7 +266,6 @@ body {
   flex-direction: column;
   align-items: center;
   gap: var(--btn-gap);
-  background: var(--toolbar-bg);
   border: var(--panel-border-width) solid var(--toolbar-border);
   border-radius: var(--panel-radius);
   padding: var(--panel-padding);
@@ -295,7 +299,6 @@ body {
 }
 
 .frame-settings-container {
-  background-color: var(--toolbar-bg);
   border: var(--panel-border-width) solid var(--toolbar-border);
   height: 100%;
   width: var(--right-panel-width);
@@ -315,7 +318,6 @@ body {
   flex-direction: row;
   align-items: center;
   gap: var(--btn-gap);
-  background: var(--toolbar-bg);
   border: var(--panel-border-width) solid var(--toolbar-border);
   border-radius: var(--panel-radius);
   padding: var(--panel-padding);
