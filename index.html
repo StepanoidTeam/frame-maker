@@ -1,260 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Frame Maker</title>
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="icon" href="./favicon.png" type="image/png" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <script src="./script.js" type="module" defer></script>
-  </head>
-  <body>
-    <!-- templates -->
-    <template id="$tmplGalleryItem">
-      <label class="gallery-item flex-row">
-        <input type="radio" name="radioName" />
-        <img src="./not-set.png" alt="" />
-      </label>
-    </template>
 
-    <template id="$tmplColorSwatch">
-      <input type="radio" class="color-swatch" name="radioName" value="" />
-    </template>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frame Maker</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        if (saved === 'dark' || saved === 'light') {
+          document.documentElement.dataset.theme = saved;
+        } else if (window.matchMedia) {
+          var sys = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          document.documentElement.dataset.theme = sys;
+        }
+      } catch (e) {
+        /* ignore - localStorage may be unavailable */
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" href="./favicon.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <script src="./script.js" type="module" defer></script>
+</head>
 
-    <template id="$tmplControlsStub">
-      <div>no settings for selected frame</div>
-    </template>
+<body>
+  <!-- templates -->
+  <template id="$tmplGalleryItem">
+    <label class="gallery-item flex-row">
+      <input type="radio" name="radioName" />
+      <img src="./not-set.png" alt="" />
+    </label>
+  </template>
 
-    <!-- settings:controls -->
+  <template id="$tmplColorSwatch">
+    <input type="radio" class="color-swatch" name="radioName" value="" />
+  </template>
 
-    <template id="$tmplControlText">
-      <label class="flex-col">
-        <span>label not set</span>
-        <input type="text" class="text-input" />
-        <!-- todo(vmyshko): not impl -->
-        <div class="flex-row checkbox-group">
-          <label class="btn">
-            <input type="checkbox" />
-            <span>Uppercase</span>
-          </label>
-          <label class="btn">
-            <input type="checkbox" />
-            <span>Italic</span>
-          </label>
-          <label class="btn">
-            <input type="checkbox" />
-            <span>Bold</span>
-          </label>
-        </div>
-      </label>
-    </template>
+  <template id="$tmplControlsStub">
+    <div>no settings for selected frame</div>
+  </template>
 
-    <template id="$tmplControlColor">
-      <label class="flex-col">
-        <span>label not set</span>
-        <form class="color-palette"></form>
-      </label>
-    </template>
+  <!-- settings:controls -->
 
-    <template id="$tmplControlRange">
-      <label class="flex-col">
-        <span>label not set</span>
-        <div class="range-wrapper">
-          <input type="range" class="range-slider" />
-          <span class="range-value"></span>
-        </div>
-      </label>
-    </template>
+  <template id="$tmplControlText">
+    <label class="flex-col">
+      <span>label not set</span>
+      <input type="text" class="text-input" />
+      <!-- todo(vmyshko): not impl -->
+      <div class="flex-row checkbox-group">
+        <label class="btn">
+          <input type="checkbox" />
+          <span>Uppercase</span>
+        </label>
+        <label class="btn">
+          <input type="checkbox" />
+          <span>Italic</span>
+        </label>
+        <label class="btn">
+          <input type="checkbox" />
+          <span>Bold</span>
+        </label>
+      </div>
+    </label>
+  </template>
 
-    <template id="$tmplControlSelect">
-      <label class="flex-col">
-        <span>label not set</span>
-        <select class="select-input"></select>
-      </label>
-    </template>
-    <!-- END templates -->
+  <template id="$tmplControlColor">
+    <label class="flex-col">
+      <span>label not set</span>
+      <form class="color-palette"></form>
+    </label>
+  </template>
 
-    <div class="app-container fullscreen">
-      <header class="panel-layout top">
-        <div class="main-toolbar-container toolbar">
-          <div class="toolbar-logo">
-            <div class="logo-container">
-              <a href="#home">
-                <svg class="logo-icon">
-                  <use xlink:href="./icon-system-sprite.svg#logo-icon" />
-                </svg>
-              </a>
-            </div>
-          </div>
-          <div class="toolbar-tools">
-            <label class="btn">
-              <svg class="photo-icon">
-                <use xlink:href="./icon-system-sprite.svg#photo-icon" />
+  <template id="$tmplControlRange">
+    <label class="flex-col">
+      <span>label not set</span>
+      <div class="range-wrapper">
+        <input type="range" class="range-slider" />
+        <span class="range-value"></span>
+      </div>
+    </label>
+  </template>
+
+  <template id="$tmplControlSelect">
+    <label class="flex-col">
+      <span>label not set</span>
+      <select class="select-input"></select>
+    </label>
+  </template>
+  <!-- END templates -->
+
+  <div class="app-container fullscreen">
+    <header class="panel-layout top">
+      <div class="main-toolbar-container toolbar">
+        <div class="toolbar-logo">
+          <div class="logo-container">
+            <a href="#home">
+              <svg class="logo-icon">
+                <use xlink:href="./icon-system-sprite.svg#logo-icon" />
               </svg>
-              <input
-                id="photo-checkbox"
-                type="checkbox"
-                class="photo-checkbox"
-                checked
-              />
-            </label>
-            <label class="btn">
-              <svg class="frame-icon">
-                <use xlink:href="./icon-system-sprite.svg#frame-icon" />
-              </svg>
-              <input
-                id="frame-checkbox"
-                type="checkbox"
-                class="frame-checkbox"
-                checked
-              />
-            </label>
-            <label class="btn">
-              <svg class="settings-icon">
-                <use xlink:href="./icon-system-sprite.svg#settings-icon" />
-              </svg>
-              <input
-                id="settings-checkbox"
-                type="checkbox"
-                class="settings-checkbox"
-                checked
-              />
-            </label>
-          </div>
-          <div class="toolbar-user">
-            <ul>
-              <li class="toolbar-icon toggle-theme-btn">
-                <svg class="light-icon">
-                  <use xlink:href="./icon-system-sprite.svg#light-icon" />
-                </svg>
-                <svg class="dark-icon">
-                  <use xlink:href="./icon-system-sprite.svg#dark-icon" />
-                </svg>
-              </li>
-              <li class="avatar-container">
-                <img src="./photos/1688381504089.jpeg" alt="" />
-              </li>
-            </ul>
+            </a>
           </div>
         </div>
-      </header>
-
-      <section class="panel-layout left" id="$framePanel">
-        <!-- Left Panel: Frames -->
-        <div class="left-toolbar-container toolbar">
-          <div class="btn frame" id="addFrame">
+        <div class="toolbar-tools">
+          <label class="btn">
+            <svg class="photo-icon">
+              <use xlink:href="./icon-system-sprite.svg#photo-icon" />
+            </svg>
+            <input id="photo-checkbox" type="checkbox" class="photo-checkbox" checked />
+          </label>
+          <label class="btn">
             <svg class="frame-icon">
               <use xlink:href="./icon-system-sprite.svg#frame-icon" />
             </svg>
-          </div>
-          <div class="frame-gallery-container">
-            <form id="$frameGallery" class="frame-gallery gallery">
-              <!-- items will be populated by javascript -->
-            </form>
-          </div>
-          <div class="panel-close-hover-area">
-            <button class="panel-close-container">
-              <label class="btn" for="frame-checkbox">
-                <svg>
-                  <use
-                    xlink:href="./icon-system-sprite.svg#slide-to-left-icon"
-                  />
-                </svg>
-              </label>
-            </button>
-          </div>
+            <input id="frame-checkbox" type="checkbox" class="frame-checkbox" checked />
+          </label>
+          <label class="btn">
+            <svg class="settings-icon">
+              <use xlink:href="./icon-system-sprite.svg#settings-icon" />
+            </svg>
+            <input id="settings-checkbox" type="checkbox" class="settings-checkbox" checked />
+          </label>
         </div>
-      </section>
+        <div class="toolbar-user">
+          <ul>
+            <li class="toolbar-icon toggle-theme-btn">
+              <svg class="light-icon">
+                <use xlink:href="./icon-system-sprite.svg#light-icon" />
+              </svg>
+              <svg class="dark-icon">
+                <use xlink:href="./icon-system-sprite.svg#dark-icon" />
+              </svg>
+            </li>
+            <li class="avatar-container">
+              <img src="./photos/1688381504089.jpeg" alt="" />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
 
-      <!-- Right Panel: Editor -->
-      <section
-        class="frame-settings-container toolbar panel-layout right"
-        id="$settingsPanel"
-      >
+    <section class="panel-layout left" id="$framePanel">
+      <!-- Left Panel: Frames -->
+      <div class="left-toolbar-container toolbar">
+        <div class="btn frame" id="addFrame">
+          <svg class="frame-icon">
+            <use xlink:href="./icon-system-sprite.svg#frame-icon" />
+          </svg>
+        </div>
+        <div class="frame-gallery-container">
+          <form id="$frameGallery" class="frame-gallery gallery">
+            <!-- items will be populated by javascript -->
+          </form>
+        </div>
         <div class="panel-close-hover-area">
           <button class="panel-close-container">
-            <label class="btn" for="settings-checkbox">
+            <label class="btn" for="frame-checkbox">
               <svg>
-                <use
-                  xlink:href="./icon-system-sprite.svg#slide-to-right-icon"
-                />
+                <use xlink:href="./icon-system-sprite.svg#slide-to-left-icon" />
               </svg>
             </label>
           </button>
         </div>
-        <h3>Frame Settings</h3>
-        <div id="$dynamicControlsContainer" class="dynamic-controls">
-          <!-- items will be populated by javascript -->
-        </div>
-        <div class="btn" id="$downloadBtn">
-          <svg class="btn-icon">
-            <use xlink:href="./icon-system-sprite.svg#download-icon" />
-          </svg>
-          <span>Download</span>
-        </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="panel-layout bottom" id="$photoPanel">
-        <div class="bottom-toolbar-container toolbar">
-          <div class="btn photo" id="$uploadPhotoBtn">
-            <svg class="photo-icon">
-              <use xlink:href="./icon-system-sprite.svg#photo-icon" />
+    <!-- Right Panel: Editor -->
+    <section class="frame-settings-container toolbar panel-layout right" id="$settingsPanel">
+      <div class="panel-close-hover-area">
+        <button class="panel-close-container">
+          <label class="btn" for="settings-checkbox">
+            <svg>
+              <use xlink:href="./icon-system-sprite.svg#slide-to-right-icon" />
             </svg>
-            <input
-              type="file"
-              id="$fileInput"
-              accept="image/*"
-              style="display: none"
-            />
-          </div>
-          <div class="photo-gallery-container">
-            <form id="$photoGallery" class="photo-gallery gallery">
-              <!-- items will be populated by javascript -->
-            </form>
-          </div>
-          <div class="panel-close-hover-area">
-            <button class="panel-close-container">
-              <label class="btn" for="photo-checkbox">
-                <svg>
-                  <use
-                    xlink:href="./icon-system-sprite.svg#slide-to-bottom-icon"
-                  />
-                </svg>
-              </label>
-            </button>
-          </div>
-        </div>
-      </section>
+          </label>
+        </button>
+      </div>
+      <h3>Frame Settings</h3>
+      <div id="$dynamicControlsContainer" class="dynamic-controls">
+        <!-- items will be populated by javascript -->
+      </div>
+      <div class="btn" id="$downloadBtn">
+        <svg class="btn-icon">
+          <use xlink:href="./icon-system-sprite.svg#download-icon" />
+        </svg>
+        <span>Download</span>
+      </div>
+    </section>
 
-      <section class="panel-layout canvas-panel" id="$board">
-        <div class="canvas-container">
-          <!-- Center Panel: Preview -->
-          <div class="preview-panel">
-            <div
-              id="$profilePreview"
-              class="profile-preview show-preview-overlay"
-            >
-              <svg class="svg-overlay" viewBox="0 0 100 100">
-                <!-- Circular mask overlay using simplified path -->
-                <defs>
-                  <mask id="circleMask">
-                    <rect width="100" height="100" fill="white" />
-                    <circle cx="50" cy="50" r="50" fill="black" />
-                  </mask>
-                </defs>
-                <rect width="100" height="100" mask="url(#circleMask)" />
+    <section class="panel-layout bottom" id="$photoPanel">
+      <div class="bottom-toolbar-container toolbar">
+        <div class="btn photo" id="$uploadPhotoBtn">
+          <svg class="photo-icon">
+            <use xlink:href="./icon-system-sprite.svg#photo-icon" />
+          </svg>
+          <input type="file" id="$fileInput" accept="image/*" style="display: none" />
+        </div>
+        <div class="photo-gallery-container">
+          <form id="$photoGallery" class="photo-gallery gallery">
+            <!-- items will be populated by javascript -->
+          </form>
+        </div>
+        <div class="panel-close-hover-area">
+          <button class="panel-close-container">
+            <label class="btn" for="photo-checkbox">
+              <svg>
+                <use xlink:href="./icon-system-sprite.svg#slide-to-bottom-icon" />
               </svg>
-              <canvas id="$previewCanvas" class="preview-canvas"></canvas>
-            </div>
+            </label>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-layout canvas-panel" id="$board">
+      <div class="canvas-container">
+        <!-- Center Panel: Preview -->
+        <div class="preview-panel">
+          <div id="$profilePreview" class="profile-preview show-preview-overlay">
+            <svg class="svg-overlay" viewBox="0 0 100 100">
+              <!-- Circular mask overlay using simplified path -->
+              <defs>
+                <mask id="circleMask">
+                  <rect width="100" height="100" fill="white" />
+                  <circle cx="50" cy="50" r="50" fill="black" />
+                </mask>
+              </defs>
+              <rect width="100" height="100" mask="url(#circleMask)" />
+            </svg>
+            <canvas id="$previewCanvas" class="preview-canvas"></canvas>
           </div>
         </div>
-      </section>
-    </div>
-  </body>
+      </div>
+    </section>
+  </div>
+</body>
+
 </html>
