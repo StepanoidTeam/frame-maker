@@ -4,23 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Frame Maker</title>
-    <script>
-      (function () {
-        try {
-          var saved = localStorage.getItem('theme');
-          if (saved === 'dark' || saved === 'light') {
-            document.documentElement.dataset.theme = saved;
-          } else if (window.matchMedia) {
-            var sys = window.matchMedia('(prefers-color-scheme: dark)').matches
-              ? 'dark'
-              : 'light';
-            document.documentElement.dataset.theme = sys;
-          }
-        } catch (e) {
-          /* ignore - localStorage may be unavailable */
-        }
-      })();
-    </script>
+    <script src="./theme-prefetch.js" type="module" async></script>
     <link rel="stylesheet" href="./style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

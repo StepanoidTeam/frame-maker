@@ -1,48 +1,35 @@
 //////////////////////////////////
 /////     theme switcher     /////
 //////////////////////////////////
-
-const root = document.documentElement;
 const toggleThemeBtn = document.querySelector('.toggle-theme-btn');
 const darkIcon = document.querySelector('.dark-icon');
 const lightIcon = document.querySelector('.light-icon');
 
-toggleThemeBtn.addEventListener('click', ()=>setTheme('click'));
-
-function getSystemTheme() {
-  return window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
-}
-
-const savedTheme = localStorage.getItem('theme');
-if (!savedTheme) {
-  root.dataset.theme = getSystemTheme();
-} else {
-  root.dataset.theme = savedTheme;
-}
+toggleThemeBtn.addEventListener('click', () => setTheme('click'));
 
 function setTheme(initial) {
-  const currentTheme = root.dataset.theme;
+  const currentTheme = document.documentElement.dataset.theme;
   let newTheme = currentTheme; // temporary value
 
-  if(initial !== 'initial') {
-    if(currentTheme === 'dark') {
+  if (initial !== 'initial') {
+    if (currentTheme === 'dark') {
       newTheme = 'light';
       lightIcon.classList.add('hidden');
       darkIcon.classList.remove('hidden');
-    } else if(currentTheme === 'light') {
+    } else if (currentTheme === 'light') {
       newTheme = 'dark';
       lightIcon.classList.remove('hidden');
       darkIcon.classList.add('hidden');
     }
   } else {
-    if(currentTheme === 'dark') {
+    if (currentTheme === 'dark') {
       darkIcon.classList.add('hidden');
-    } else if(currentTheme === 'light') {
+    } else if (currentTheme === 'light') {
       lightIcon.classList.add('hidden');
     }
   }
 
-  root.dataset.theme = newTheme;
+  document.documentElement.dataset.theme = newTheme;
   localStorage.setItem('theme', newTheme);
 }
 
