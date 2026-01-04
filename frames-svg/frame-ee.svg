@@ -21,7 +21,6 @@
       target="--text-color"
       default="#FFFFFF"
       label="Text Color"
-      palette="text"
     />
 
     <property
@@ -97,7 +96,6 @@
       target="--gradient-1"
       default="#F5F300"
       label="gradient 1"
-      palette="frame"
     />
     <property
       name="gradientColor2"
@@ -105,7 +103,6 @@
       target="--gradient-2"
       default="#2ABF21"
       label="gradient 2"
-      palette="frame"
     />
     <property
       name="gradientColor3"
@@ -113,7 +110,6 @@
       target="--gradient-3"
       default="#00D1FF"
       label="gradient 3"
-      palette="frame"
     />
   </config>
 

@@ -30,7 +30,6 @@
       target="--frame-color"
       default="#F5DB64"
       label="Frame Color"
-      palette="frame"
     />
 
     <property
@@ -39,7 +38,6 @@
       target="--wedge-color"
       default="#FFFFFF"
       label="Wedge Color"
-      palette="frame"
     />
 
     <property
@@ -48,7 +46,6 @@
       target="--text-color"
       default="#000000"
       label="Text Color"
-      palette="text"
     />
 
     <property

@@ -21,7 +21,6 @@
       target="--color"
       default="#467031"
       label="Frame Color"
-      palette="frame"
     />
 
     <property
@@ -30,7 +29,6 @@
       target="--text-color"
       default="#FFFFFF"
       label="Text Color"
-      palette="text"
     />
 
     <property

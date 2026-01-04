@@ -2,21 +2,25 @@
  * Color configurations for Frame Maker
  */
 
-export const textColors = ['black', '#ffffff', '#0a66c2', 'yellow'];
-
-export const frameColors = [
-  '#79389f',
+export const colorPalette = [
+  '#79389F',
   '#467031',
-  '#FF7745',
-  '#0a66c2',
-  '#fff000',
-  '#ff80ed',
-  '#ffffff',
-  '#7b5804',
-  '#00ff00',
-  '#ff0000',
-  '#00ffff',
+  '#FFFFFF',
   'black',
+  //from ee
+  '#F5F300',
+  '#2ABF21',
+  '#00D1FF',
+
+  // todo(vmyshko): add normal colors
+  '#FF7745',
+  '#0A66C2',
+  '#FFF000',
+  '#FF80ED',
+  '#7B5804',
+  '#00FF00',
+  '#FF0000',
+  '#00FFFF',
   // not gay
   `linear-gradient(89.7deg, 
     rgba(223,0,0,1) 2.7%, 

@@ -2,13 +2,8 @@
  * Dynamic UI Generator from SVG Config
  */
 
-import { textColors, frameColors } from './colors.js';
+import { colorPalette } from './colors.js';
 import { FONT_FAMILIES } from './fonts.js';
-
-const colorPalettes = {
-  frame: frameColors,
-  text: textColors,
-};
 
 const templates = {
   text: '$tmplControlText',
@@ -45,6 +40,8 @@ export function generateUI(config, state, container) {
 function createControlGroup(prop, state) {
   let control;
 
+  // todo(vmyshko): make separate components/extract for each type
+  // make it possible to have multiple vars per component?
   switch (prop.type) {
     case 'text':
       control = createTextInput(prop, state);
@@ -99,9 +96,7 @@ function createColorPalette(prop, state) {
   if (!palette) return null;
   palette.id = `$control_${prop.name}`;
 
-  const colors = (prop.palette && colorPalettes[prop.palette]) || frameColors;
-
-  colors.forEach((color, index) => {
+  colorPalette.forEach((color, index) => {
     const radio = cloneTemplate(templates.swatch);
     if (!radio) return;
     radio.value = color;

@@ -12,7 +12,6 @@
  * @property {string|null} [attr] - Attribute to modify (textContent, fill, etc.)
  * @property {string} default - Default value
  * @property {string} label - UI label
- * @property {string|null} [palette] - Color palette name ('frame', 'text')
  * @property {number} [min] - For range: minimum value
  * @property {number} [max] - For range: maximum value
  * @property {number} [step] - For range: step value
@@ -53,7 +52,6 @@ export function parseSvgConfig(svgDoc) {
       attr: prop.getAttribute('attr') || null,
       default: prop.getAttribute('default') || '',
       label: prop.getAttribute('label') || name,
-      palette: prop.getAttribute('palette') || null,
       unit: prop.getAttribute('unit') || '',
     };
 

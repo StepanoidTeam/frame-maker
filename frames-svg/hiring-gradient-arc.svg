@@ -21,7 +21,6 @@
       target="--wedge-color"
       default="#8344cb"
       label="Wedge Color"
-      palette="frame"
     />
 
     <property
@@ -30,7 +29,6 @@
       target="--text-color"
       default="#FFFFFF"
       label="Text Color"
-      palette="text"
     />
 
     <property
