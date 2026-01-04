@@ -35,4 +35,8 @@ export const presets = {
     type: 'svg',
     src: 'frames-svg/frame-ee.svg',
   },
+  google: {
+    type: 'svg',
+    src: 'frames-svg/google-like.svg',
+  },
 };

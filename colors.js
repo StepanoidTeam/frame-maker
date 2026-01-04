@@ -11,8 +11,14 @@ export const colorPalette = [
   '#F5F300',
   '#2ABF21',
   '#00D1FF',
+  //google-like
+  '#E92D18',
+  '#3174F1',
+  '#249A41',
+  '#F6AD01',
+  // todo(vmyshko): somehow add colors from frames automatically
 
-  // todo(vmyshko): add normal colors
+  // todo(vmyshko): add normal colors (above) and delete that shit below
   '#FF7745',
   '#0A66C2',
   '#FFF000',
