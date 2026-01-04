@@ -1,4 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" fill="none">
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="800"
+  height="800"
+  viewBox="0 0 800 800"
+  fill="none"
+>
   <config id="fm-config" display="none">
     <property
       name="textTop"
@@ -115,8 +121,18 @@
   />
 
   <!-- Wedge segments and text (rotates together) -->
-  <g style="transform-origin: 400px 400px; transform: rotate(var(--text-rotation, 0deg)) scale(var(--text-scale, 1));">
-    <g fill="none" stroke="var(--wedge-color, #FFFFFF)" stroke-width="120" stroke-linecap="butt">
+  <g
+    style="
+      transform-origin: 400px 400px;
+      transform: rotate(var(--text-rotation, 0deg)) scale(var(--text-scale, 1));
+    "
+  >
+    <g
+      fill="none"
+      stroke="var(--wedge-color, #FFFFFF)"
+      stroke-width="120"
+      stroke-linecap="butt"
+    >
       <path d="M 660.4 181.4 A 340 340 0 0 1 516.3 719.6" />
       <path d="M 80.4 283.7 A 340 340 0 0 1 618.6 139.6" />
     </g>

@@ -1,133 +1,184 @@
-<svg width="800" height="800" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-<mask id="mask0_46_29" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="800">
-<path fill="#B86B6B" d="M400 0C620.914 1.28922e-07 800 179.086 800 400C800 620.914 620.914 800 400 800C179.086 800 1.28855e-07 620.914 0 400C0 179.086 179.086 0 400 0ZM400 130C250.883 130 130 250.883 130 400C130 549.117 250.883 670 400 670C549.117 670 670 549.117 670 400C670 250.883 549.117 130 400 130Z" />
-</mask>
-<g mask="url(#mask0_46_29)" style="
-    transform-origin: center; 
-    transform: rotate(var(--frame-rotation, 0deg));
-">
-<rect y="-0.799988" width="800" height="800" fill="url(#paint0_radial_46_29)"/>
-</g>
-
-<config id="fm-config" display="none">
-    <property
-        name="text"
-        type="text"
-        target="#frame-text"
-        attr="textContent"
-        default="#OPENTOWORK"
-        label="Text"
+<svg
+  width="800"
+  height="800"
+  viewBox="0 0 800 800"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <mask
+    id="mask0_46_29"
+    style="mask-type: alpha"
+    maskUnits="userSpaceOnUse"
+    x="0"
+    y="0"
+    width="800"
+    height="800"
+  >
+    <path
+      fill="#B86B6B"
+      d="M400 0C620.914 1.28922e-07 800 179.086 800 400C800 620.914 620.914 800 400 800C179.086 800 1.28855e-07 620.914 0 400C0 179.086 179.086 0 400 0ZM400 130C250.883 130 130 250.883 130 400C130 549.117 250.883 670 400 670C549.117 670 670 549.117 670 400C670 250.883 549.117 130 400 130Z"
     />
-
-    <property
-        name="frameColor"
-        type="color"
-        target="--color"
-        default="#467031"
-        label="Frame Color"
-        palette="frame"
-    />
-
-    <property
-        name="textColor"
-        type="color"
-        target="--text-color"
-        default="#FFFFFF"
-        label="Text Color"
-        palette="text"
-    />
-
-    <property
-        name="fontSize"
-        type="range"
-        target="--font-size"
-        default="80"
-        min="40"
-        max="120"
-        step="1"
-        unit="px"
-        label="Font Size"
-    />
-
-    <property
-        name="fontFamily"
-        type="select"
-        target="--font-family"
-        default="Inter, sans-serif"
-        label="Font Family"
-    />
-
-    <property
-        name="textRotation"
-        type="range"
-        target="--text-rotation"
-        default="0"
-        min="-180"
-        max="180"
-        step="1"
-        unit="deg"
-        label="Text Rotation"
-    />
-
-    <property
-        name="frameRotation"
-        type="range"
-        target="--frame-rotation"
-        default="0"
-        min="-180"
-        max="180"
-        step="1"
-        unit="deg"
-        label="Frame Rotation"
-    />
-
-    <property
-        name="textScale"
-        type="range"
-        target="--text-scale"
-        default="0.9"
-        min="0.5"
-        max="1"
-        step="0.05"
-        label="Text Scale"
-    />
-</config>
-
-<!-- <defs> -->
-
-<path x="0" y="0" id="curve" stroke="none"
-style="
-transform-origin: center; 
-transform:scale(var(--text-scale, 0.9));
-" stroke-width="10" d="M00 400 A 100 100 0 0 0 800 400 A 100 100 0 0 0 0 400Z" />
-<!-- <path x="0" y="0" id="curve" stroke="#ff00ffff" stroke-width="10" d="M00 400 A 300 300 0 1 0 0 403" transform="translate(610, 60) scale(0.87)" /> -->
-<!-- todo: make position/transform configurable, and arc params too -->
-<!-- ref to svg arc explanation:  -->
-<!-- https://www.joshwcomeau.com/svg/interactive-guide-to-paths/ -->
-
-<!-- </defs> -->
-
-<text fill="var(--text-color, white)" xml:space="preserve"
+  </mask>
+  <g
+    mask="url(#mask0_46_29)"
     style="
-    white-space: pre; 
-    transform-origin: center; 
-    transform: rotate(var(--text-rotation, 0deg));
-    font-size: var(--font-size, 80px);
-    font-family: var(--font-family, Inter, sans-serif);
-    font-weight: 800;
-    " letter-spacing="0.08em">
-<textPath startOffset="0%" href="#curve">
-    <tspan id="frame-text" x="0">#OPENTOWORK</tspan>
-</textPath>
-</text>
+      transform-origin: center;
+      transform: rotate(var(--frame-rotation, 0deg));
+    "
+  >
+    <rect
+      y="-0.799988"
+      width="800"
+      height="800"
+      fill="url(#paint0_radial_46_29)"
+    />
+  </g>
 
+  <config id="fm-config" display="none">
+    <property
+      name="text"
+      type="text"
+      target="#frame-text"
+      attr="textContent"
+      default="#OPENTOWORK"
+      label="Text"
+    />
 
-<defs>
-<radialGradient id="paint0_radial_46_29" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(922.8 -374.4) rotate(128.178) scale(1492.95)">
-<stop offset="0.676088" stop-color="var(--color,#467031)" stop-opacity="0"/>
-<stop offset="0.70219" stop-color="var(--color,#467031)" stop-opacity="0.15"/>
-<stop offset="0.743414" stop-color="var(--color,#467031)" stop-opacity="0.539009"/>
-<stop offset="0.773275" stop-color="var(--color,#467031)"/>
-</radialGradient>
-</defs>
+    <property
+      name="frameColor"
+      type="color"
+      target="--color"
+      default="#467031"
+      label="Frame Color"
+      palette="frame"
+    />
+
+    <property
+      name="textColor"
+      type="color"
+      target="--text-color"
+      default="#FFFFFF"
+      label="Text Color"
+      palette="text"
+    />
+
+    <property
+      name="fontSize"
+      type="range"
+      target="--font-size"
+      default="80"
+      min="40"
+      max="120"
+      step="1"
+      unit="px"
+      label="Font Size"
+    />
+
+    <property
+      name="fontFamily"
+      type="select"
+      target="--font-family"
+      default="Inter, sans-serif"
+      label="Font Family"
+    />
+
+    <property
+      name="textRotation"
+      type="range"
+      target="--text-rotation"
+      default="0"
+      min="-180"
+      max="180"
+      step="1"
+      unit="deg"
+      label="Text Rotation"
+    />
+
+    <property
+      name="frameRotation"
+      type="range"
+      target="--frame-rotation"
+      default="0"
+      min="-180"
+      max="180"
+      step="1"
+      unit="deg"
+      label="Frame Rotation"
+    />
+
+    <property
+      name="textScale"
+      type="range"
+      target="--text-scale"
+      default="0.9"
+      min="0.5"
+      max="1"
+      step="0.05"
+      label="Text Scale"
+    />
+  </config>
+
+  <!-- <defs> -->
+
+  <path
+    x="0"
+    y="0"
+    id="curve"
+    stroke="none"
+    style="transform-origin: center; transform: scale(var(--text-scale, 0.9))"
+    stroke-width="10"
+    d="M00 400 A 100 100 0 0 0 800 400 A 100 100 0 0 0 0 400Z"
+  />
+  <!-- <path x="0" y="0" id="curve" stroke="#ff00ffff" stroke-width="10" d="M00 400 A 300 300 0 1 0 0 403" transform="translate(610, 60) scale(0.87)" /> -->
+  <!-- todo: make position/transform configurable, and arc params too -->
+  <!-- ref to svg arc explanation:  -->
+  <!-- https://www.joshwcomeau.com/svg/interactive-guide-to-paths/ -->
+
+  <!-- </defs> -->
+
+  <text
+    fill="var(--text-color, white)"
+    xml:space="preserve"
+    style="
+      white-space: pre;
+      transform-origin: center;
+      transform: rotate(var(--text-rotation, 0deg));
+      font-size: var(--font-size, 80px);
+      font-family: var(--font-family, Inter, sans-serif);
+      font-weight: 800;
+    "
+    letter-spacing="0.08em"
+  >
+    <textPath startOffset="0%" href="#curve">
+      <tspan id="frame-text" x="0">#OPENTOWORK</tspan>
+    </textPath>
+  </text>
+
+  <defs>
+    <radialGradient
+      id="paint0_radial_46_29"
+      cx="0"
+      cy="0"
+      r="1"
+      gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(922.8 -374.4) rotate(128.178) scale(1492.95)"
+    >
+      <stop
+        offset="0.676088"
+        stop-color="var(--color,#467031)"
+        stop-opacity="0"
+      />
+      <stop
+        offset="0.70219"
+        stop-color="var(--color,#467031)"
+        stop-opacity="0.15"
+      />
+      <stop
+        offset="0.743414"
+        stop-color="var(--color,#467031)"
+        stop-opacity="0.539009"
+      />
+      <stop offset="0.773275" stop-color="var(--color,#467031)" />
+    </radialGradient>
+  </defs>
 </svg>
