@@ -13,7 +13,7 @@
     </linearGradient>
   </defs>
 
-  <config id="fm-config" display="none">
+  <config>
     <property
       name="text"
       type="text"

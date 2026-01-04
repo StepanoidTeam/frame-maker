@@ -27,8 +27,7 @@
 export function parseSvgConfig(svgDoc) {
   const config = new Map();
 
-  const configEl =
-    svgDoc.getElementById('fm-config') || svgDoc.querySelector('config');
+  const configEl = svgDoc.querySelector('config');
 
   if (!configEl) {
     console.warn('No <config> element found in SVG');
@@ -150,8 +149,7 @@ export function applySvgConfig(svgDoc, config, state) {
     `;
   }
 
-  const configEl =
-    svgDoc.getElementById('fm-config') || svgDoc.querySelector('config');
+  const configEl = svgDoc.querySelector('config');
   configEl?.remove();
 }
 

@@ -5,7 +5,7 @@
   viewBox="0 0 60 60"
   fill="none"
 >
-  <config id="fm-config" display="none">
+  <config>
     <property
       name="text"
       type="text"
