@@ -85,7 +85,7 @@
   --toolbar-bg: rgb(255, 255, 255, 0.8);
   --toolbar-border: #e0e0e0;
   --accent-color: skyblue;
-  --canvas-overlay: hsla(0, 100%, 100%, 0.75);
+  --canvas-overlay: hsla(0, 100%, 100%, 0.55);
 }
 :root[data-theme='dark'] {
   color-scheme: dark; /* manual theme switcher */
@@ -96,7 +96,7 @@
   --toolbar-bg: rgb(33, 33, 38, 0.8);
   --toolbar-border: rgb(48, 46, 51);
   --accent-color: yellow;
-  --canvas-overlay: hsla(0, 0%, 0%, 0.75);
+  --canvas-overlay: hsla(0, 0%, 0%, 0.55);
 }
 
 /*//////////////////////////////////*/
@@ -433,5 +433,5 @@ body {
 }
 
 .framing-grid {
-  stroke: light-dark(#ffffff75, #00000075);
+  stroke: var(--canvas-overlay);
 }
