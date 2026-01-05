@@ -179,6 +179,16 @@
         class="frame-settings-container toolbar panel-layout right"
         id="$settingsPanel"
       >
+        <h3>Frame Settings</h3>
+        <div id="$dynamicControlsContainer" class="dynamic-controls">
+          <!-- items will be populated by javascript -->
+        </div>
+        <div class="btn" id="$downloadBtn">
+          <svg class="btn-icon">
+            <use xlink:href="./icon-system-sprite.svg#download-icon" />
+          </svg>
+          <span>Download</span>
+        </div>
         <div class="panel-close-hover-area">
           <button class="panel-close-container">
             <label class="btn" for="settings-checkbox">
@@ -189,16 +199,6 @@
               </svg>
             </label>
           </button>
-        </div>
-        <h3>Frame Settings</h3>
-        <div id="$dynamicControlsContainer" class="dynamic-controls">
-          <!-- items will be populated by javascript -->
-        </div>
-        <div class="btn" id="$downloadBtn">
-          <svg class="btn-icon">
-            <use xlink:href="./icon-system-sprite.svg#download-icon" />
-          </svg>
-          <span>Download</span>
         </div>
       </section>
 
