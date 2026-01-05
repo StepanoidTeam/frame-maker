@@ -76,6 +76,7 @@
 }
 
 :root[data-theme='light'] {
+  /* todo(vmyshko): use light-dark()? to discuss */
   color-scheme: light; /* manual theme switcher */
 
   --bg-color: #efefef;
@@ -345,8 +346,6 @@ body {
 
 .canvas-panel {
   .canvas-container {
-    /* background-color: pink; */
-    border-radius: calc(var(--panel-radius) * 2);
     width: min(var(--canvas-width), 100vw);
     overflow: hidden;
 
@@ -382,7 +381,6 @@ body {
   align-items: center;
   justify-content: center;
 
-  cursor: pointer;
   transition: border-radius 200ms ease-in;
   border-radius: 50%;
   &.show-preview-overlay {
@@ -409,12 +407,31 @@ body {
 
 /* Canvas for rendering the final result */
 .preview-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
+/* Photo canvas - can be zoomed and panned */
+.photo-canvas {
+  transform-origin: center center;
+  transition: transform 0.05s ease-out;
+  will-change: transform;
+}
+
+/* Frame canvas - stays static on top */
+.frame-canvas {
+  pointer-events: none;
+}
+
 .preview-buttons {
   display: flex;
   gap: var(--spacing-m);
+}
+
+.framing-grid {
+  stroke: light-dark(#ffffff75, #00000075);
 }

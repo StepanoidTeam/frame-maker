@@ -60,13 +60,6 @@
     --y: 50%;
     left: var(--x);
     top: var(--y);
-
-    & * {
-      cursor: grab;
-    }
-    &.panning-active * {
-      cursor: grabbing;
-    }
   }
 }
 

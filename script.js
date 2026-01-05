@@ -19,7 +19,7 @@ import {
 
 import './theme-switcher.js';
 import { updateMask } from './scroll-mask-feature.js';
-import './drag-panels.js';
+import { resetCanvasZoom } from './canvas-zoom.js';
 
 /**
  * Default state configuration
@@ -58,22 +58,24 @@ addStatePropListener(
     updateAndDraw();
   }
 );
-addStatePropListener(
-  ['userImage', 'frameImage'],
-  (_propName, _value, _oldValue) => {
-    draw();
-  }
-);
+addStatePropListener(['userImage'], drawPhoto);
+addStatePropListener(['frameImage'], drawFrame);
 
-// Canvas setup
-const canvas = $previewCanvas;
-const ctx = canvas.getContext('2d');
+addStatePropListener(['userImage'], resetCanvasZoom);
+
+// Canvas setup - separate canvases for photo and frame
+const photoCanvas = $photoCanvas;
+const frameCanvas = $frameCanvas;
+const photoCtx = photoCanvas.getContext('2d');
+const frameCtx = frameCanvas.getContext('2d');
 const CANVAS_SIZE = 800;
-canvas.width = CANVAS_SIZE;
-canvas.height = CANVAS_SIZE;
+photoCanvas.width = CANVAS_SIZE;
+photoCanvas.height = CANVAS_SIZE;
+frameCanvas.width = CANVAS_SIZE;
+frameCanvas.height = CANVAS_SIZE;
 
 // Drawing functions
-function drawImageContain(img) {
+function drawImageContain(ctx, canvas, img) {
   const canvasAspect = canvas.width / canvas.height;
   const imgAspect = img.width / img.height;
 
@@ -99,16 +101,64 @@ function drawImageContain(img) {
   ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
 }
 
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+function drawPhoto() {
+  photoCtx.clearRect(0, 0, photoCanvas.width, photoCanvas.height);
   if (state.userImage) {
-    drawImageContain(state.userImage);
+    drawImageContain(photoCtx, photoCanvas, state.userImage);
   }
+}
 
+function drawFrame() {
+  frameCtx.clearRect(0, 0, frameCanvas.width, frameCanvas.height);
   if (state.frameImage) {
-    ctx.drawImage(state.frameImage, 0, 0, canvas.width, canvas.height);
+    frameCtx.drawImage(
+      state.frameImage,
+      0,
+      0,
+      frameCanvas.width,
+      frameCanvas.height
+    );
   }
+}
+
+function draw() {
+  drawPhoto();
+  drawFrame();
+}
+
+// Combine both canvases for download with zoom/pan transforms applied
+function getDownloadCanvas() {
+  // Combined canvas for download (hidden)
+  const downloadCanvas = document.createElement('canvas');
+  const downloadCtx = downloadCanvas.getContext('2d');
+  downloadCanvas.width = CANVAS_SIZE;
+  downloadCanvas.height = CANVAS_SIZE;
+
+  downloadCtx.clearRect(0, 0, downloadCanvas.width, downloadCanvas.height);
+
+  // Get zoom state from canvas-zoom.js
+  const zoom = window.canvasZoomControls?.getZoom() || 1;
+  const offsetX = window.canvasZoomControls?.getOffsetX() || 0;
+  const offsetY = window.canvasZoomControls?.getOffsetY() || 0;
+
+  // Calculate scale factor (CSS transform is relative to display size, canvas is 800x800)
+  // The preview container displays at ~300px, so we need to scale the offset
+  const previewContainer = document.getElementById('$profilePreview');
+  const containerSize = previewContainer?.getBoundingClientRect().width || 300;
+  const scaleFactor = CANVAS_SIZE / containerSize;
+
+  // Apply transform to match the visual preview
+  downloadCtx.save();
+  downloadCtx.translate(downloadCanvas.width / 2, downloadCanvas.height / 2);
+  downloadCtx.translate(offsetX * scaleFactor, offsetY * scaleFactor);
+  downloadCtx.scale(zoom, zoom);
+  downloadCtx.translate(-downloadCanvas.width / 2, -downloadCanvas.height / 2);
+  downloadCtx.drawImage(photoCanvas, 0, 0);
+  downloadCtx.restore();
+
+  // Draw frame without transform (stays static)
+  downloadCtx.drawImage(frameCanvas, 0, 0);
+  return downloadCanvas;
 }
 
 function updateSVG() {
@@ -284,6 +334,8 @@ function initPhotoGallery() {
 
 // Preview overlay toggle
 function togglePreviewOverlay() {
+  // Don't toggle if user was panning the canvas
+  if (window.canvasZoomControls?.didPan?.()) return;
   $profilePreview.classList.toggle('show-preview-overlay');
 }
 
@@ -353,7 +405,7 @@ function setupEventListeners() {
   $downloadBtn.addEventListener('click', () => {
     const link = document.createElement('a');
     link.download = 'frame-avatar.png';
-    link.href = canvas.toDataURL('image/png');
+    link.href = getDownloadCanvas().toDataURL('image/png');
     link.click();
   });
 }

@@ -1,7 +1,3 @@
-[hidden] {
-  display: none;
-}
-
 .flex,
 .flex-row,
 .flex-col {
@@ -37,9 +33,20 @@
   flex-grow: 1;
 }
 
-.hidden {
-  display: none;
-}
+.hidden,
 [hidden] {
   display: none;
+}
+
+/* cursors */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-grab {
+  cursor: grab;
+}
+
+.cursor-grabbing {
+  cursor: grabbing;
 }
