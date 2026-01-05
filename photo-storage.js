@@ -4,7 +4,7 @@
  */
 
 // dev only
-export const localPhotos = [
+export const _testPhotos = [
   '1688381504089.jpeg',
   '1699455018471.jpeg',
   '1744056970861.jpeg',
@@ -16,8 +16,6 @@ export const localPhotos = [
   '1516856965487.jpeg',
   '1517506584047.jpeg',
   '1756203294622.jpeg',
-
-  'BAD_IMAGE_404.PNG',
 ];
 
 // List of photos managed internally (IDs)
@@ -79,7 +77,7 @@ export function loadPhotosFromStorage() {
       console.log(`📸 Loaded ${photosList.length} photos from localStorage`);
     } else {
       // First time: initialize with config photos
-      photosList.splice(0, photosList.length, ...configPhotos);
+      photosList.splice(0, photosList.length, ..._testPhotos);
       console.log(
         `📸 No saved photos found, using ${photosList.length} config photos`
       );
@@ -87,7 +85,7 @@ export function loadPhotosFromStorage() {
   } catch (error) {
     console.error('Error loading photos from storage:', error);
     // Fallback to config photos
-    photosList.splice(0, photosList.length, ...configPhotos);
+    photosList.splice(0, photosList.length, ..._testPhotos);
     console.log(`📸 Using fallback - ${photosList.length} config photos`);
   }
 }
@@ -107,11 +105,11 @@ async function initializeTestPhotos() {
     }
 
     console.log(
-      `🧪 Initializing test photos (${configPhotos.length} photos from config)...`
+      `🧪 Initializing test photos (${_testPhotos.length} photos from config)...`
     );
 
     // Load all test photos from config
-    const photoPromises = configPhotos.map((filename) => {
+    const photoPromises = _testPhotos.map((filename) => {
       return fetch(`./photos/${filename}`)
         .then((response) => response.blob())
         .then((blob) => {
