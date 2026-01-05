@@ -305,7 +305,6 @@ body {
 
 .frame-settings-container {
   border: var(--panel-border-width) solid var(--toolbar-border);
-  height: 100%;
   width: var(--right-panel-width);
   border-radius: var(--panel-radius);
   padding: calc(var(--panel-padding) * 2);
