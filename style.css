@@ -70,6 +70,10 @@
   --partition-color: hsla(0, 0%, 60%, 0.15);
   --transparent: hsla(0, 0%, 0%, 0);
 
+  --toolbar-bg-rgb: 255 255 255;
+  --toolbar-bg-alpha: 0.8;
+  --toolbar-bg: rgb(var(--toolbar-bg-rgb) / var(--toolbar-bg-alpha));
+
   transition: --bg-color 0.2s ease, --text-color 0.2s ease,
     --label-text-color 0.2s ease, --toolbar-bg 0.2s ease,
     --toolbar-border 0.2s ease, --canvas-overlay 0.2s ease;
@@ -82,7 +86,7 @@
   --bg-color: #efefef;
   --text-color: hsla(0, 0%, 33%, 1);
   --label-text-color: hsla(0, 0%, 33%, 0.5);
-  --toolbar-bg: rgb(255, 255, 255, 0.8);
+  --toolbar-bg-rgb: 255 255 255;
   --toolbar-border: #e0e0e0;
   --accent-color: skyblue;
   --canvas-overlay: hsla(0, 100%, 100%, 0.55);
@@ -93,7 +97,7 @@
   --bg-color: #111;
   --text-color: hsla(0, 0%, 87%, 1);
   --label-text-color: hsla(0, 0%, 87%, 0.5);
-  --toolbar-bg: rgb(33, 33, 38, 0.8);
+  --toolbar-bg-rgb: 33 33 38;
   --toolbar-border: rgb(48, 46, 51);
   --accent-color: yellow;
   --canvas-overlay: hsla(0, 0%, 0%, 0.55);

@@ -126,6 +126,6 @@
     transform: scale(1.1);
   }
   & .color-swatch:checked {
-    box-shadow: 0 0 0 2px var(--toolbar-bg), 0 0 0 4px var(--text-color);
+    box-shadow: 0 0 0 2px rgb(var(--toolbar-bg-rgb)), 0 0 0 4px var(--text-color);
   }
 }

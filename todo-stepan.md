@@ -17,3 +17,4 @@
 [x] remove li
 [x] "btn pressedBtn" replace by checkboxes (input:checkbox + label) similar to gallery items
 [ ] put panel icons closer to panels themselves
+[x] issues with --toolbar-bg inside box-shadow selections
