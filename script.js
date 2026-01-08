@@ -247,6 +247,24 @@ function applyPreset(id) {
 
         if (currentFrameConfig.size > 0) {
           generateUI(currentFrameConfig, state, $dynamicControlsContainer);
+
+          // Додаємо слухачів для всіх текстових стилів
+          const textStyleProps = [];
+          for (const [name, prop] of currentFrameConfig) {
+            if (prop.type === 'text') {
+              textStyleProps.push(`${name}Styles`);
+            }
+          }
+
+          if (textStyleProps.length > 0) {
+            addStatePropListener(
+              textStyleProps,
+              (_propName, _value, _oldValue) => {
+                updateAndDraw();
+              }
+            );
+          }
+
           /////////////////////
           // mask refreshing
           updateMask($dynamicControlsContainer, 'vertical');

@@ -115,6 +115,27 @@ export function applySvgConfig(svgDoc, config, state) {
 
       if (prop.attr === 'textContent') {
         el.textContent = value;
+
+        const stylesPropName = `${name}Styles`;
+        const textStyles = state[stylesPropName];
+        if (textStyles && prop.type === 'text') {
+          // Uppercase
+          if (textStyles.uppercase) {
+            el.textContent = el.textContent.toUpperCase();
+          }
+          // Font weight (bold)
+          if (textStyles.bold) {
+            el.style.fontWeight = 'bold';
+          } else {
+            el.style.fontWeight = 'normal';
+          }
+          // Font style (italic)
+          if (textStyles.italic) {
+            el.style.fontStyle = 'italic';
+          } else {
+            el.style.fontStyle = 'normal';
+          }
+        }
       } else if (prop.attr) {
         el.setAttribute(prop.attr, valueWithUnit);
       }

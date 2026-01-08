@@ -55,6 +55,9 @@ function createControlGroup(prop, state) {
     case 'select':
       control = createSelect(prop, state);
       break;
+    case 'toggle':
+      control = createToggleButtons(prop, state);
+      break;
     default:
       console.warn(`Unknown property type: ${prop.type}`);
       return null;
@@ -75,7 +78,7 @@ function createTextInput(prop, state) {
   const textControl = cloneTemplate(templates.text);
   if (!textControl) return null;
 
-  const input = textControl.querySelector('input');
+  const input = textControl.querySelector('input[type="text"]');
 
   input.id = `$control_${prop.name}`;
   input.value = state[prop.name] ?? prop.default;
@@ -83,6 +86,42 @@ function createTextInput(prop, state) {
 
   input.addEventListener('input', (e) => {
     state[prop.name] = e.target.value;
+  });
+
+  const checkboxes = textControl.querySelectorAll(
+    '.checkbox-group input[type="checkbox"]'
+  );
+  const [uppercaseCheckbox, italicCheckbox, boldCheckbox] = checkboxes;
+
+  const stylesPropName = `${prop.name}Styles`;
+  if (!state[stylesPropName]) {
+    state[stylesPropName] = {
+      uppercase: false,
+      italic: false,
+      bold: false,
+    };
+  }
+
+  uppercaseCheckbox.checked = state[stylesPropName].uppercase;
+  italicCheckbox.checked = state[stylesPropName].italic;
+  boldCheckbox.checked = state[stylesPropName].bold;
+
+  // Uppercase
+  uppercaseCheckbox.addEventListener('change', (e) => {
+    state[stylesPropName].uppercase = e.target.checked;
+    state[stylesPropName] = { ...state[stylesPropName] }; // триггер обновления
+  });
+
+  // Italic
+  italicCheckbox.addEventListener('change', (e) => {
+    state[stylesPropName].italic = e.target.checked;
+    state[stylesPropName] = { ...state[stylesPropName] };
+  });
+
+  // Bold
+  boldCheckbox.addEventListener('change', (e) => {
+    state[stylesPropName].bold = e.target.checked;
+    state[stylesPropName] = { ...state[stylesPropName] };
   });
 
   return textControl;
@@ -168,6 +207,55 @@ function createSelect(prop, state) {
   return dropDown;
 }
 
+function createToggleButtons(prop, state) {
+  const textControl = cloneTemplate(templates.text);
+  if (!textControl) return null;
+  const input = textControl.querySelector('input[type="text"]');
+
+  input.id = `control-${prop.name}`;
+  input.value = state[prop.name] ?? prop.default;
+  input.placeholder = prop.label;
+  input.addEventListener('input', (e) => {
+    state[prop.name] = e.target.value;
+  });
+  const checkboxes = textControl.querySelectorAll(
+    '.checkbox-group input[type="checkbox"]'
+  );
+  const [uppercaseCheckbox, italicCheckbox, boldCheckbox] = checkboxes;
+
+  const stylesPropName = `${prop.name}Styles`;
+  if (!state[stylesPropName]) {
+    state[stylesPropName] = {
+      uppercase: false,
+      italic: false,
+      bold: false,
+    };
+  }
+
+  uppercaseCheckbox.checked = state[stylesPropName].uppercase;
+  italicCheckbox.checked = state[stylesPropName].italic;
+  boldCheckbox.checked = state[stylesPropName].bold;
+
+  // Uppercase
+  uppercaseCheckbox.addEventListener('change', (e) => {
+    state[stylesPropName].uppercase = e.target.checked;
+    state[stylesPropName] = { ...state[stylesPropName] }; // триггер обновления
+  });
+
+  // Italic
+  italicCheckbox.addEventListener('change', (e) => {
+    state[stylesPropName].italic = e.target.checked;
+    state[stylesPropName] = { ...state[stylesPropName] };
+  });
+
+  // Bold
+  boldCheckbox.addEventListener('change', (e) => {
+    state[stylesPropName].bold = e.target.checked;
+    state[stylesPropName] = { ...state[stylesPropName] };
+  });
+
+  return textControl;
+}
 /**
  * Update UI controls to reflect current state.
  * @param {Map<string, import('./svg-config.js').SvgProperty>} config
