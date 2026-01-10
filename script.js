@@ -248,7 +248,6 @@ function applyPreset(id) {
         if (currentFrameConfig.size > 0) {
           generateUI(currentFrameConfig, state, $dynamicControlsContainer);
 
-          // Додаємо слухачів для всіх текстових стилів
           const textStyleProps = [];
           for (const [name, prop] of currentFrameConfig) {
             if (prop.type === 'text') {
