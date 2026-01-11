@@ -20,6 +20,7 @@ import {
 import './theme-switcher.js';
 import { updateMask } from './scroll-mask-feature.js';
 import { resetCanvasZoom } from './canvas-zoom.js';
+import './authentication.js';
 
 /**
  * Default state configuration

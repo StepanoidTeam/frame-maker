@@ -241,6 +241,21 @@ body {
       width: var(--toolbar-icon-size);
       height: var(--toolbar-icon-size);
     }
+
+    & li.auth-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+
+      & button {
+        width: 100%;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
   }
 }
 .logo-container {
@@ -423,6 +438,147 @@ body {
   transform-origin: center center;
   transition: transform 0.05s ease-out;
   will-change: transform;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+
+  &.hidden {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:not(.hidden) {
+    opacity: 1;
+  }
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+.modal-content {
+  position: relative;
+  background-color: var(--color-bg-primary);
+  border-radius: 12px;
+  padding: 40px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  background-color: var(--bg-color);
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: var(--color-hover-bg, rgba(0, 0, 0, 0.1));
+    color: var(--color-text-primary);
+  }
+}
+
+.auth-form {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  h2 {
+    margin: 0 0 24px 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+}
+
+.form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+
+  input {
+    padding: 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-family: var(--font-family);
+    font-size: 14px;
+    background-color: var(--color-input-bg);
+    color: var(--color-text-primary);
+    transition: border-color 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-accent-blue);
+      box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.1);
+    }
+  }
+}
+
+.auth-form button[type='submit'] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.form-toggle {
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+
+  a {
+    color: var(--color-accent-blue);
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--color-accent-blue);
+      opacity: 0.8;
+    }
+  }
 }
 
 /* Frame canvas - stays static on top */
