@@ -48,6 +48,9 @@ web_modules/
 *.tsbuildinfo
 
 # Optional npm cache directory
+
+# Environment variables (keep sensitive data out of the repo)
+env.js
 .npm
 
 # Optional eslint cache
