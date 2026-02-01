@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frame Maker</title>
+  <script src="./theme-prefetch.js"></script>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" href="./favicon.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <script src="./script.js" type="module" defer></script>
+</head>
+
+<body>
+  <!-- templates -->
+  <template id="$tmplGalleryItem">
+    <label class="gallery-item flex-row">
+      <input type="radio" name="radioName" />
+      <img src="./not-set.png" alt="" />
+    </label>
+  </template>
+
+  <template id="$tmplColorSwatch">
+    <input type="radio" class="color-swatch" name="radioName" value="" />
+  </template>
+
+  <template id="$tmplControlsStub">
+    <div>no settings for selected frame</div>
+  </template>
+
+  <!-- settings:controls -->
+
+  <template id="$tmplControlText">
+    <label class="flex-col">
+      <span>label not set</span>
+      <input type="text" class="text-input" />
+      <!-- todo(vmyshko): not impl -->
+      <div class="flex-row checkbox-group">
+        <label class="btn">
+          <input type="checkbox" />
+          <span>Uppercase</span>
+        </label>
+        <label class="btn">
+          <input type="checkbox" />
+          <span>Italic</span>
+        </label>
+        <label class="btn">
+          <input type="checkbox" />
+          <span>Bold</span>
+        </label>
+      </div>
+    </label>
+  </template>
+
+  <template id="$tmplControlColor">
+    <label class="flex-col">
+      <span>label not set</span>
+      <form class="color-palette"></form>
+    </label>
+  </template>
+
+  <template id="$tmplControlRange">
+    <label class="flex-col">
+      <span>label not set</span>
+      <div class="range-wrapper">
+        <input type="range" class="range-slider" />
+        <span class="range-value"></span>
+      </div>
+    </label>
+  </template>
+
+  <template id="$tmplControlSelect">
+    <label class="flex-col">
+      <span>label not set</span>
+      <select class="select-input"></select>
+    </label>
+  </template>
+  <!-- END templates -->
+
+  <div class="app-container fullscreen">
+    <header class="panel-layout top">
+      <div class="main-toolbar-container toolbar">
+        <div class="toolbar-logo">
+          <div class="logo-container">
+            <a href="#home">
+              <svg class="logo-icon">
+                <use xlink:href="./icon-system-sprite.svg#logo-icon" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="toolbar-tools">
+          <label class="btn">
+            <svg class="photo-icon">
+              <use xlink:href="./icon-system-sprite.svg#photo-icon" />
+            </svg>
+            <input id="photo-checkbox" type="checkbox" class="photo-checkbox" checked />
+          </label>
+          <label class="btn">
+            <svg class="frame-icon">
+              <use xlink:href="./icon-system-sprite.svg#frame-icon" />
+            </svg>
+            <input id="frame-checkbox" type="checkbox" class="frame-checkbox" checked />
+          </label>
+          <label class="btn">
+            <svg class="settings-icon">
+              <use xlink:href="./icon-system-sprite.svg#settings-icon" />
+            </svg>
+            <input id="settings-checkbox" type="checkbox" class="settings-checkbox" checked />
+          </label>
+        </div>
+        <div class="toolbar-user">
+          <ul>
+            <li class="toolbar-icon toggle-theme-btn">
+              <svg class="light-icon">
+                <use xlink:href="./icon-system-sprite.svg#light-icon" />
+              </svg>
+              <svg class="dark-icon">
+                <use xlink:href="./icon-system-sprite.svg#dark-icon" />
+              </svg>
+            </li>
+            <li class="auth-buttons">
+              <button class="btn btn-secondary" id="loginBtn">Log In</button>
+              <button class="btn btn-primary" id="createAccountBtn">Create Account</button>
+            </li>
+            <li class="avatar-container">
+              <img src="./photos/1688381504089.jpeg" alt="" />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <section class="panel-layout left" id="$framePanel">
+      <!-- Left Panel: Frames -->
+      <div class="left-toolbar-container toolbar">
+        <div class="btn frame" id="addFrame">
+          <svg class="frame-icon">
+            <use xlink:href="./icon-system-sprite.svg#frame-icon" />
+          </svg>
+        </div>
+        <div class="frame-gallery-container">
+          <form id="$frameGallery" class="frame-gallery gallery">
+            <!-- items will be populated by javascript -->
+          </form>
+        </div>
+        <div class="panel-close-hover-area">
+          <button class="panel-close-container">
+            <label class="btn" for="frame-checkbox">
+              <svg>
+                <use xlink:href="./icon-system-sprite.svg#slide-to-left-icon" />
+              </svg>
+            </label>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Panel: Editor -->
+    <section class="frame-settings-container toolbar panel-layout right" id="$settingsPanel">
+      <h3>Frame Settings</h3>
+      <div id="$dynamicControlsContainer" class="dynamic-controls">
+        <!-- items will be populated by javascript -->
+      </div>
+      <div class="btn" id="$downloadBtn">
+        <svg class="btn-icon">
+          <use xlink:href="./icon-system-sprite.svg#download-icon" />
+        </svg>
+        <span>Download</span>
+      </div>
+      <div class="panel-close-hover-area">
+        <button class="panel-close-container">
+          <label class="btn" for="settings-checkbox">
+            <svg>
+              <use xlink:href="./icon-system-sprite.svg#slide-to-right-icon" />
+            </svg>
+          </label>
+        </button>
+      </div>
+    </section>
+
+    <section class="panel-layout bottom" id="$photoPanel">
+      <div class="bottom-toolbar-container toolbar">
+        <div class="btn photo" id="$uploadPhotoBtn">
+          <svg class="photo-icon">
+            <use xlink:href="./icon-system-sprite.svg#photo-icon" />
+          </svg>
+          <input type="file" id="$fileInput" accept="image/*" style="display: none" />
+        </div>
+        <div class="photo-gallery-container">
+          <form id="$photoGallery" class="photo-gallery gallery">
+            <!-- items will be populated by javascript -->
+          </form>
+        </div>
+        <div class="panel-close-hover-area">
+          <button class="panel-close-container">
+            <label class="btn" for="photo-checkbox">
+              <svg>
+                <use xlink:href="./icon-system-sprite.svg#slide-to-bottom-icon" />
+              </svg>
+            </label>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-layout canvas-panel" id="$board">
+      <div class="canvas-container">
+        <!-- Center Panel: Preview -->
+        <div class="preview-panel">
+          <div id="$profilePreview" class="profile-preview show-preview-overlay">
+            <canvas id="$photoCanvas" class="preview-canvas photo-canvas"></canvas>
+            <canvas id="$frameCanvas" class="preview-canvas frame-canvas"></canvas>
+            <svg class="svg-overlay" viewBox="0 0 300 300">
+              <!-- Circular mask overlay using simplified path -->
+              <defs>
+                <mask id="circleMask">
+                  <rect width="300" height="300" fill="white" />
+                  <circle cx="150" cy="150" r="150" fill="black" />
+                </mask>
+              </defs>
+              <path id="$framingGrid" class="framing-grid hidden"
+                d="M 100 0 L 100 300 M 200 0 L 200 300 M 0 100 L 300 100 M 0 200 L 300 200" />
+              <rect width="300" height="300" mask="url(#circleMask)" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Auth Modal -->
+  <div id="authModal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="closeAuthModal">&times;</button>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="auth-form active">
+        <h2>Log In</h2>
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" required />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Log In</button>
+        <p class="form-toggle">Don't have an account? <a href="#" id="switchToSignup">Sign Up</a></p>
+      </form>
+
+      <!-- Sign Up Form -->
+      <form id="signupForm" class="auth-form">
+        <h2>Create Account</h2>
+        <div class="form-group">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" required />
+        </div>
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" required />
+        </div>
+        <div class="form-group">
+          <label for="signupConfirmPassword">Confirm Password</label>
+          <input type="password" id="signupConfirmPassword" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Create Account</button>
+        <p class="form-toggle">Already have an account? <a href="#" id="switchToLogin">Log In</a></p>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

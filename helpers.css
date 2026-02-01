@@ -1,0 +1,52 @@
+.flex,
+.flex-row,
+.flex-col {
+  display: flex;
+}
+.flex-row {
+  flex-direction: row;
+}
+.flex-col {
+  flex-direction: column;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+.items-center {
+  align-items: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.gap-10 {
+  gap: 10px;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.hidden,
+[hidden] {
+  display: none;
+}
+
+/* cursors */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-grab {
+  cursor: grab;
+}
+
+.cursor-grabbing {
+  cursor: grabbing;
+}

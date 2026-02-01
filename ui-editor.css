@@ -1,0 +1,131 @@
+/*////////////////////////////////////////////*/
+/*//////// Dynamic Editor Controls UI ////////*/
+/*////////////////////////////////////////////*/
+
+.dynamic-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--btn-gap);
+  overflow-y: auto;
+  margin-right: calc(var(--panel-padding) * (-2));
+  padding-right: calc(var(--panel-padding) * 2);
+  margin-left: calc(var(--panel-padding) * (-2));
+  padding-left: calc(var(--panel-padding) * 2);
+
+  & > label {
+    display: flex;
+    flex-direction: column;
+    gap: var(--btn-gap);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--label-text-color);
+    border-bottom: var(--panel-border-width) solid var(--partition-color);
+    padding-bottom: calc(var(--btn-gap) * 1.5);
+
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: none;
+    }
+  }
+}
+
+.text-input {
+  padding: calc(var(--btn-padding) * 2) calc(var(--btn-padding) * 1);
+  border: calc(var(--panel-border-width) * 2) solid var(--transparent);
+  border-radius: calc(var(--panel-radius) / 2);
+  background: var(--btn-bg);
+  transition: border 0.2s;
+
+  color: var(--text-color);
+
+  &:focus {
+    outline: none;
+    border-color: var(--text-color);
+  }
+}
+
+.range-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--btn-gap);
+}
+.range-slider {
+  position: relative;
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--toolbar-border);
+  appearance: none;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: inherit;
+
+    width: attr(data-width %);
+
+    /* todo(vmyshko): somehow make thumb in front of this line */
+    background-color: var(--text-color);
+  }
+}
+.range-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: var(--text-color);
+  cursor: grab;
+  transition: transform 0.2s;
+}
+.range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+.range-slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+}
+.range-value {
+  min-width: 60px;
+  text-align: right;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-color);
+  /* font-variant-numeric: tabular-nums; */
+}
+
+.select-input {
+  padding: var(--btn-padding) calc(var(--btn-padding) * 2);
+  border: calc(var(--panel-border-width) * 2) solid var(--transparent);
+  border-radius: calc(var(--panel-radius) / 2);
+  background: var(--btn-bg);
+  color: var(--text-color);
+  cursor: pointer;
+}
+.select-input:focus {
+  outline: none;
+}
+
+.color-palette {
+  display: flex;
+  gap: var(--btn-gap);
+  flex-wrap: wrap;
+
+  & .color-swatch {
+    appearance: none;
+    width: var(--swatch-size);
+    height: var(--swatch-size);
+    border-radius: 50%;
+    background-color: var(--color, transparent);
+    background-image: var(--color, none);
+    border: var(--panel-border-width) solid transparent;
+    box-shadow: 0 0 0 1px var(--toolbar-border);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  & .color-swatch:hover {
+    transform: scale(1.1);
+  }
+  & .color-swatch:checked {
+    box-shadow: 0 0 0 2px rgb(var(--toolbar-bg-rgb)), 0 0 0 4px var(--text-color);
+  }
+}

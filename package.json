@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "scripts": {
+    "env:inject": "node scripts/generate-env.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  }
+}
