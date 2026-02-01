@@ -3,8 +3,6 @@ name: Deploy
 on:
   push:
     branches: [main, master]
-  pull_request:
-    branches: [main, master]
 
 jobs:
   build:
@@ -26,12 +24,16 @@ jobs:
           echo "};" >> env.js
 
       - name: Debug - Check env.js exists
-        run: ls -la env.js
+        run: |
+          echo "Files in directory:"
+          ls -la env.js
+          echo "Content of env.js:"
+          cat env.js
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
-          cname: stepanoidteam.github.io
+          force_orphan: true
