@@ -25,9 +25,13 @@ jobs:
           echo "  FIREBASE_MEASUREMENT_ID: '${{ secrets.FIREBASE_MEASUREMENT_ID }}'," >> env.js
           echo "};" >> env.js
 
+      - name: Debug - Check env.js exists
+        run: ls -la env.js
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
+          cname: stepanoidteam.github.io
