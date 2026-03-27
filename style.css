@@ -74,9 +74,13 @@
   --toolbar-bg-alpha: 0.8;
   --toolbar-bg: rgb(var(--toolbar-bg-rgb) / var(--toolbar-bg-alpha));
 
-  transition: --bg-color 0.2s ease, --text-color 0.2s ease,
-    --label-text-color 0.2s ease, --toolbar-bg 0.2s ease,
-    --toolbar-border 0.2s ease, --canvas-overlay 0.2s ease;
+  transition:
+    --bg-color 0.2s ease,
+    --text-color 0.2s ease,
+    --label-text-color 0.2s ease,
+    --toolbar-bg 0.2s ease,
+    --toolbar-border 0.2s ease,
+    --canvas-overlay 0.2s ease;
 }
 
 :root[data-theme='light'] {
@@ -144,7 +148,8 @@
   --shadow-soft: 0 4px 10px rgba(0, 0, 0, 0.6);
   */
 
-  --font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto,
+  --font-family:
+    -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto,
     Helvetica Neue, Fira Sans, Ubuntu, Oxygen, Oxygen Sans, Cantarell,
     Droid Sans, Apple Color Emoji, Segoe UI Emoji, Segoe UI Emoji,
     Segoe UI Symbol, Lucida Grande, Helvetica, Arial, sans-serif;
@@ -502,7 +507,9 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 
   &:hover {
     background-color: var(--color-hover-bg, rgba(0, 0, 0, 0.1));
@@ -539,7 +546,7 @@ body {
 
   input {
     padding: 10px 12px;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--text-color);
     border-radius: 6px;
     font-family: var(--font-family);
     font-size: 14px;

@@ -2,6 +2,9 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+  onAuthStateChanged,
 } from 'https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js';
 import { app } from './firebase-config.js';
 
@@ -12,6 +15,7 @@ const authModal = document.getElementById('authModal');
 const closeAuthModal = document.getElementById('closeAuthModal');
 const loginBtn = document.getElementById('loginBtn');
 const createAccountBtn = document.getElementById('createAccountBtn');
+const logoutBtn = document.getElementById('logoutBtn');
 
 // Forms
 const loginForm = document.getElementById('loginForm');
@@ -23,12 +27,34 @@ const loginPasswordInput = document.getElementById('loginPassword');
 const signupEmailInput = document.getElementById('signupEmail');
 const signupPasswordInput = document.getElementById('signupPassword');
 const signupConfirmPasswordInput = document.getElementById(
-  'signupConfirmPassword'
+  'signupConfirmPassword',
 );
 
 // Form Toggle Links
 const switchToSignupLink = document.getElementById('switchToSignup');
 const switchToLoginLink = document.getElementById('switchToLogin');
+const resetPasswordLink = document.getElementById('resetPasswordLink');
+
+// Update UI based on auth state
+// Track current user
+export let currentUser = null;
+
+// Update UI based on auth state
+const updateAuthUI = (user) => {
+  if (user) {
+    // User is logged in
+    loginBtn.style.display = 'none';
+    createAccountBtn.style.display = 'none';
+    logoutBtn.style.display = 'block';
+    currentUser = user;
+  } else {
+    // User is logged out
+    loginBtn.style.display = 'block';
+    createAccountBtn.style.display = 'block';
+    logoutBtn.style.display = 'none';
+    currentUser = null;
+  }
+};
 
 // Modal Functions
 const openAuthModal = (isSignup = false) => {
@@ -86,7 +112,7 @@ const loginHandler = async (e) => {
     const userCredential = await signInWithEmailAndPassword(
       auth,
       loginEmailInput.value,
-      loginPasswordInput.value
+      loginPasswordInput.value,
     );
     console.log('User logged in:', userCredential);
     closeModal();
@@ -109,7 +135,7 @@ const signUpHandler = async (e) => {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       signupEmailInput.value,
-      signupPasswordInput.value
+      signupPasswordInput.value,
     );
     console.log('User signed up:', userCredential);
     closeModal();
@@ -119,5 +145,44 @@ const signUpHandler = async (e) => {
   }
 };
 
+// Reset Password Handler
+const resetPasswordHandler = async (e) => {
+  e.preventDefault();
+
+  const email = loginEmailInput.value.trim();
+  if (!email) {
+    alert('Please enter your email in the login form first.');
+    loginEmailInput.focus();
+    return;
+  }
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    alert('Password reset email sent. Please check your inbox.');
+  } catch (error) {
+    console.error('Error sending password reset email:', error);
+    alert('Password reset failed: ' + error.message);
+  }
+};
+
 loginForm.addEventListener('submit', loginHandler);
 signupForm.addEventListener('submit', signUpHandler);
+resetPasswordLink.addEventListener('click', resetPasswordHandler);
+
+// Logout Handler
+const logoutHandler = async () => {
+  try {
+    await signOut(auth);
+    console.log('User logged out');
+  } catch (error) {
+    console.error('Error during logout:', error);
+    alert('Logout failed: ' + error.message);
+  }
+};
+
+logoutBtn.addEventListener('click', logoutHandler);
+
+// Monitor auth state changes
+onAuthStateChanged(auth, (user) => {
+  updateAuthUI(user);
+});

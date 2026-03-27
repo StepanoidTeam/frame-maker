@@ -21,6 +21,7 @@ import './theme-switcher.js';
 import { updateMask } from './scroll-mask-feature.js';
 import { resetCanvasZoom } from './canvas-zoom.js';
 import './authentication.js';
+import { currentUser } from './authentication.js';
 
 /**
  * Default state configuration
@@ -57,7 +58,7 @@ addStatePropListener(
   renderTriggerProperties,
   (_propName, _value, _oldValue) => {
     updateAndDraw();
-  }
+  },
 );
 addStatePropListener(['userImage'], drawPhoto);
 addStatePropListener(['frameImage'], drawFrame);
@@ -117,7 +118,7 @@ function drawFrame() {
       0,
       0,
       frameCanvas.width,
-      frameCanvas.height
+      frameCanvas.height,
     );
   }
 }
@@ -179,7 +180,7 @@ function updateSVG() {
     });
 
     const newProps = Array.from(currentFrameConfig.keys()).filter(
-      (prop) => !renderPropsSet.has(prop)
+      (prop) => !renderPropsSet.has(prop),
     );
     if (newProps.length) {
       addStatePropListener(newProps, () => {
@@ -261,7 +262,7 @@ function applyPreset(id) {
               textStyleProps,
               (_propName, _value, _oldValue) => {
                 updateAndDraw();
-              }
+              },
             );
           }
 
@@ -421,6 +422,10 @@ function setupEventListeners() {
 
   // Download
   $downloadBtn.addEventListener('click', () => {
+    if (!currentUser) {
+      alert('Please log in or create an account to download the photo.');
+      return;
+    }
     const link = document.createElement('a');
     link.download = 'frame-avatar.png';
     link.href = getDownloadCanvas().toDataURL('image/png');

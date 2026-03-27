@@ -123,9 +123,10 @@
                 <use xlink:href="./icon-system-sprite.svg#dark-icon" />
               </svg>
             </li>
-            <li class="auth-buttons">
+            <li class="auth-buttons" id="authButtonsContainer">
               <button class="btn btn-secondary" id="loginBtn">Log In</button>
               <button class="btn btn-primary" id="createAccountBtn">Create Account</button>
+              <button class="btn btn-secondary" id="logoutBtn" style="display: none;">Log Out</button>
             </li>
             <li class="avatar-container">
               <img src="./photos/1688381504089.jpeg" alt="" />
@@ -250,6 +251,7 @@
           <label for="loginPassword">Password</label>
           <input type="password" id="loginPassword" required />
         </div>
+        <p class="form-toggle"><a href="#" id="resetPasswordLink">Forgot password?</a></p>
         <button type="submit" class="btn btn-primary">Log In</button>
         <p class="form-toggle">Don't have an account? <a href="#" id="switchToSignup">Sign Up</a></p>
       </form>
