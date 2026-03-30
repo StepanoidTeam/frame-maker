@@ -5,16 +5,8 @@
 
 // dev only
 export const _testPhotos = [
-  '1688381504089.jpeg',
   '1699455018471.jpeg',
-  '1744056970861.jpeg',
-  '1752057077706.jpeg',
   '1765933298027.jpeg',
-  'photo_2025-12-16_23-24-09.jpg',
-
-  '1516839120841.jpeg',
-  '1516856965487.jpeg',
-  '1517506584047.jpeg',
   '1756203294622.jpeg',
 ];
 
@@ -64,10 +56,28 @@ export function loadPhotosFromStorage() {
 
     if (savedList) {
       const parsed = JSON.parse(savedList);
-      photosList.splice(0, photosList.length, ...parsed);
+      const allowedTestIds = new Set(
+        _testPhotos.map((filename) => `test-${filename}`),
+      );
+      const filtered = parsed.filter((photoId) => {
+        if (!photoId.startsWith('test-')) return true;
+        return allowedTestIds.has(photoId);
+      });
+
+      photosList.splice(0, photosList.length, ...filtered);
+
+      parsed.forEach((photoId) => {
+        if (photoId.startsWith('test-') && !allowedTestIds.has(photoId)) {
+          deletePhotoFromStorage(photoId);
+        }
+      });
+
+      if (filtered.length !== parsed.length) {
+        savePhotosListToStorage();
+      }
 
       // Load data URLs for each photo
-      parsed.forEach((photoId) => {
+      filtered.forEach((photoId) => {
         const dataUrl = loadPhotoFromStorage(photoId);
         if (dataUrl) {
           uploadedPhotos[photoId] = dataUrl;
@@ -79,7 +89,7 @@ export function loadPhotosFromStorage() {
       // First time: initialize with config photos
       photosList.splice(0, photosList.length, ..._testPhotos);
       console.log(
-        `📸 No saved photos found, using ${photosList.length} config photos`
+        `📸 No saved photos found, using ${photosList.length} config photos`,
       );
     }
   } catch (error) {
@@ -99,13 +109,13 @@ async function initializeTestPhotos() {
     const savedList = localStorage.getItem(PHOTOS_LIST_KEY);
     if (savedList) {
       console.log(
-        '✓ Test photos already initialized (found saved photos list)'
+        '✓ Test photos already initialized (found saved photos list)',
       );
       return; // Already initialized
     }
 
     console.log(
-      `🧪 Initializing test photos (${_testPhotos.length} photos from config)...`
+      `🧪 Initializing test photos (${_testPhotos.length} photos from config)...`,
     );
 
     // Load all test photos from config
@@ -141,7 +151,7 @@ async function initializeTestPhotos() {
       // Save list to storage
       savePhotosListToStorage();
       console.log(
-        `✓ Test photos initialized: ${validPhotoIds.length} photos saved to localStorage`
+        `✓ Test photos initialized: ${validPhotoIds.length} photos saved to localStorage`,
       );
     }
   } catch (error) {
