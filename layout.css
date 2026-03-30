@@ -4,7 +4,10 @@
   position: absolute;
   z-index: 999;
   opacity: 1;
-  transition: transform 0.5s ease-in-out, opacity 0.5s, bottom 0.5s ease-in-out,
+  transition:
+    transform 0.5s ease-in-out,
+    opacity 0.5s,
+    bottom 0.5s ease-in-out,
     right 0.5s ease-in-out;
 
   &.top {
@@ -24,18 +27,18 @@
   }
 
   &.left {
-    left: calc(
-      var(--panel-gap) + var(--panel-padding) + var(--panel-padding) +
-        var(--logo-size)
-    );
+    left: 100px; /* start from the right of the logo */
     top: var(--panel-gap);
     bottom: var(--panel-gap);
 
     opacity: 0;
     transform: translateX(
       calc(
-        -1 * (100% + var(--panel-gap) + var(--panel-padding) +
-              var(--panel-padding) + var(--logo-size))
+        -1 *
+          (
+            100% + var(--panel-gap) + var(--panel-padding) +
+              var(--panel-padding) + var(--logo-size)
+          )
       )
     );
   }
