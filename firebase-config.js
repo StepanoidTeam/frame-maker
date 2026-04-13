@@ -1,6 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js';
 
-export {
+import {
   getAnalytics,
   logEvent,
 } from 'https://www.gstatic.com/firebasejs/12.7.0/firebase-analytics.js';
