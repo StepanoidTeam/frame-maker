@@ -6,7 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js';
-import { app } from './firebase-config.js';
+import { analytics, app, logEvent } from './firebase-config.js';
 
 const auth = getAuth(app);
 
@@ -115,6 +115,9 @@ const loginHandler = async (e) => {
       loginPasswordInput.value,
     );
     console.log('User logged in:', userCredential);
+
+    logEvent(analytics, 'log_in', { email: loginEmailInput.value });
+
     closeModal();
   } catch (error) {
     console.error('Error during login:', error);

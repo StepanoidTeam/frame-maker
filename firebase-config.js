@@ -1,5 +1,10 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js';
 
+export {
+  getAnalytics,
+  logEvent,
+} from 'https://www.gstatic.com/firebasejs/12.7.0/firebase-analytics.js';
+
 // Firebase configuration
 // Values are injected from .env file (local) or GitHub Secrets (deployment)
 // Run: npm run env:inject (for local development)
@@ -14,5 +19,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
-export { app };
+export { app, analytics, logEvent };
