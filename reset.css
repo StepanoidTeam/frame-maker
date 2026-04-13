@@ -1,0 +1,41 @@
+/* reset.css -- all related to default styles for default html elements */
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+a {
+  color: inherit; /* cancel default link color behavior */
+  text-decoration: none;
+  text-decoration: revert; /* back to default */
+}
+
+input,
+select,
+textarea {
+  font-size: 1rem; /* by default, iOS will zoom in so that the input text is the equivalent of 16px */
+}
+
+input,
+button,
+select,
+textarea {
+  font: inherit; /* consistent and inheritable fonts */
+  color: inherit; /* consistent and inheritable colors */
+}

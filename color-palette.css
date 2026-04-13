@@ -1,0 +1,14 @@
+.color-palette {
+
+  & .color-swatch {
+    /* all: unset; */
+
+    &:checked {
+
+    }
+
+    &:hover {
+
+    }
+  }
+}
